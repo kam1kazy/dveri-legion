@@ -27,20 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   })
 
-  // ! STOP / PLAY SLIDER ONMOUSE
-
-  // const targetSlider = document.querySelector('.swiper-wrapper')
-
-  // targetSlider.addEventListener('mouseenter', function () {
-  //   swiper.autoplay.stop()
-  // })
-
-  // targetSlider.addEventListener('mouseleave', function () {
-  //   swiper.autoplay.start()
-  // })
-
-  // ! SLIDER Dropdowm
-  var swiperDropdowm = new Swiper('.dropdown__menu__swiper', {
+  // ! SLIDER Dropdown
+  var swiperDropdown = new Swiper('.dropdown__menu__swiper', {
     spaceBetween: 30,
     slidesPerView: 3,
     direction: 'vertical',
@@ -64,29 +52,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ! SLIDE TO
   function slideTo(id) {
-    swiperDropdowm.slideTo(id)
+    swiperDropdown.slideTo(id + 1, 400, true)
   }
 
-  const arr = document.querySelectorAll('.dropdown__menu a')
+  const dropdownArrLink = document.querySelectorAll('.dropdown__menu a')
 
   //! mouseover
-  arr.forEach((item, id) => {
+  dropdownArrLink.forEach((item, id) => {
     item.addEventListener('mouseover', () => slideTo(id))
   })
 
   // ! STOP / PLAY SLIDER ONMOUSE
 
-  const targetSlider = document.querySelector('.dropdown__menu')
+  function stopPlay(slider, target) {
+    let targetElement = document.querySelector(target)
 
-  targetSlider.addEventListener('mouseover', function () {
-    swiperDropdowm.autoplay.stop()
-  })
+    targetElement.addEventListener('mouseover', function () {
+      slider.autoplay.stop()
+    })
 
-  targetSlider.addEventListener('mouseout', function () {
-    swiperDropdowm.autoplay.start()
+    targetElement.addEventListener('mouseout', function () {
+      slider.autoplay.start()
+    })
+  }
 
-    console.log(swiperDropdowm.speed)
-  })
+  stopPlay(swiperDropdown, '.dropdown__menu')
+
+  //! DROPDOWN
+
+  const dropdown_menu = document.querySelector('.dropdown')
+  dropdown_menu.style.cssText = 'width: calc(100% + 50px); left: -25px;'
 
   // ! BTN ANIMATION
   if (document.querySelector('.animate-icon')) {

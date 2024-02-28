@@ -27,36 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   })
 
-  // ! SLIDER Dropdowm
-  var swiperDropdowm = new Swiper('.dropdown__menu__swiper', {
-    spaceBetween: 30,
-    slidesPerView: 3,
-    direction: 'vertical',
-
-    loop: true,
-    speed: 3200,
-    freeMode: true,
-    freeModeMomentum: false,
-    loopAdditionalSlides: 0,
-    centeredSlidesBounds: true,
-    slideToClickedSlide: true,
-    centeredSlides: true,
-
-    autoplay: {
-      delay: 3,
-      disableOnInteraction: false,
-    },
-
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'progressbar',
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-  })
-
   // ! STOP / PLAY SLIDER ONMOUSE
 
   // const targetSlider = document.querySelector('.swiper-wrapper')
@@ -68,6 +38,55 @@ document.addEventListener('DOMContentLoaded', () => {
   // targetSlider.addEventListener('mouseleave', function () {
   //   swiper.autoplay.start()
   // })
+
+  // ! SLIDER Dropdowm
+  var swiperDropdowm = new Swiper('.dropdown__menu__swiper', {
+    spaceBetween: 30,
+    slidesPerView: 3,
+    direction: 'vertical',
+
+    loop: true,
+    freeMode: true,
+    freeModeMomentum: false,
+    loopAdditionalSlides: 0,
+    centeredSlidesBounds: true,
+    slideToClickedSlide: true,
+    centeredSlides: true,
+
+    // Autoplay
+    speed: 5200,
+
+    autoplay: {
+      delay: 3,
+      disableOnInteraction: false,
+    },
+  })
+
+  // ! SLIDE TO
+  function slideTo(id) {
+    swiperDropdowm.slideTo(id)
+  }
+
+  const arr = document.querySelectorAll('.dropdown__menu a')
+
+  //! mouseover
+  arr.forEach((item, id) => {
+    item.addEventListener('mouseover', () => slideTo(id))
+  })
+
+  // ! STOP / PLAY SLIDER ONMOUSE
+
+  const targetSlider = document.querySelector('.dropdown__menu')
+
+  targetSlider.addEventListener('mouseover', function () {
+    swiperDropdowm.autoplay.stop()
+  })
+
+  targetSlider.addEventListener('mouseout', function () {
+    swiperDropdowm.autoplay.start()
+
+    console.log(swiperDropdowm.speed)
+  })
 
   // ! BTN ANIMATION
   if (document.querySelector('.animate-icon')) {

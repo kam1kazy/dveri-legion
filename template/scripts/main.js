@@ -29,22 +29,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ! SLIDER Dropdowm
   var swiperDropdowm = new Swiper('.dropdown__menu__swiper', {
-    spaceBetween: 0,
-    slidesPerView: 1,
+    spaceBetween: 30,
+    slidesPerView: 3,
     direction: 'vertical',
 
     loop: true,
-    // speed: 3200,
+    speed: 3200,
     freeMode: true,
     freeModeMomentum: false,
     loopAdditionalSlides: 0,
     centeredSlidesBounds: true,
     slideToClickedSlide: true,
+    centeredSlides: true,
 
-    // autoplay: {
-    //   delay: 2500,
-    //   disableOnInteraction: false,
-    // },
+    autoplay: {
+      delay: 3,
+      disableOnInteraction: false,
+    },
 
     pagination: {
       el: '.swiper-pagination',

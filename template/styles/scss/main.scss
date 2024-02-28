@@ -41,6 +41,7 @@ body {
   height: 6rem;
   padding-top: 1rem;
   color: map-get($theme-dark, 'on-default');
+  z-index: 1;
 
   .container {
     position: relative;
@@ -904,6 +905,32 @@ body {
   background: #fff;
   color: #000;
   inset: 0;
-  top: 90px;
-  height: 260px;
+  top: 59px;
+  height: 585px;
+
+  padding-left: 300px;
+
+  &__menu {
+    margin-bottom: 2.375rem;
+    margin-top: 5.125rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      font-size: calc(1.16197rem + 0.37559vw);
+      line-height: 1.3333333333;
+      padding: 0.375rem 0;
+    }
+  }
+}
+
+.dropdown__menu__swiper {
+  .swiper-wrapper {
+    height: 585px;
+  }
+  .swiper-slide {
+    height: 300px;
+  }
 }

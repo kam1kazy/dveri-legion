@@ -27,6 +27,35 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   })
 
+  // ! SLIDER Dropdowm
+  var swiperDropdowm = new Swiper('.dropdown__menu__swiper', {
+    spaceBetween: 0,
+    slidesPerView: 1,
+    direction: 'vertical',
+
+    loop: true,
+    // speed: 3200,
+    freeMode: true,
+    freeModeMomentum: false,
+    loopAdditionalSlides: 0,
+    centeredSlidesBounds: true,
+    slideToClickedSlide: true,
+
+    // autoplay: {
+    //   delay: 2500,
+    //   disableOnInteraction: false,
+    // },
+
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'progressbar',
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  })
+
   // ! STOP / PLAY SLIDER ONMOUSE
 
   // const targetSlider = document.querySelector('.swiper-wrapper')

@@ -1,0 +1,85 @@
+$size__site_content_width: 1229px;
+
+//* Media Breakpoint
+$media_queries: (
+  'small': unquote('only screen and (max-width: 480px)'),
+  'x-small': unquote('only screen and (max-width: 576px)'),
+  'xx-small': unquote('only screen and (max-width: 768px)'),
+  'tablet': unquote('only screen and (max-width: 992px)'),
+  'desktop':
+    unquote('only screen and (max-width: ' + $size__site_content_width + ')'),
+  'retina2':
+    unquote(
+      'only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi)'
+    ),
+  'retina3':
+    unquote(
+      'only screen and (-webkit-min-device-pixel-ratio: 3) and (min-resolution: 288dpi)'
+    ),
+  'landscape': unquote('screen and (orientation:landscape) '),
+  'portrait': unquote('screen and (orientation:portrait) '),
+);
+
+@mixin media_queries($breakpoints) {
+  $conditions: ();
+  @each $breakpoint in $breakpoints {
+    // If the key exists in the map
+    $conditions: append(
+      $conditions,
+      #{inspect(map-get($media_queries, $breakpoint))},
+      comma
+    );
+  }
+
+  @media #{$conditions} {
+    @content;
+  }
+}
+
+//* Colors
+$theme-dark: (
+  'default': #2f3035,
+  'default-15': rgba(47, 48, 53, 0.15),
+  'default-70': rgba(47, 48, 53, 0.7),
+  'on-default': #fff,
+  'on-default-70': hsla(0, 0%, 100%, 0.7),
+  'button-background-hovered': #484951,
+  'button-outline-color': rgba(47, 48, 53, 0.5),
+  'input-placeholder': rgba(47, 48, 53, 0.7),
+  'input-border': rgba(47, 48, 53, 0.5),
+  'input-border-15': rgba(47, 48, 53, 0.15),
+  'input-border-focus': #2f3035,
+  'toggle-text': rgba(47, 48, 53, 0.7),
+);
+$theme-light: (
+  'default': #fff,
+  'default-15': hsla(0, 0%, 100%, 0.15),
+  'default-70': hsla(0, 0%, 100%, 0.7),
+  'on-default': #2f3035,
+  'on-default-70': rgba(47, 48, 53, 0.7),
+  'button-background-hovered': #f6f6f6,
+  'button-outline-color': hsla(0, 0%, 100%, 0.3),
+  'input-placeholder': hsla(0, 0%, 100%, 0.7),
+  'input-border': hsla(0, 0%, 100%, 0.7),
+  'input-border-15': hsla(0, 0%, 100%, 0.15),
+  'input-border-focus': #fff,
+  'toggle-text': hsla(0, 0%, 100%, 0.5),
+);
+
+//* Fonts
+$fontFamily: 'SuisseInt', helvetica, sans-serif;
+$fontSize-main: 1rem;
+$line-height: 1.5;
+
+$border-radius: 0.5rem;
+
+$lh-text: 1.7142857143;
+$lh-text-second: 1.2857142857;
+
+$fw-light: 300;
+$fw-normal: 400;
+$fw-medium: 500;
+$fw-bold: 700;
+
+// Shadow
+$inset-shadow: inset 5px 5px 20px 0px #dcdcdc;

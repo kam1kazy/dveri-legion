@@ -221,7 +221,7 @@ body {
   padding-left: 300px;
   padding: 0 300px;
 
-  transition: height 1s ease-in-out;
+  transition: height 0.5s ease-in-out;
 
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
@@ -316,6 +316,7 @@ body {
 
   &:hover {
     background: linear-gradient(45deg, rgb(43, 43, 43), transparent);
+    border-color: #fff;
     color: #fff;
   }
 }
@@ -329,7 +330,8 @@ body {
     height: 585px;
   }
   .swiper-slide {
-    // height: 300px;
+    cursor: default !important;
+    pointer-events: none;
     box-shadow: 0px -1px 21px -6px rgba(34, 60, 80, 0.26);
   }
 }
@@ -371,6 +373,11 @@ body {
   padding: 0 12px;
   max-width: max-content;
   cursor: pointer;
+
+  span,
+  img {
+    pointer-events: none;
+  }
 
   &__icon {
     width: 20px;
@@ -451,6 +458,27 @@ body {
   }
 }
 
+.dark-theme {
+  .filled {
+    background-color: map-get($theme-light, 'default');
+    color: map-get($theme-light, 'on-default');
+
+    .button__icon {
+      filter: none;
+    }
+
+    &-border {
+      border: 1px solid map-get($theme-dark, 'button-outline-color');
+    }
+
+    &-hover {
+      &:hover {
+        background-color: map-get($theme-light, 'button-background-hovered');
+      }
+    }
+  }
+}
+
 .animate-icon {
   display: flex;
   overflow: hidden;
@@ -480,7 +508,6 @@ body {
   position: relative;
   padding-block: 3rem;
   color: map-get($theme-dark, 'on-default');
-  z-index: -1;
 
   &::before {
     content: '';

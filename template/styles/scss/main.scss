@@ -221,7 +221,7 @@ body {
   padding-left: 300px;
   padding: 0 300px;
 
-  transition: height 0.5s ease-in-out;
+  transition: height 0.5s cubic-bezier(0.25, 0.25, 0.355, 0.99);
 
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
@@ -229,6 +229,29 @@ body {
   &__menu {
     margin-bottom: 2.375rem;
     margin-top: 5.125rem;
+
+    &--about {
+      .link,
+      .link a {
+        padding-left: 0;
+      }
+
+      .link {
+        &:hover {
+          padding-left: 25px;
+        }
+      }
+    }
+
+    &--collection {
+      .link:hover .link__icon {
+        transform: translateX(0);
+      }
+
+      .active a {
+        padding-left: 0;
+      }
+    }
 
     &:hover li {
       opacity: 0.5;
@@ -246,17 +269,41 @@ body {
       font-size: calc(1.16197rem + 0.37559vw);
       line-height: 1.3333333333;
 
-      transition: opacity 0.5s;
+      .marker {
+        width: 18px;
+        border: 1px solid;
+        height: 18px;
 
-      &:nth-child(1) a .marker {
+        position: absolute;
+
+        transition-duration: 0.1s;
+        transition-property: transform, opacity;
+
+        &::before {
+          content: '';
+          display: block;
+          height: 0.25rem;
+          width: 0.25rem;
+          background-color: map-get($theme-light, 'on-default');
+          border-radius: 0.25rem;
+          margin: 6px auto;
+        }
+      }
+
+      &:hover .marker {
+        opacity: 0;
+        transform: translateX(25px);
+      }
+
+      &:nth-child(1) .marker {
         border-radius: 5px;
       }
 
-      &:nth-child(4) a .marker {
+      &:nth-child(4) .marker {
         border-radius: 5px;
       }
 
-      &:nth-child(5) a .marker {
+      &:nth-child(5) .marker {
         border-radius: 25px;
       }
 
@@ -266,23 +313,7 @@ body {
         position: relative;
         width: 100%;
         padding: 0.375rem 0;
-
-        .marker {
-          width: 18px;
-          border: 1px solid;
-          height: 18px;
-          margin-right: 15px;
-
-          &::before {
-            content: '';
-            display: block;
-            height: 0.25rem;
-            width: 0.25rem;
-            background-color: map-get($theme-light, 'on-default');
-            border-radius: 0.25rem;
-            margin: 6px auto;
-          }
-        }
+        padding-left: 30px;
       }
     }
   }
@@ -324,6 +355,9 @@ body {
 .open-collection .dropdown-collection {
   height: 585px;
 }
+.open-about .dropdown-about {
+  height: 585px;
+}
 
 .dropdown__menu__swiper {
   .swiper-wrapper {
@@ -338,6 +372,47 @@ body {
 
 [class^='dropdown__sidebar'] {
   width: 50%;
+}
+
+.dropdown__menu--small {
+  margin-top: 0;
+
+  li {
+    color: rgba(47, 48, 53, 0.7);
+    font-size: 0.875rem;
+  }
+}
+
+.dropdown__image_area {
+  position: relative;
+  height: 416px;
+  width: 416px;
+
+  margin-top: 5.125rem;
+
+  border-radius: 1rem;
+  overflow: hidden;
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    transition: opacity 0.1s ease-in-out;
+  }
+
+  &.toggle-selected {
+    img {
+      opacity: 0;
+
+      &.selected {
+        opacity: 1;
+        z-index: 1;
+      }
+    }
+  }
 }
 
 // ? ------------
@@ -385,6 +460,62 @@ body {
 
     filter: invert(18%) sepia(6%) saturate(659%) hue-rotate(192deg)
       brightness(91%) contrast(94%);
+  }
+}
+
+.link__icon {
+  max-width: 30px;
+}
+
+.link {
+  transition: padding-left 0.3s ease;
+
+  .link__icon {
+    pointer-events: none;
+    position: absolute;
+
+    width: 20px;
+
+    opacity: 0;
+    transform: translateX(-25px);
+    transition-duration: 0.1s;
+    transition-property: transform, opacity;
+
+    filter: invert(18%) sepia(6%) saturate(659%) hue-rotate(192deg)
+      brightness(91%) contrast(94%);
+  }
+
+  &:hover {
+    .link__icon {
+      opacity: 1;
+    }
+  }
+
+  &.active {
+    .marker {
+      display: none;
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      background-color: currentColor;
+
+      width: 0.35rem;
+      height: 0.3rem;
+
+      border-radius: 1rem;
+      margin-inline: 0.625rem 0.875rem;
+    }
+
+    &:hover {
+      padding-left: 0;
+
+      .link__icon {
+        transform: translateX(-10px);
+        opacity: 0;
+      }
+    }
   }
 }
 

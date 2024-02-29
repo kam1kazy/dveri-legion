@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loop: true,
     freeMode: true,
 
+    // Autoplay
     speed: 6200,
 
     autoplay: {
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     allowTouchMove: false,
 
     // Autoplay
-    speed: 5200,
+    speed: 2200,
 
     autoplay: {
       delay: 3,
@@ -56,19 +57,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // ? Переход к слайдам при наведении курсора в шапке -> навигация -> коллекции
 
   const slideToArrLinks = () => {
-    const dropdownArrLink = document.querySelectorAll('.dropdown__menu a')
+    const dropdownArrLink = document.querySelectorAll(
+      '.dropdown__menu--collection a'
+    )
 
     dropdownArrLink.forEach((item, id) => {
-      item.addEventListener('mouseenter', () => {
-        slideTo(swiperDropdown, id)
+      item.addEventListener('mouseover', () => {
         swiperDropdown.autoplay.stop()
+        slideTo(swiperDropdown, id)
       })
     })
 
     dropdownArrLink.forEach((item, id) => {
-      item.addEventListener('mouseleave', () => {
-        slideTo(swiperDropdown, id)
+      item.addEventListener('mouseout', () => {
         swiperDropdown.autoplay.start()
+        slideTo(swiperDropdown, id)
       })
     })
   }
@@ -82,12 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let targetElement = document.querySelector(target)
 
     targetElement.addEventListener('mouseenter', function () {
-      console.log('_')
       slider.autoplay.stop()
     })
 
     targetElement.addEventListener('mouseleave', function () {
-      console.log('+')
       slider.autoplay.start()
     })
   }
@@ -126,10 +127,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const openMenu = () => {
     const nav_items = document.querySelectorAll('.header__nav nav li')
     const headerMenu = document.querySelector('.header')
+    let openMenu = ''
 
     const openDropdownMenu = (typeMenu) => {
       const header = document.querySelector('.header')
-      header.classList.add(typeMenu, 'light-theme')
+
+      if (openMenu !== typeMenu) {
+        if (openMenu !== '') {
+          header.classList.remove(openMenu)
+        }
+
+        header.classList.add(typeMenu, 'light-theme')
+        openMenu = typeMenu
+      } else {
+        return false
+      }
+
+      console.log(openMenu)
     }
 
     const closeMenu = (typeMenu) => {
@@ -148,51 +162,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   openMenu()
 
-  // // ! BTN ANIMATION
-  // if (document.querySelector('.animate-icon')) {
-  //   const animate_btns = document.querySelector('.animate-icon')
+  const toggleImageDropdownSidebar = () => {
+    const linkList = document.querySelectorAll('.dropdown__menu--about li')
+    const imageList = document.querySelectorAll('.dropdown__image_area img')
+    const imageArea = document.querySelector('.dropdown__image_area')
 
-  //   const img = animate_btns.querySelector('img')
-  //   const span = animate_btns.querySelector('span')
+    linkList.forEach((item, id) => {
+      item.addEventListener('mouseenter', () => {
+        item.classList.add('hover')
+        imageList[id].classList.add('selected')
+        imageArea.classList.add('toggle-selected')
+      })
+      item.addEventListener('mouseleave', () => {
+        item.classList.remove('hover')
+        imageList[id].classList.remove('selected')
+        imageArea.classList.remove('toggle-selected')
+      })
+    })
+  }
 
-  //   // Наводим курсор
-  //   animate_btns.addEventListener('mouseenter', () => {
-  //     img.style = 'transform: translate(22px, 0px); opacity: 0;'
-  //     span.style = 'transform: translate(22px, 0px);'
-  //     swingInterval_in = setInterval(swing_in_1, 240)
-  //   })
-
-  //   function swing_in_1() {
-  //     img.style = 'transform: translate(-182px, 0px); opacity: 0;'
-  //     span.style = 'transform: translate(22px, 0px);'
-  //     clearInterval(swingInterval_in)
-  //     swingInterval_in_2 = setInterval(swing_in_2, 270)
-  //   }
-
-  //   function swing_in_2() {
-  //     img.style = 'transform: translate(-142px, 0px); opacity: 1;'
-  //     span.style = 'transform: translate(22px, 0px);'
-  //     clearInterval(swingInterval_in_2)
-  //   }
-
-  //   // Убираем курсор
-  //   animate_btns.addEventListener('mouseleave', () => {
-  //     img.style = 'transform: translate(-182px, 0px); opacity: 0;'
-  //     span.style = 'transform: translate(22px, 0px);'
-  //     swingInterval_out = setInterval(swing_out_1, 300)
-  //   })
-
-  //   function swing_out_1() {
-  //     img.style = 'transform: translate(42px, 0px); opacity: 0;'
-  //     span.style = 'transform: translate(0, 0px);'
-  //     clearInterval(swingInterval_out)
-  //     swingInterval_out_2 = setInterval(swing_out_2, 270)
-  //   }
-
-  //   function swing_out_2() {
-  //     img.style = 'transform: translate(0, 0px); opacity: 1;'
-  //     span.style = 'transform: translate(0, 0px);'
-  //     clearInterval(swingInterval_out_2)
-  //   }
-  // }
+  toggleImageDropdownSidebar()
 })

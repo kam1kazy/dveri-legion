@@ -15,4 +15,4 @@
 
 
 
-Здесь - [сайт донор]([http://example.com/](https://www.modelec.com/fr)https://www.modelec.com/fr).
+Здесь - [сайт донор](https://www.modelec.com/fr)https://www.modelec.com/fr).

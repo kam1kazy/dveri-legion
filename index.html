@@ -57,15 +57,24 @@
       <div class="container">
         <div class="wrapper">
           <div class="header__logo">
-            <img src="./template/images/logo_legion-light.svg" alt="Логотип" />
+            <img
+              class="logo-light"
+              src="./template/images/logo_legion-light.svg"
+              alt="Логотип"
+            />
+            <img
+              class="logo-dark"
+              src="./template/images/logo_legion.svg"
+              alt="Логотип"
+            />
           </div>
 
           <div class="header__nav">
             <nav>
-              <li>
+              <li class="nav__collection" dropdown="collection">
                 <a href="#">Коллекции</a>
               </li>
-              <li>
+              <li class="nav__about" dropdown="about">
                 <a href="#">Узнать больше</a>
               </li>
             </nav>
@@ -92,7 +101,8 @@
 
             <!--  DROP SRAT -->
 
-            <div class="dropdown">
+            <div class="dropdown dropdown-collection">
+              <span class="dropdown__close">X</span>
               <div class="wrapper">
                 <div class="dropdown__sidebar--left">
                   <!--  -->

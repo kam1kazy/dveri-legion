@@ -5,12 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
     slidesPerView: 4,
 
     loop: true,
-    // speed: 3200,
     freeMode: true,
     freeModeMomentum: false,
     loopAdditionalSlides: 0,
     centeredSlidesBounds: true,
     slideToClickedSlide: true,
+
+    // speed: 3200,
 
     // autoplay: {
     //   delay: 2500,
@@ -51,13 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   // ! SLIDE TO
+  const dropdownArrLink = document.querySelectorAll('.dropdown__menu a')
+
   function slideTo(id) {
     swiperDropdown.slideTo(id + 1, 400, true)
   }
 
-  const dropdownArrLink = document.querySelectorAll('.dropdown__menu a')
-
-  //! mouseover
   dropdownArrLink.forEach((item, id) => {
     item.addEventListener('mouseover', () => slideTo(id))
   })
@@ -77,11 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   stopPlay(swiperDropdown, '.dropdown__menu')
-
-  //! DROPDOWN
-
-  const dropdown_menu = document.querySelector('.dropdown')
-  dropdown_menu.style.cssText = 'width: calc(100% + 50px); left: -25px;'
 
   // ! BTN ANIMATION
   if (document.querySelector('.animate-icon')) {
@@ -153,9 +148,29 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
 
-  //
+  //! Open Dropdown
 
-  //
+  const nav_items = document.querySelectorAll('.header__nav nav li')
 
-  //
+  nav_items.forEach((item) => {
+    item.addEventListener('mouseover', () =>
+      openDropdownMenu(item.getAttribute('dropdown'))
+    )
+  })
+
+  const openDropdownMenu = (typeMenu) => {
+    const header = document.querySelector('.header')
+    let typeName = 'open-' + typeMenu
+
+    header.classList.add(typeName, 'light-theme')
+  }
+
+  const closeBtnMenu = document.querySelector('.dropdown__close')
+  const headerMenu = document.querySelector('.header')
+
+  const CloseMenu = () => {
+    headerMenu.classList.remove('light-theme', 'open-collection')
+  }
+
+  closeBtnMenu.addEventListener('click', () => CloseMenu())
 })

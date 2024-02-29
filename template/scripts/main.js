@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   })
 
-  // ! SLIDER Dropdown
+  //! SLIDER Dropdown
   // ? Слайдер в навигации
   let swiperDropdown = new Swiper('.dropdown__menu__swiper', {
     spaceBetween: 30,
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   })
 
-  // ! SLIDE TO
+  //! SLIDE TO
   // ? Функция в которую можно передать ID и слайдер, для перехода к слайду по id
 
   const slideTo = (slider, id) => {
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   slideToArrLinks()
 
-  // ! STOP / PLAY SLIDER ONMOUSE
+  //! STOP / PLAY SLIDER ONMOUSE
   // ? Создай функцию с классом слайдера и таргет зоной, чтобы останавливать его при наведении курсора
 
   const stopPlay = (slider, target) => {
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   stopPlay(swiperCollection, '.collection_carousel .swiper-wrapper')
 
-  // ! SMOOTH SCROLL
+  //! SMOOTH SCROLL
   // ? Находит ссылки с якорями и кастует плавный скролл
 
   const smooth_scroll = () => {
@@ -161,6 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   openMenu()
+
+  //! Toggle Image in Dropdown About
 
   const toggleImageDropdownSidebar = () => {
     const linkList = document.querySelectorAll('.dropdown__menu--about li')

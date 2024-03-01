@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
   //! SELECT SLIDE ON MENU
   // ? Переход к слайдам при наведении курсора в шапке -> навигация -> коллекции
 
-  const cloneSlide = (cloneArea) => {
+  const cloneSlide = (cloneArea, targetLink) => {
     let targetElement = document.querySelector(
-      '.dropdown__menu__swiper .swiper-slide-active'
+      '[imageLinkTarget="' + targetLink + '"]'
     )
 
     let clone = targetElement.cloneNode(true)
@@ -76,24 +76,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const slideToArrLinks = () => {
     const cloneArea = document.querySelector('.dropdown__menu__selected')
     const dropdownArrLink = document.querySelectorAll(
-      '.dropdown__menu--collection a'
+      '.dropdown__menu--collection li'
     )
 
     dropdownArrLink.forEach((item, id) => {
       item.addEventListener('mouseover', () => {
-        slideTo(swiperDropdown, id)
-        swiperDropdown.autoplay.stop()
+        let targetLink = Number(item.getAttribute('imageLink'))
 
         cloneArea.classList.add('clone_in')
-        cloneSlide(cloneArea)
+        cloneSlide(cloneArea, targetLink)
       })
     })
 
     dropdownArrLink.forEach((item, id) => {
       item.addEventListener('mouseout', () => {
-        swiperDropdown.autoplay.start()
-        slideTo(swiperDropdown, id)
-
         cloneArea.classList.remove('clone_in')
         deleteSlide(cloneArea)
       })

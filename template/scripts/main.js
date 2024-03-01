@@ -54,17 +54,38 @@ document.addEventListener('DOMContentLoaded', () => {
     slider.slideToLoop(id, 400, true)
   }
 
+  //! SELECT SLIDE ON MENU
   // ? Переход к слайдам при наведении курсора в шапке -> навигация -> коллекции
 
+  const cloneSlide = (cloneArea) => {
+    let targetElement = document.querySelector(
+      '.dropdown__menu__swiper .swiper-slide-active'
+    )
+
+    let clone = targetElement.cloneNode(true)
+
+    cloneArea.innerHTML = ''
+
+    cloneArea.appendChild(clone)
+  }
+
+  const deleteSlide = (cloneArea) => {
+    // cloneArea.innerHTML = ''
+  }
+
   const slideToArrLinks = () => {
+    const cloneArea = document.querySelector('.dropdown__menu__selected')
     const dropdownArrLink = document.querySelectorAll(
       '.dropdown__menu--collection a'
     )
 
     dropdownArrLink.forEach((item, id) => {
       item.addEventListener('mouseover', () => {
-        swiperDropdown.autoplay.stop()
         slideTo(swiperDropdown, id)
+        swiperDropdown.autoplay.stop()
+
+        cloneArea.classList.add('clone_in')
+        cloneSlide(cloneArea)
       })
     })
 
@@ -72,6 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
       item.addEventListener('mouseout', () => {
         swiperDropdown.autoplay.start()
         slideTo(swiperDropdown, id)
+
+        cloneArea.classList.remove('clone_in')
+        deleteSlide(cloneArea)
       })
     })
   }
@@ -84,12 +108,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const stopPlay = (slider, target) => {
     let targetElement = document.querySelector(target)
 
+    let distanceRatio
+    let duration
+    let startTimer
+
     targetElement.addEventListener('mouseenter', function () {
+      // Остановить слайд на текущей позиции.
+      slider.setTranslate(slider.getTranslate())
+
+      // Вычисление расстояния между текущим слайдом и следующим слайдом.
+      // 0,3 соответствует 30% расстоянию до следующего слайда.
+      distanceRatio = Math.abs(
+        (slider.width * slider.activeIndex + slider.getTranslate()) /
+          slider.width
+      )
+
+      duration = slider.params.speed * distanceRatio
+
       slider.autoplay.stop()
     })
 
-    targetElement.addEventListener('mouseleave', function () {
-      slider.autoplay.start()
+    targetElement.addEventListener('mouseleave', function (delay = duration) {
+      if (startTimer) clearTimeout(startTimer)
+
+      startTimer = setTimeout(() => {
+        slider.slideTo(slider.activeIndex, duration / 5)
+        slider.autoplay.start()
+      }, delay + 400)
     })
   }
 
@@ -142,8 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         return false
       }
-
-      console.log(openMenu)
     }
 
     const closeMenu = (typeMenu) => {
@@ -156,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Open
       item.addEventListener('mouseenter', () => openDropdownMenu(typeMenu))
       // Close
-      headerMenu.addEventListener('mouseleave', () => closeMenu(typeMenu))
+      // headerMenu.addEventListener('mouseleave', () => closeMenu(typeMenu))
     })
   }
 

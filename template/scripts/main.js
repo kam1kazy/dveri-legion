@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Open
       item.addEventListener('mouseenter', () => openDropdownMenu(typeMenu))
       // Close
-      // headerMenu.addEventListener('mouseleave', () => closeMenu(typeMenu))
+      headerMenu.addEventListener('mouseleave', () => closeMenu(typeMenu))
     })
   }
 
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //! Toggle Image in Dropdown About
 
   const toggleImageDropdownSidebar = () => {
-    const linkList = document.querySelectorAll('.dropdown__menu--about li')
+    const linkList = document.querySelectorAll('.dropdown__menu--main li')
     const imageList = document.querySelectorAll('.dropdown__image_area img')
     const imageArea = document.querySelector('.dropdown__image_area')
 

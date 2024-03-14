@@ -16,6 +16,18 @@ document.addEventListener('DOMContentLoaded', () => {
       disableOnInteraction: false,
     },
 
+    breakpoints: {
+      480: {
+        slidesPerView: 1,
+      },
+      640: {
+        slidesPerView: 2,
+      },
+      1240: {
+        slidesPerView: 3,
+      },
+    },
+
     pagination: {
       el: '.swiper-pagination',
       type: 'progressbar',

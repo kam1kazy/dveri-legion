@@ -21,18 +21,56 @@ body {
 .container {
   width: 1800px;
   margin: 0 auto;
+  padding: 0 40px;
 
-  @include media_queries(x-small) {
-    width: 460px;
+  // 1800px
+  @include media_queries(desktop-ultra) {
+    width: 1600px;
   }
+
+  // 1600px
+  @include media_queries(desktop-big) {
+    width: 1440px;
+  }
+
+  // 1440px
+  @include media_queries(desktop-xl) {
+    width: 1280px;
+    padding: 0 30px;
+  }
+
+  // 1280px
+  @include media_queries(desktop) {
+    width: 1024px;
+    padding: 0 20px;
+  }
+
+  // 1024px
+  @include media_queries(desktop-xs) {
+    width: 991px;
+    padding: 0 10px;
+  }
+
+  // 991px
+  @include media_queries(tablet) {
+    width: 767px;
+    padding: 0 10px;
+    // width: 576px;
+  }
+
+  // 767px
   @include media_queries(xx-small) {
     width: 576px;
   }
-  @include media_queries(tablet) {
-    width: 768px;
+
+  // 576px
+  @include media_queries(x-small) {
+    width: 460px;
   }
-  @include media_queries(desktop) {
-    width: 1170px;
+
+  // 460px
+  @include media_queries(small) {
+    width: 320px;
   }
 }
 
@@ -46,6 +84,7 @@ body {
   padding-top: 1rem;
   color: map-get($theme-dark, 'on-default');
   z-index: 1;
+  overflow: hidden;
 
   .container {
     position: relative;
@@ -94,6 +133,10 @@ body {
     height: 52px;
     position: relative;
 
+    @include media_queries(desktop) {
+      width: 145px;
+    }
+
     .logo-dark {
       opacity: 0;
     }
@@ -113,8 +156,17 @@ body {
     align-items: center;
     z-index: 1;
 
+    @include media_queries(desktop-xs) {
+      justify-content: flex-end;
+    }
+
     nav {
       display: flex;
+
+      @include media_queries(desktop-xs) {
+        //! Будет мобильное меню
+        display: none;
+      }
 
       li {
         position: relative;
@@ -472,6 +524,14 @@ body {
     line-height: 1.25;
     font-weight: $fw-normal;
     margin-left: 460px;
+
+    @include media_queries(desktop-xs) {
+      margin-left: 270px;
+    }
+
+    @include media_queries(xx-small) {
+      margin-left: 110px;
+    }
   }
 }
 
@@ -677,6 +737,10 @@ body {
   padding-block: 3rem;
   color: map-get($theme-dark, 'on-default');
 
+  @include media_queries(xx-small) {
+    padding-block: 0;
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -719,6 +783,10 @@ body {
 
   align-self: end;
 
+  @include media_queries(xx-small) {
+    min-height: 9rem;
+  }
+
   &::before {
     content: '';
     inset: 0;
@@ -741,6 +809,11 @@ body {
       margin-left: -10px;
       margin-bottom: 20px;
       display: block;
+
+      @include media_queries(xx-small) {
+        font-size: 0.8rem;
+        margin-left: 0px;
+      }
     }
   }
 
@@ -748,6 +821,15 @@ body {
     position: absolute;
     right: 45px;
     bottom: 60px;
+
+    @include media_queries(desktop) {
+      bottom: 75px;
+    }
+
+    @include media_queries(xx-small) {
+      bottom: 40px;
+      right: 25px;
+    }
   }
 }
 
@@ -771,11 +853,19 @@ body {
       right: -50px;
       bottom: 0;
       margin: auto;
+
+      @include media_queries(desktop-xs) {
+        top: -140px;
+      }
     }
   }
 
   &-link {
     margin: 67px 0 93px;
+
+    @include media_queries(desktop-xs) {
+      margin: 67px 0 0px;
+    }
 
     .button {
       margin: 0 auto;
@@ -794,6 +884,10 @@ body {
     &--info {
       position: relative;
       margin-top: 70px;
+
+      @include media_queries(xx-small) {
+        margin-top: 2.5rem;
+      }
 
       &-btn {
         background-color: map-get($theme-dark, 'default');
@@ -847,6 +941,11 @@ body {
         max-height: 390px;
         box-shadow: -1px 0px 17px 5px rgba(34, 60, 80, 0.19);
 
+        @include media_queries(xx-small) {
+          max-width: 170px;
+        }
+
+        //? Другой вид отображение картинок в карусели
         // width: 330px;
         // height: 330px;
         // margin: 0 auto;
@@ -995,6 +1094,7 @@ body {
 
 .about_text {
   margin: 7.5rem 0;
+  // overflow: hidden;
 
   &-gray-bg {
     background: #cfd2df;
@@ -1010,6 +1110,12 @@ body {
 
   &__img-left .wrapper {
     flex-direction: row-reverse;
+
+    @include media_queries(xx-small) {
+      p {
+        width: 250px;
+      }
+    }
   }
 
   &-img {
@@ -1019,6 +1125,28 @@ body {
     width: 55rem;
     height: 55rem;
     object-fit: cover;
+
+    @include media_queries(desktop-big) {
+      width: 45rem;
+      height: 45rem;
+    }
+
+    @include media_queries(desktop-xl) {
+      width: 35rem;
+      height: 35rem;
+    }
+
+    @include media_queries(desktop) {
+      width: 25rem;
+    }
+
+    @include media_queries(tablet) {
+      width: 20rem;
+    }
+
+    @include media_queries(xx-small) {
+      width: 15rem;
+    }
 
     picture,
     img {
@@ -1046,10 +1174,26 @@ body {
 
     p {
       width: 570px;
-      font-size: calc(1.412rem + 0.37559vw);
+      @include responsive-font-size;
       margin-bottom: 2.25rem;
       font-weight: $fw-normal;
       line-height: $lh-text-second;
+
+      @include media_queries(desktop) {
+        width: 510px;
+      }
+
+      @include media_queries(desktop-xs) {
+        width: 450px;
+      }
+
+      @include media_queries(tablet) {
+        width: 350px;
+      }
+
+      @include media_queries(xx-small) {
+        width: 280px;
+      }
     }
   }
 }
@@ -1071,6 +1215,16 @@ body {
       flex: 0 1 590px;
       background-color: #eee;
 
+      @include media_queries(tablet) {
+        min-height: 425px;
+      }
+
+      @include media_queries(xx-small) {
+        min-height: 385px;
+        padding: 2.9375rem 2.25rem;
+        gap: 1rem;
+      }
+
       &.contact_area--dark {
         background-color: map-get($theme-dark, 'default');
         color: map-get($theme-dark, 'on-default');
@@ -1085,7 +1239,7 @@ body {
 
     p {
       margin-bottom: 2.9375rem;
-      font-size: calc(1.412rem + 0.37559vw);
+      @include responsive-font-size;
       line-height: $lh-text-second;
     }
   }
@@ -1098,10 +1252,18 @@ body {
     align-items: center;
     gap: 203px;
     margin-bottom: 9rem;
+
+    @include media_queries(desktop-xs) {
+      gap: 20px;
+    }
   }
 
   &__item {
     width: 260px;
+
+    @include media_queries(xx-small) {
+      min-height: 330px;
+    }
 
     img {
       margin-bottom: 2.5rem;
@@ -1137,6 +1299,18 @@ body {
 
     margin: 0 150px;
 
+    @include media_queries(desktop-xs) {
+      margin: 0 70px;
+    }
+
+    @include media_queries(tablet) {
+      margin: 0;
+    }
+
+    @include media_queries(xx-small) {
+      flex-direction: column;
+    }
+
     &:last-child {
       border-top: 1px solid hsla(0, 0%, 100%, 0.2);
       padding-top: 3.4375rem;
@@ -1147,8 +1321,23 @@ body {
   &__feedback {
     max-width: 500px;
 
+    @include media_queries(desktop-xl) {
+      max-width: 370px;
+    }
+
+    @include media_queries(tablet) {
+      max-width: 290px;
+    }
+
+    @include media_queries(xx-small) {
+      max-width: 100%;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 3.125rem;
+      margin-bottom: 3.375rem;
+    }
+
     &__header {
-      font-size: calc(1.262rem + 0.37559vw);
+      @include responsive-font-size;
       line-height: 1.25;
       margin: 0 0 3.4375rem;
     }
@@ -1161,11 +1350,35 @@ body {
       font-size: 0.875rem;
       line-height: $lh-text;
       color: map-get($theme-light, 'toggle-text');
+
+      @include media_queries(desktop-xs) {
+        a {
+          display: block;
+        }
+      }
+
+      @include media_queries(xx-small) {
+        a {
+          display: inline-block;
+        }
+      }
     }
   }
 
   &__sidebar {
     width: 570px;
+
+    @include media_queries(desktop-xl) {
+      width: 370px;
+    }
+
+    @include media_queries(xx-small) {
+      width: 320px;
+    }
+
+    @include media_queries(xx-small) {
+      width: 100%;
+    }
 
     &__menu {
       li {
@@ -1201,6 +1414,10 @@ body {
         width: 392px;
         transition: border-color 0.3s;
 
+        @include media_queries(desktop-xl) {
+          width: 210px;
+        }
+
         &:focus {
           border-color: map-get($theme-light, 'input-border-focus');
         }
@@ -1216,6 +1433,11 @@ body {
   &__logo {
     display: flex;
     align-items: center;
+
+    @include media_queries(xx-small) {
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
 
     img {
       width: 100px;
@@ -1261,6 +1483,15 @@ body {
 
     padding-bottom: 5.75rem;
     padding: 7.5rem 0;
+
+    @include media_queries(desktop-xl) {
+      background-position: 70px -1130px;
+    }
+
+    @include media_queries(desktop-xs) {
+      background-position: center;
+      background-repeat: no-repeat;
+    }
 
     h5 {
       min-width: min(340px, 100%);
@@ -1320,6 +1551,10 @@ body {
   margin-top: 0.625rem;
   opacity: 0.5;
   max-width: 450px;
+
+  @include media_queries(desktop-xs) {
+    font-size: 0.75rem;
+  }
 
   a {
     text-decoration: underline;

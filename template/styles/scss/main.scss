@@ -1762,6 +1762,12 @@ body {
   width: 40px;
   top: 20px;
   right: 20px;
+
+  display: none;
+
+  @include media_queries(desktop) {
+    display: block;
+  }
 }
 
 @include media_queries(desktop) {

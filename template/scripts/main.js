@@ -236,3 +236,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   toggleImageDropdownSidebar()
 })
+
+const mobileMenuToggle = () => {
+  const openMobileMenuBtn = document.querySelector('.mobile_menu-open_btn')
+  const closeMobileMenuBtn = document.querySelector('.close_menu')
+  const header = document.querySelector('.header')
+  const headerNav = document.querySelector('.header__nav')
+
+  openMobileMenuBtn.addEventListener('click', () => {
+    header.classList.add('shadowbox-active')
+    headerNav.classList.add('active')
+  })
+
+  closeMobileMenuBtn.addEventListener('click', () => {
+    header.classList.remove('shadowbox-active')
+    headerNav.classList.remove('active')
+  })
+}
+
+mobileMenuToggle()

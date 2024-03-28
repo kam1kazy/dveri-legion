@@ -84,7 +84,7 @@ body {
   padding-top: 1rem;
   color: map-get($theme-dark, 'on-default');
   z-index: 1;
-  overflow: hidden;
+  // overflow: hidden;
 
   .container {
     position: relative;
@@ -176,8 +176,9 @@ body {
       display: flex;
 
       @include media_queries(desktop-xs) {
-        //! Будет мобильное меню
-        display: none;
+        // [dropdown] {
+        //   display: none;
+        // }
       }
 
       li {
@@ -282,13 +283,16 @@ body {
 
   overflow: hidden;
 
-  padding-left: 300px;
   padding: 0 300px;
 
   transition: height 0.5s cubic-bezier(0.25, 0.25, 0.355, 0.99);
 
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
+
+  @include media_queries(desktop) {
+    padding: 0 40px;
+  }
 
   &__menu {
     margin-bottom: 2.375rem;
@@ -1736,5 +1740,113 @@ body {
 
   a {
     text-decoration: underline;
+  }
+}
+
+.mobile_menu-open_btn {
+  display: none;
+  align-items: center;
+  margin-right: 30px;
+
+  img {
+    max-width: 40px;
+  }
+
+  @include media_queries(desktop) {
+    display: flex;
+  }
+}
+
+.close_menu {
+  position: absolute;
+  width: 40px;
+  top: 20px;
+  right: 20px;
+}
+
+@include media_queries(desktop) {
+  .header.shadowbox-active::after {
+    opacity: 1;
+    visibility: visible;
+    z-index: -1;
+  }
+
+  .header__nav {
+    position: absolute;
+
+    inset: 0;
+    left: -100vw;
+    transition: left 0.5s ease;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    background: #292a2f;
+    border: 2px solid #292a2f;
+
+    height: 100vh;
+    width: 100%;
+
+    z-index: 2;
+
+    nav {
+      display: none;
+    }
+
+    &.active {
+      left: 0;
+    }
+  }
+
+  .header__add_links {
+    padding: 20px 0;
+    order: 2;
+    margin-top: auto;
+
+    .outline-border {
+      color: #fff;
+    }
+  }
+
+  .dropdown {
+    position: static;
+    height: auto;
+    width: 100%;
+    inset: 0;
+    border-radius: 0;
+    padding: 0 20px;
+
+    [class^='dropdown__sidebar'] {
+      width: 100%;
+    }
+
+    &-collection {
+      order: 1;
+      background: #292a2f;
+      color: #fff;
+      margin-top: auto;
+    }
+
+    &-about {
+      order: 3;
+      margin-top: auto;
+    }
+
+    .button {
+      display: none;
+    }
+
+    &__sidebar {
+      &--right {
+        display: none;
+      }
+    }
+
+    &__menu {
+      margin-bottom: 0;
+      margin-top: 0;
+      padding: 20px 0;
+    }
   }
 }

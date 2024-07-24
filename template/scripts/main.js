@@ -70,9 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ? Переход к слайдам при наведении курсора в шапке -> навигация -> коллекции
 
   const cloneSlide = (cloneArea, targetLink) => {
-    let targetElement = document.querySelector(
-      '[imageLinkTarget="' + targetLink + '"]'
-    )
+    let targetElement = document.querySelector('[imageLinkTarget="' + targetLink + '"]')
 
     let clone = targetElement.cloneNode(true)
 
@@ -87,9 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const slideToArrLinks = () => {
     const cloneArea = document.querySelector('.dropdown__menu__selected')
-    const dropdownArrLink = document.querySelectorAll(
-      '.dropdown__menu--collection li'
-    )
+    const dropdownArrLink = document.querySelectorAll('.dropdown__menu--collection li')
 
     dropdownArrLink.forEach((item, id) => {
       item.addEventListener('mouseover', () => {
@@ -126,10 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Вычисление расстояния между текущим слайдом и следующим слайдом.
       // 0,3 соответствует 30% расстоянию до следующего слайда.
-      distanceRatio = Math.abs(
-        (slider.width * slider.activeIndex + slider.getTranslate()) /
-          slider.width
-      )
+      distanceRatio = Math.abs((slider.width * slider.activeIndex + slider.getTranslate()) / slider.width)
 
       duration = slider.params.speed * distanceRatio
 
@@ -146,7 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  stopPlay(swiperCollection, '.collection_carousel .swiper-wrapper')
+  if (document.querySelector('.collection_carousel')) {
+    console.log('+')
+    stopPlay(swiperCollection, '.collection_carousel .swiper-wrapper')
+  }
 
   //! SMOOTH SCROLL
   // ? Находит ссылки с якорями и кастует плавный скролл
@@ -162,8 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let targetElement = document.getElementById(targetId)
 
         if (targetElement) {
-          let targetPosition =
-            targetElement.getBoundingClientRect().top + window.pageYOffset
+          let targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset
           window.scrollTo({
             top: targetPosition,
             behavior: 'smooth',

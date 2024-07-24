@@ -94,9 +94,6 @@ body {
       position: absolute;
       inset: 0;
       top: -5px;
-      left: calc(($gutter / 2) * (-1));
-
-      width: calc(100% + $gutter);
 
       background-color: map-get($theme-light, 'default');
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
@@ -109,6 +106,10 @@ body {
 
       opacity: 0;
       transition: opacity 0.3s;
+
+      @include media_queries(desktop-xs) {
+        width: calc(100% - $gutter);
+      }
     }
   }
 
@@ -592,8 +593,7 @@ body {
     width: 20px;
     margin-left: 5px;
 
-    filter: invert(18%) sepia(6%) saturate(659%) hue-rotate(192deg)
-      brightness(91%) contrast(94%);
+    filter: invert(18%) sepia(6%) saturate(659%) hue-rotate(192deg) brightness(91%) contrast(94%);
   }
 }
 
@@ -615,8 +615,7 @@ body {
     transition-duration: 0.1s;
     transition-property: transform, opacity;
 
-    filter: invert(18%) sepia(6%) saturate(659%) hue-rotate(192deg)
-      brightness(91%) contrast(94%);
+    filter: invert(18%) sepia(6%) saturate(659%) hue-rotate(192deg) brightness(91%) contrast(94%);
   }
 
   &:hover {
@@ -695,8 +694,7 @@ body {
     color: map-get($theme-light, 'default');
 
     .button__icon {
-      filter: invert(97%) sepia(19%) saturate(0%) hue-rotate(299deg)
-        brightness(101%) contrast(103%);
+      filter: invert(97%) sepia(19%) saturate(0%) hue-rotate(299deg) brightness(101%) contrast(103%);
     }
 
     &:hover {
@@ -711,8 +709,7 @@ body {
     color: map-get($theme-dark, 'on-default');
 
     .button__icon {
-      filter: brightness(0) saturate(100%) invert(99%) sepia(5%) saturate(2%)
-        hue-rotate(257deg) brightness(116%) contrast(100%);
+      filter: brightness(0) saturate(100%) invert(99%) sepia(5%) saturate(2%) hue-rotate(257deg) brightness(116%) contrast(100%);
     }
 
     &-hover {
@@ -834,11 +831,7 @@ body {
     inset: 0;
     position: absolute;
     z-index: -1;
-    background: linear-gradient(
-      180deg,
-      rgba(47, 48, 53, 0),
-      rgba(47, 48, 53, 0.5)
-    );
+    background: linear-gradient(180deg, rgba(47, 48, 53, 0), rgba(47, 48, 53, 0.5));
   }
 
   &--header {
@@ -1683,11 +1676,7 @@ body {
     }
 
     &::after {
-      background: radial-gradient(
-        at center 130%,
-        hsl(36deg 24.73% 17.04% / 79%),
-        hsla(0, 23.67%, 11.46%, 0.18)
-      );
+      background: radial-gradient(at center 130%, hsl(36deg 24.73% 17.04% / 79%), hsla(0, 23.67%, 11.46%, 0.18));
       content: '';
       inset: 0;
       position: absolute;

@@ -1852,13 +1852,13 @@ body {
   background-color: map-get($theme-dark, 'second');
 }
 
-#container3D canvas {
-  width: 100vw !important;
-  height: 100vh !important;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
+// .webgl canvas {
+//   width: 100vw !important;
+//   height: 100vh !important;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+// }
 
 .cursor {
   position: fixed;
@@ -1916,4 +1916,9 @@ body {
 
 .overlay h1 span {
   position: absolute;
+}
+
+.catalog_promo .header {
+  font-size: 130px;
+    text-align: center;
 }

@@ -301,8 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
         //? Добавляем на сцену
         base.add(gltf.scene)
 
-        //? Устанавливаем позицию модели в сцене
-        gltf.scene.position.set(0, -0.4, 0)
+        //! Устанавливаем позицию модели в сцене
+        gltf.scene.position.set(-0.3, -1.2, 0)
       },
       undefined,
       function (error) {
@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //! Создаем камеру
 
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+    const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000)
 
     //! Установка позиции камеры
     camera.position.z = 2.5

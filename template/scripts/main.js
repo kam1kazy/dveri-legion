@@ -140,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (document.querySelector('.collection_carousel')) {
-    console.log('+')
     stopPlay(swiperCollection, '.collection_carousel .swiper-wrapper')
   }
 
@@ -402,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  model3D()
+  if (document.querySelector('.webgl')) model3D()
 })
 
 const mobileMenuToggle = () => {

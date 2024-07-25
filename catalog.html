@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="./template/styles/css/main.min.css" />
 
-    <title>Двери «Legion»</title>
+    <title>Двери «Legion» - Каталог</title>
   </head>
   <body class="background-noise">
     <header class="header">
@@ -202,45 +202,18 @@
     </header>
 
     <main>
-      <section class="slogan">
+      <section class="slogan catalog_promo">
         <div class="container">
           <div class="wrapper">
-            <h3>
-              Искусство создания теплых
-              <br />
-              моментов: совершенство Hugge
-              <br />
-              на вашем пороге
-            </h3>
+            <canvas class="webgl"></canvas>
+
+            <div class="cursor"></div>
+            <div class="cursor-border"></div>
 
             <div class="arrow_down">
               <a href="#promo">
                 <img src="./template/images/icons/arrow-down.svg" alt="Стрелка вниз" />
               </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="promo">
-        <div class="container">
-          <div class="wrapper">
-            <div class="promo__inner">
-              <figure id="promo" class="promo__image">
-                <picture><img src="./template/images/promo.jpg" /></picture>
-              </figure>
-
-              <div class="promo__text">
-                <p class="promo__text--header">
-                  <span>Входная дверь из натурального дерева</span>
-                  ZMD-24
-                </p>
-
-                <a href="#" class="button filled filled-hover animate-icon">
-                  <span>Посмотреть коллекцию</span>
-                  <img class="button__icon" src="./template/images/icons/arrow-right.svg" alt="Настройки" />
-                </a>
-              </div>
             </div>
           </div>
         </div>
@@ -375,7 +348,21 @@
       </div>
     </footer>
 
+    <div class="overlay">
+      <h1>
+        <span>LEGION</span>
+      </h1>
+    </div>
+
+    <!-- CDN -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.146.0/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.146.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+
+    <script></script>
+
     <script src="./template/scripts/main.js"></script>
   </body>
 </html>

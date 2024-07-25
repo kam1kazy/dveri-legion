@@ -10,16 +10,9 @@ $media_queries: (
   'desktop': unquote('only screen and (max-width: 1280px)'),
   'desktop-xl': unquote('only screen and (max-width: 1440px)'),
   'desktop-big': unquote('only screen and (max-width: 1600px)'),
-  'desktop-ultra':
-    unquote('only screen and (max-width: ' + $size__site_content_width + ')'),
-  'retina2':
-    unquote(
-      'only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi)'
-    ),
-  'retina3':
-    unquote(
-      'only screen and (-webkit-min-device-pixel-ratio: 3) and (min-resolution: 288dpi)'
-    ),
+  'desktop-ultra': unquote('only screen and (max-width: ' + $size__site_content_width + ')'),
+  'retina2': unquote('only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi)'),
+  'retina3': unquote('only screen and (-webkit-min-device-pixel-ratio: 3) and (min-resolution: 288dpi)'),
   'landscape': unquote('screen and (orientation:landscape) '),
   'portrait': unquote('screen and (orientation:portrait) '),
 );
@@ -28,11 +21,7 @@ $media_queries: (
   $conditions: ();
   @each $breakpoint in $breakpoints {
     // If the key exists in the map
-    $conditions: append(
-      $conditions,
-      #{inspect(map-get($media_queries, $breakpoint))},
-      comma
-    );
+    $conditions: append($conditions, #{inspect(map-get($media_queries, $breakpoint))}, comma);
   }
 
   @media #{$conditions} {
@@ -47,6 +36,7 @@ $theme-dark: (
   'default-70': rgba(47, 48, 53, 0.7),
   'on-default': #fff,
   'on-default-70': hsla(0, 0%, 100%, 0.7),
+  'second': #010101,
   'button-background-hovered': #484951,
   'button-outline-color': rgba(47, 48, 53, 0.5),
   'input-placeholder': rgba(47, 48, 53, 0.7),
@@ -61,6 +51,7 @@ $theme-light: (
   'default-70': hsla(0, 0%, 100%, 0.7),
   'on-default': #2f3035,
   'on-default-70': rgba(47, 48, 53, 0.7),
+  'second': #010101,
   'button-background-hovered': #f6f6f6,
   'button-outline-color': hsla(0, 0%, 100%, 0.3),
   'input-placeholder': hsla(0, 0%, 100%, 0.7),

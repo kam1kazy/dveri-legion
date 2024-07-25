@@ -232,14 +232,13 @@ document.addEventListener('DOMContentLoaded', () => {
   toggleImageDropdownSidebar()
 
   //! 3D Scene Three.js with GLTF
+  //! ... & preloader from scene load
 
   const model3D = () => {
-    /** Canvas */
-
+    //? Место рендеринга модели
     const canvas = document.querySelector('.webgl')
 
-    /** Loaders */
-
+    //? Preloader
     gsap.from('.overlay h1 span', {
       duration: 1,
       y: '100%',
@@ -273,28 +272,37 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     )
 
-    /** Scene */
+    //? Создаем сцену
 
     const scene = new THREE.Scene()
 
-    /** GLTF Model */
+    //? GLTF Model
 
-    let skull = null
     let base = new THREE.Object3D()
     scene.add(base)
+
+    //? Загрузка GLTF модели
+
     const gltfLoader = new THREE.GLTFLoader(loadingManager)
+
+    //? Загружаем модель
     gltfLoader.load(
       './assets/model/door/scene.gltf',
       (gltf) => {
         gltf.scene.traverse((child) => {
           if (child.isMesh) {
-            // Убедитесь, что модель непрозрачная
+            //? Убираем прозначность модели
+            // если не задана в самой моделе, перестраховка
             child.material.transparent = false
-            child.material.opacity = 1 // Установите непрозрачность на 1
+            child.material.opacity = 1
           }
         })
-        // gltf.scene.position.y = 0.5
+
+        //? Добавляем на сцену
         base.add(gltf.scene)
+
+        //? Устанавливаем позицию модели в сцене
+        gltf.scene.position.set(0, -0.4, 0)
       },
       undefined,
       function (error) {
@@ -302,42 +310,53 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     )
 
-    /** Sizes */
+    //? Размеры окна
 
     const sizes = {
       width: window.innerWidth,
       height: window.innerHeight,
     }
 
-    /** Camera */
+    //! Создаем камеру
 
-    const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height)
-    camera.position.z = 6
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+
+    //! Установка позиции камеры
+    camera.position.z = 2.5
 
     scene.add(camera)
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4)
+    //! Создаем освещение
+
+    // Добавление общего освещения в сцену
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.6)
     scene.add(ambientLight)
 
-    const light = new THREE.DirectionalLight(0xffffff, 0.5)
+    // Направленный свет
+    const light = new THREE.DirectionalLight(0xffffff, 1)
     light.position.set(500, 200, 500) //looking at 0,0,0
     scene.add(light)
 
-    const pointLight = new THREE.PointLight(0xffffff, 1)
+    // Добавление точечный свет
+    const pointLight = new THREE.PointLight(0xffffff, 2.5)
     pointLight.position.z = 1
     scene.add(pointLight)
 
-    var plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), -2)
-    var raycaster = new THREE.Raycaster()
-    var mouse = new THREE.Vector2()
-    var pointOfIntersection = new THREE.Vector3()
+    let plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), -2)
+    let raycaster = new THREE.Raycaster()
+    let mouse = new THREE.Vector2()
+    let pointOfIntersection = new THREE.Vector3()
     canvas.addEventListener('mousemove', onMouseMove, false)
+
+    //? Меняем курсор и задаем границы
 
     const cursor = document.querySelector('.cursor')
     const cursorBorder = document.querySelector('.cursor-border')
 
     const cursorPos = new THREE.Vector2()
     const cursorBorderPos = new THREE.Vector2()
+
+    //? Следование за курсором
 
     function onMouseMove(e) {
       cursorPos.x = e.clientX
@@ -361,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cursorBorder.style.visibility = 'visible'
     }
 
-    /** Renderer */
+    //? Создаем рендерер
 
     const renderer = new THREE.WebGLRenderer({
       canvas: canvas,

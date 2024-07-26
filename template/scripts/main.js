@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
         base.add(gltf.scene)
 
         //! Устанавливаем позицию модели в сцене
-        gltf.scene.position.set(-0.3, -1.2, 0)
+        gltf.scene.position.set(0, -1.2, 0)
       },
       undefined,
       function (error) {
@@ -311,22 +311,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //? Размеры окна
 
+    const sceneContainer = document.querySelector('.catalog_promo .wrapper')
+
     const sizes = {
-      width: window.innerWidth,
+      width: sceneContainer.offsetWidth,
       height: window.innerHeight,
     }
 
     //! Создаем камеру
-
     const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000)
 
     //! Установка позиции камеры
-    camera.position.z = 2.5
-
+    camera.position.z = 2.1
     scene.add(camera)
 
     //! Создаем освещение
-
     // Добавление общего освещения в сцену
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.6)
     scene.add(ambientLight)
@@ -345,24 +344,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let raycaster = new THREE.Raycaster()
     let mouse = new THREE.Vector2()
     let pointOfIntersection = new THREE.Vector3()
-    canvas.addEventListener('mousemove', onMouseMove, false)
-
-    //? Меняем курсор и задаем границы
-
-    const cursor = document.querySelector('.cursor')
-    const cursorBorder = document.querySelector('.cursor-border')
+    window.addEventListener('mousemove', onMouseMove, false)
 
     const cursorPos = new THREE.Vector2()
-    const cursorBorderPos = new THREE.Vector2()
 
-    //? Следование за курсором
-
+    //! Следование за курсором
     function onMouseMove(e) {
       cursorPos.x = e.clientX
       cursorPos.y = e.clientY
 
-      mouse.x = (cursorPos.x / sizes.width) * 2 - 1
-      mouse.y = -(cursorPos.y / sizes.height) * 2 + 1
+      mouse.x = (cursorPos.x / window.innerWidth) * 2 - 1
+      mouse.y = -(cursorPos.y / window.innerHeight) * 2 + 1
 
       pointLight.position.x = mouse.x
       pointLight.position.y = mouse.y
@@ -370,13 +362,6 @@ document.addEventListener('DOMContentLoaded', () => {
       raycaster.setFromCamera(mouse, camera)
       raycaster.ray.intersectPlane(plane, pointOfIntersection)
       base.lookAt(pointOfIntersection)
-
-      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
-      cursor.style.opacity = 1
-      cursor.style.visibility = 'visible'
-
-      cursorBorder.style.opacity = 1
-      cursorBorder.style.visibility = 'visible'
     }
 
     //? Создаем рендерер
@@ -393,11 +378,11 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer.setAnimationLoop(() => {
       renderer.render(scene, camera)
 
-      const easting = 8
-      cursorBorderPos.x += (cursorPos.x - cursorBorderPos.x) / easting
-      cursorBorderPos.y += (cursorPos.y - cursorBorderPos.y) / easting
+      // const easting = 8
+      // cursorBorderPos.x += (cursorPos.x - cursorBorderPos.x) / easting
+      // cursorBorderPos.y += (cursorPos.y - cursorBorderPos.y) / easting
 
-      cursorBorder.style.transform = `translate(${cursorBorderPos.x}px, ${cursorBorderPos.y}px)`
+      // cursorBorder.style.transform = `translate(${cursorBorderPos.x}px, ${cursorBorderPos.y}px)`
     })
   }
 

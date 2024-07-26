@@ -31,33 +31,33 @@ $media_queries: (
 
 //* Colors
 $theme-dark: (
-  'default': #2f3035,
-  'default-15': rgba(47, 48, 53, 0.15),
-  'default-70': rgba(47, 48, 53, 0.7),
-  'on-default': #fff,
+  'default': hsl(230, 6%, 20%),
+  'default-15': hsla(230, 6%, 20%, 0.15),
+  'default-70': hsla(230, 6%, 20%, 0.7),
+  'on-default': hsl(0, 0%, 100%),
   'on-default-70': hsla(0, 0%, 100%, 0.7),
-  'second': #010101,
-  'button-background-hovered': #484951,
-  'button-outline-color': rgba(47, 48, 53, 0.5),
-  'input-placeholder': rgba(47, 48, 53, 0.7),
-  'input-border': rgba(47, 48, 53, 0.5),
-  'input-border-15': rgba(47, 48, 53, 0.15),
-  'input-border-focus': #2f3035,
-  'toggle-text': rgba(47, 48, 53, 0.7),
+  'second': hsl(0deg 0% 3%),
+  'button-background-hovered': hsl(233, 6%, 30%),
+  'button-outline-color': hsla(230, 6%, 20%, 0.5),
+  'input-placeholder': hsla(230, 6%, 20%, 0.7),
+  'input-border': hsla(230, 6%, 20%, 0.5),
+  'input-border-15': hsla(230, 6%, 20%, 0.15),
+  'input-border-focus': hsl(230, 6%, 20%),
+  'toggle-text': hsla(230, 6%, 20%, 0.7),
 );
 $theme-light: (
-  'default': #fff,
+  'default': hsl(0, 0%, 100%),
   'default-15': hsla(0, 0%, 100%, 0.15),
   'default-70': hsla(0, 0%, 100%, 0.7),
-  'on-default': #2f3035,
-  'on-default-70': rgba(47, 48, 53, 0.7),
-  'second': #010101,
-  'button-background-hovered': #f6f6f6,
+  'on-default': hsl(230, 6%, 20%),
+  'on-default-70': hsla(230, 6%, 20%, 0.7),
+  'second': hsl(0deg 0% 3%),
+  'button-background-hovered': hsl(0, 0%, 97%),
   'button-outline-color': hsla(0, 0%, 100%, 0.3),
   'input-placeholder': hsla(0, 0%, 100%, 0.7),
   'input-border': hsla(0, 0%, 100%, 0.7),
   'input-border-15': hsla(0, 0%, 100%, 0.15),
-  'input-border-focus': #fff,
+  'input-border-focus': hsl(0, 0%, 100%),
   'toggle-text': hsla(0, 0%, 100%, 0.5),
 );
 
@@ -82,7 +82,7 @@ $content-text-mobile: calc(0.82rem + 0.37559vw);
   }
 }
 
-$gutter: 48px;
+$gutter: 3rem;
 
 $border-radius: 0.5rem;
 

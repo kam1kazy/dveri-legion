@@ -30,17 +30,19 @@
       <div class="container">
         <div class="wrapper">
           <div class="mobile_menu-open_btn">
-            <img src="./template/images/icons/menu.svg" alt="" />
+            <img src="./template/images/icons/menu.svg" alt="Мобильное меню" />
           </div>
 
           <div class="header__logo">
-            <img class="logo-light" src="./template/images/logo_legion-light.svg" alt="Логотип" />
-            <img class="logo-dark" src="./template/images/logo_legion.svg" alt="Логотип" />
+            <a href="/index.html">
+              <img class="logo-light" src="./template/images/logo_legion-light.svg" alt="Логотип" />
+              <img class="logo-dark" src="./template/images/logo_legion.svg" alt="Логотип" />
+            </a>
           </div>
 
           <div class="header__nav">
             <div class="close_menu">
-              <img src="./template/images/icons/close.svg" alt="" />
+              <img src="./template/images/icons/close.svg" alt="Закрыть мобильное меню" />
             </div>
 
             <nav>
@@ -212,9 +214,75 @@
             <div class="cursor-border"></div>
 
             <div class="arrow_down">
-              <a href="#promo">
-                <img src="./template/images/icons/arrow-down.svg" alt="Стрелка вниз" />
-              </a>
+              <a href="#promo" class="button outline-border">Выбрать свою дверь</a>
+              <a href="#promo" class="button outline-border">Вдохновение</a>
+              <a href="#promo" class="button outline-border">Техническое описание</a>
+              <a href="#promo" class="button outline-border">Документация</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about_text catalog_art">
+        <div class="container">
+          <div class="wrapper">
+            <div class="about_text__content">
+              <div class="about_text__content-wrapper">
+                <p>
+                  Изысканные формы и безупречная детализация делают наши коллекции незаменимыми для создания теплой и уютной атмосферы в вашем доме, гостинице или любом другом проекте.
+                  <br />
+                  <br />
+                  <strong>Позвольте вашим интерьерам говорить</strong>
+                  на языке изысканности с дверями, которые подчеркнут ваш высокий статус и утонченный вкус.
+                </p>
+              </div>
+            </div>
+
+            <figure class="about_text-img">
+              <picture>
+                <img src="./assets/images/catalog/art-door.png" loading="lazy" />
+              </picture>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="advantage catalog_advantage">
+        <div class="container">
+          <p>
+            <strong>Двери Legion — это гармония стиля и функциональности.</strong>
+            <br />
+            Каждый элемент материализует ваше стремление к совершенству.
+          </p>
+          <div class="wrapper">
+            <div class="advantage__item">
+              <figure class="about_text-img">
+                <picture>
+                  <img src="./assets/images/catalog/adv_1.png" alt="Надежные замки" />
+                </picture>
+              </figure>
+
+              <p><strong>Надежные замки</strong></p>
+            </div>
+
+            <div class="advantage__item">
+              <figure class="about_text-img">
+                <picture>
+                  <img src="./assets/images/catalog/adv_2.png" alt="Прочные ручки" />
+                </picture>
+              </figure>
+
+              <p><strong>Износостойкие ручки</strong></p>
+            </div>
+
+            <div class="advantage__item">
+              <figure class="about_text-img">
+                <picture>
+                  <img src="./assets/images/catalog/adv_3.png" alt="Тихие петли" />
+                </picture>
+              </figure>
+
+              <p><strong>Бесшумные петли</strong></p>
             </div>
           </div>
         </div>
@@ -327,7 +395,7 @@
         </div>
         <div class="wrapper">
           <div class="footer__logo">
-            <img src="./template/images/logo_legion-light.svg" alt="" />
+            <a href="/index.html"><img src="./template/images/logo_legion-light.svg" alt="" /></a>
           </div>
           <div class="footer__link">
             <ul>
@@ -357,7 +425,6 @@
 
     <!-- CDN -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.146.0/three.min.js"></script>
     <script src="https://unpkg.com/three@0.146.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>

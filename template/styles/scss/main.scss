@@ -1965,7 +1965,22 @@ body {
   padding-bottom: calc($gutter * 6);
 
   .wrapper {
-    flex-direction: row-reverse;
+    // flex-direction: row-reverse;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 100px;
+  }
+  .about_text__content {
+    display: none;
+  }
+  .about_text__content p {
+    width: auto;
+    text-align: center;
+    max-width: 870px;
+  }
+  .about_text-img {
+    width: 100%;
+    max-height: 520px;
   }
 }
 
@@ -1993,4 +2008,87 @@ body {
     width: 20rem;
     height: 20rem;
   }
+}
+
+.catalog_line {
+  padding: 30px 0;
+  border-top: 1px solid #ccc;
+}
+
+.personnalisation {
+  min-height: 500px;
+  display: flex;
+
+  .wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+  }
+}
+.personnalisation__generator__preview {
+  width: 340px;
+  background: red;
+  height: 330px;
+}
+.personnalisation__generator {
+  display: flex;
+  justify-content: space-between;
+}
+
+.personnalisation__generator__settings__inner {
+  background: #313131;
+  border: 1px solid #cccc;
+  padding: 30px;
+}
+.personnalisation__generator__settings__form__option {
+  display: flex;
+  flex-direction: column;
+}
+.personnalisation__generator__settings__form__option__label {
+  display: flex;
+  justify-content: space-between;
+}
+.personnalisation__generator__settings__form__option__arrow span {
+  border: 1px solid #ccc;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+}
+
+.personnalisation__generator__settings__form {
+  width: 550px;
+  height: 250px;
+}
+
+.personnalisation__generator__settings__form__option__content__color {
+  display: flex;
+  gap: 25px;
+}
+
+.personnalisation__generator__settings__form__option__content__color__value {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.personnalisation__generator__settings__form__option__content__color__input {
+  display: block;
+  border: 1px solid;
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+
+  &:checked {
+    background-color: #ccc;
+  }
+}
+
+.personnalisation__generator__settings__form__option__arrow {
+  display: flex;
+  gap: 20px;
 }

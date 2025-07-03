@@ -27,13 +27,19 @@
         "./src/*"
       ],
       "@/features/": [
-        "./features/*"
+        "./src/features/*"
       ],
       "@/shared/": [
-        "./shared/*"
+        "./src/shared/*"
       ],
       "@/entities/": [
-        "./entities/*"
+        "./src/entities/*"
+      ],
+      "@/ui/": [
+        "./src/shared/ui/*"
+      ],
+      "@/lib/": [
+        "./src/shared/lib/*"
       ]
     }
   },

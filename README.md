@@ -1,40 +1,36 @@
-# Правки
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-### Не забыть доделать фичи:
+## Getting Started
 
-♦ ♦ ♦ 
-* Параллакс в футоре.
-* Анимация "перебежок" иконки в кнопках. 
-* Прилипание меню к верху экрана.
-* ~~В Меню "коллекции" - иконка `->` с анимацией "пробежки"~~
-* Анимация открытие меню перенести в JS из Transition. 
-* Nav - Collection -> сделать ужи ссылки. 
-* Nav - Collection -> сделать анимацию повление медленнее. 
-* Доделать смену курсора в каталоге. 
+First, run the development server:
 
-* Мобильное меню не сделано.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-♦ ♦ ♦ 
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Правки по SEO:
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-* Расставить заголовки h1 
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-♦ ♦ ♦ 
+## Learn More
 
+To learn more about Next.js, take a look at the following resources:
 
-* **Баг**: ~~Выбор слайда в навигации по пунктам меню. Слайды меняют свой ID так как пересоздаются, а не катяться~~
-* **Баг**: ~~Остановка карусели не работает как надо. Ей нужно завершить анимацию до нужного слайда, только потом она соизволит остановится~~
-* **Баг**: Остановка карусели приводит к ее ускарению / замедлению.
-* **Баг**: Перестали работать кнопки навигации в Carousel Collection.
-* **Баг**: Не срабатывает повторное открытие меню, если выбирается та же категория что и прежде.
-* **Баг**: Пересчитывать высоту и ширину модели динамически от размера экрана.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-***
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-### Функционал:
-* Раздел "Сторис" в блоке со слоганом
+## Deploy on Vercel
 
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-
-Здесь - [сайт донор](https://www.modelec.com/fr).
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

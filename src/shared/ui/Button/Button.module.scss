@@ -1,0 +1,86 @@
+.button {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: $fw-normal;
+  line-height: $lh-text;
+  height: 52px;
+  padding: 0 12px;
+  max-width: max-content;
+  cursor: pointer;
+
+  @include media_queries(xx-small) {
+    height: 40px;
+  }
+
+  @include media_queries(x-small) {
+    font-size: 0.675rem;
+  }
+
+  span,
+  img {
+    pointer-events: none;
+  }
+
+  &__icon {
+    width: 20px;
+    margin-left: 5px;
+
+    filter: invert(18%) sepia(6%) saturate(659%) hue-rotate(192deg) brightness(91%) contrast(94%);
+  }
+}
+
+.outline-border {
+  border-radius: $border-radius;
+  border: 1px solid map-get($theme-light, 'button-outline-color');
+  transition: border-color 0.3s;
+
+  &:hover {
+    border-color: map-get($theme-light, 'default');
+  }
+}
+
+.filled {
+  border-radius: $border-radius;
+
+  background-color: map-get($theme-light, 'default');
+  color: map-get($theme-light, 'on-default');
+
+  transition: background-color 0.3s;
+
+  &-border {
+    border: 1px solid map-get($theme-dark, 'button-outline-color');
+  }
+
+  &-hover {
+    &:hover {
+      background-color: map-get($theme-light, 'button-background-hovered');
+    }
+  }
+
+  &-dark {
+    background: map-get($theme-light, 'on-default');
+    color: map-get($theme-light, 'default');
+
+    .button__icon {
+      filter: invert(97%) sepia(19%) saturate(0%) hue-rotate(299deg) brightness(101%) contrast(103%);
+    }
+
+    &:hover {
+      background-color: map-get($theme-dark, 'button-background-hovered');
+    }
+  }
+}
+
+.animate-icon {
+  display: flex;
+  overflow: hidden;
+
+  span {
+    transition: transform 0.5s;
+  }
+
+  img {
+    transition: opacity 0.5s, transform 0.3s;
+  }
+}

@@ -1,0 +1,78 @@
+@import './_variable';
+@import './normalize.css';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $fontFamily;
+  font-size: $fontSize-main;
+  font-weight: $fw-normal;
+  line-height: $line-height;
+  color: map-get($theme-light, 'on-default');
+
+  &.background-noise {
+    background: map-get($theme-light, 'default') url(/images/noise.png);
+  }
+}
+.main {
+  background: map-get($theme-light, 'default') url(/images/noise.png);
+}
+
+.container {
+  width: 1800px;
+  margin: 0 auto;
+  padding: 0 40px;
+
+  // 1800px
+  @include media_queries(desktop-ultra) {
+    width: 1600px;
+  }
+
+  // 1600px
+  @include media_queries(desktop-big) {
+    width: 1440px;
+  }
+
+  // 1440px
+  @include media_queries(desktop-xl) {
+    width: 1280px;
+    padding: 0 30px;
+  }
+
+  // 1280px
+  @include media_queries(desktop) {
+    width: 1024px;
+    padding: 0 20px;
+  }
+
+  // 1024px
+  @include media_queries(desktop-xs) {
+    width: 991px;
+    padding: 0 10px;
+  }
+
+  // 991px
+  @include media_queries(tablet) {
+    width: 767px;
+    padding: 0 10px;
+  }
+
+  // 767px
+  @include media_queries(xx-small) {
+    width: 576px;
+  }
+
+  // 576px
+  @include media_queries(x-small) {
+    width: 460px;
+  }
+
+  // 460px
+  @include media_queries(small) {
+    width: 320px;
+  }
+}

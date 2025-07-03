@@ -1,15 +1,15 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
 import { FlatCompat } from '@eslint/eslintrc';
-import { defineConfig } from 'eslint/config';
 import js from '@eslint/js';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import prettier from 'eslint-plugin-prettier';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
-import prettier from 'eslint-plugin-prettier';
-import globals from 'globals';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import { defineConfig } from 'eslint/config';
+import globals from 'globals';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -91,7 +91,7 @@ const eslintConfig = defineConfig([
       eqeqeq: ['error', 'always'],
       curly: ['error', 'all'],
       'simple-import-sort/imports': 'error',
-      'simple-import-sort/exports': 'error',
+      // 'simple-import-sort/exports': 'error',
     },
   },
 ]);

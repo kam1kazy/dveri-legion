@@ -1,3 +1,5 @@
+@import '../../../app/style/variable';
+
 .button {
   display: flex;
   align-items: center;
@@ -81,6 +83,8 @@
   }
 
   img {
-    transition: opacity 0.5s, transform 0.3s;
+    transition:
+      opacity 0.5s,
+      transform 0.3s;
   }
 }

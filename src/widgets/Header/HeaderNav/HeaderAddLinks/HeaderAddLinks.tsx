@@ -1,22 +1,31 @@
-import { Button } from "@/shared/ui/Button/Button"
+import { Button, IButton } from '@/shared/ui/Button';
 
-interface IProps {
+const addLinks: IButton[] = [
+  {
+    id: 1,
+    text: 'Визуализация в 3D',
+  },
+  {
+    id: 2,
+    text: 'Собрать свою дверь',
+    filled: true,
+    icon: {
+      src: './images/icons/setting.svg',
+      alt: 'Настройки',
+    },
+  },
+];
 
-}
-
-export const HeaderAddLinks = (props: IProps) => {
+export const HeaderAddLinks = () => {
   return (
     <div className="header__add_links">
       <ul>
-        <Button
-          text="Визуализация в 3D"
-        />
-        <Button
-          text="Собрать свою дверь"
-          filled
-          icon={{src: './template/images/icons/setting.svg', alt: 'Настройки'}}
-        />
+        {addLinks.map((item) => (
+          <li key={item.id}>
+            <Button text={item.text} />
+          </li>
+        ))}
       </ul>
     </div>
-  )
-}
+  );
+};

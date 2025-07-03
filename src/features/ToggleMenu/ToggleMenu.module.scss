@@ -1,0 +1,28 @@
+@import '../../app/style/variable';
+
+.close_menu {
+  position: absolute;
+  width: 40px;
+  top: 20px;
+  right: 20px;
+
+  display: none;
+
+  @include media_queries(desktop) {
+    display: block;
+  }
+}
+
+.open_menu {
+  display: none;
+  align-items: center;
+  margin-right: 30px;
+
+  img {
+    max-width: 40px;
+  }
+
+  @include media_queries(desktop) {
+    display: flex;
+  }
+}

@@ -1,27 +1,33 @@
-import Link from 'next/link';
-import { Icon } from '../Icon/Icon';
-import styles from './Button.module.css';
+import { Icon } from '../Icon';
+import { Link } from '../Link';
+import styles from './Button.module.scss';
 
-interface Props {
+export interface IButton {
+  id?: number;
   text: string;
   link?: string;
   ancher?: boolean;
   filled?: boolean;
   icon?: {
-    src: string
-    alt: string
-  }
+    src: string;
+    alt: string;
+  };
 }
 
-export const Button = (props: Props) => {
-  const href = props.link ? (props.ancher ? `#${props.link}` : props.link) : "#";
-  const isFilled = `${styles.button} ${props.filled ? styles.filled : styles['outline-border']}`
+export const Button = (props: IButton) => {
+  const href = props.link ? (props.ancher ? `#${props.link}` : props.link) : '#';
+  const isFilled = `${styles.button} ${props.filled ? styles.filled : styles['outline-border']}`;
 
   return (
     <li>
-      <Link href={href} className={`${isFilled} ${props.icon?.src && styles['animate-icon']}`}>{props.text}</Link>
-      {props.icon?.src && <Icon class="button__icon" src={props.icon?.src} alt={props.icon?.alt || 'icon'}  />}
+      <Link
+        text={props.text}
+        href={href}
+        className={`${isFilled} ${props.icon?.src && styles['animate-icon']}`}
+      ></Link>
+      {props.icon?.src && (
+        <Icon className="button__icon" src={props.icon?.src} alt={props.icon?.alt || 'icon'} />
+      )}
     </li>
-  )
-}
-
+  );
+};

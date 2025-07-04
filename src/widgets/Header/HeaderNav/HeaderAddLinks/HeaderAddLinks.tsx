@@ -1,5 +1,7 @@
 import { Button, IButton } from '@/shared/ui/Button';
 
+import style from './HeaderAddLinks.module.scss';
+
 const addLinks: IButton[] = [
   {
     id: 1,
@@ -18,7 +20,7 @@ const addLinks: IButton[] = [
 
 export const HeaderAddLinks = () => {
   return (
-    <div className="header__add_links">
+    <div className={style.header__add_links}>
       <ul>
         {addLinks.map((item) => (
           <li key={item.id}>

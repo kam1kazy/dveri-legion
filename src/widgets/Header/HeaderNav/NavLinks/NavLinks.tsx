@@ -16,11 +16,13 @@ const links: ILink[] = [
 export const NavLinks = () => {
   return (
     <nav>
-      {links.map((item) => (
-        <li key={item.id} className={item.className}>
-          <Link text={item.text} href={item.href} />
-        </li>
-      ))}
+      {links.map((item, idx) => {
+        return (
+          <li key={idx} className={item.className}>
+            <Link text={item.text} href={item.href} />
+          </li>
+        );
+      })}
     </nav>
   );
 };

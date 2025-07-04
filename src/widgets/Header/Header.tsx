@@ -17,8 +17,8 @@ export const Header = () => {
 
   return (
     <header className={style.header}>
-      <div className="container">
-        <div className="wrapper">
+      <div className={`container ${style.container}`}>
+        <div className={style.wrapper}>
           <ToggleMenu onClick={handlerToggleMobileMenu} isOpen={isOpen} />
           <Logo />
           <HeaderNav onClick={handlerToggleMobileMenu} isOpen={isOpen} />

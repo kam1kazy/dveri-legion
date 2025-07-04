@@ -1,4 +1,4 @@
-@import '../../app/style/variable';
+@use '../../app/style/variable';
 
 .close_menu {
   position: absolute;
@@ -8,7 +8,7 @@
 
   display: none;
 
-  @include media_queries(desktop) {
+  @include variable.media_queries(desktop) {
     display: block;
   }
 }
@@ -22,7 +22,7 @@
     max-width: 40px;
   }
 
-  @include media_queries(desktop) {
+  @include variable.media_queries(desktop) {
     display: flex;
   }
 }

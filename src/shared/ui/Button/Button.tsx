@@ -19,15 +19,14 @@ export const Button = (props: IButton) => {
   const isFilled = `${styles.button} ${props.filled ? styles.filled : styles['outline-border']}`;
 
   return (
-    <li>
-      <Link
-        text={props.text}
-        href={href}
-        className={`${isFilled} ${props.icon?.src && styles['animate-icon']}`}
-      ></Link>
+    <Link
+      text={props.text}
+      href={href}
+      className={`${isFilled} ${props.icon?.src && styles['animate-icon']}`}
+    >
       {props.icon?.src && (
         <Icon className="button__icon" src={props.icon?.src} alt={props.icon?.alt || 'icon'} />
       )}
-    </li>
+    </Link>
   );
 };

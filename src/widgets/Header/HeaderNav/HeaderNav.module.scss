@@ -1,4 +1,4 @@
-@import '../../../app/style/_variable';
+@use '../../../app/style/_variable' as variable;
 
 .header__nav {
   display: flex;
@@ -7,18 +7,18 @@
   align-items: center;
   z-index: 1;
 
-  @include media_queries(desktop-xs) {
+  @include variable.media_queries(desktop-xs) {
     justify-content: flex-end;
   }
 
-  @include media_queries(small) {
+  @include variable.media_queries(small) {
     display: none;
   }
 
   nav {
     display: flex;
 
-    @include media_queries(desktop-xs) {
+    @include variable.media_queries(desktop-xs) {
       // [dropdown] {
       //   display: none;
       // }
@@ -28,7 +28,7 @@
       position: relative;
       margin-right: 20px;
       font-size: 0.875rem;
-      line-height: $lh-text;
+      line-height: variable.$lh-text;
       transition: color 0.3s;
       display: flex;
 
@@ -59,7 +59,7 @@
           height: 1.5rem;
           width: 1px;
           margin-left: 0.625rem;
-          background-color: map-get($theme-dark, 'on-default-70');
+          background-color: map-get(variable.$theme-dark, 'on-default-70');
         }
       }
 

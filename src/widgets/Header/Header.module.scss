@@ -1,10 +1,10 @@
-@import '../../app/style/variable';
+@use '../../app/style/variable' as variable;
 
 .header {
   position: sticky;
   height: 6rem;
   padding-top: 1rem;
-  color: map-get($theme-dark, 'on-default');
+  color: map-get(variable.$theme-dark, 'on-default');
   z-index: 1;
   // overflow: hidden;
 
@@ -17,7 +17,7 @@
       inset: 0;
       top: -5px;
 
-      background-color: map-get($theme-light, 'default');
+      background-color: map-get(variable.$theme-light, 'default');
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
       height: 4rem;
 
@@ -29,8 +29,8 @@
       opacity: 0;
       transition: opacity 0.3s;
 
-      @include media_queries(desktop-xs) {
-        width: calc(100% - $gutter);
+      @include variable.media_queries(desktop-xs) {
+        width: calc(100% - variable.$gutter);
       }
     }
   }
@@ -39,7 +39,7 @@
     display: flex;
     justify-content: space-between;
 
-    @include media_queries(small) {
+    @include variable.media_queries(small) {
       justify-content: center;
     }
   }
@@ -62,11 +62,11 @@
     height: 52px;
     position: relative;
 
-    @include media_queries(desktop) {
+    @include variable.media_queries(desktop) {
       width: 145px;
     }
 
-    @include media_queries(small) {
+    @include variable.media_queries(small) {
       width: 90px;
     }
 
@@ -89,18 +89,18 @@
     align-items: center;
     z-index: 1;
 
-    @include media_queries(desktop-xs) {
+    @include variable.media_queries(desktop-xs) {
       justify-content: flex-end;
     }
 
-    @include media_queries(small) {
+    @include variable.media_queries(small) {
       display: none;
     }
 
     nav {
       display: flex;
 
-      @include media_queries(desktop-xs) {
+      @include variable.media_queries(desktop-xs) {
         // [dropdown] {
         //   display: none;
         // }
@@ -110,7 +110,7 @@
         position: relative;
         margin-right: 20px;
         font-size: 0.875rem;
-        line-height: $lh-text;
+        line-height: variable.$lh-text;
         transition: color 0.3s;
         display: flex;
 
@@ -141,7 +141,7 @@
             height: 1.5rem;
             width: 1px;
             margin-left: 0.625rem;
-            background-color: map-get($theme-dark, 'on-default-70');
+            background-color: map-get(variable.$theme-dark, 'on-default-70');
           }
         }
 
@@ -154,14 +154,7 @@
     }
   }
 
-  &__add_links {
-    ul {
-      display: flex;
-      gap: 0.75rem;
-    }
-
-    .button {
-      height: 32px;
-    }
+  .container {
+    position: relative;
   }
 }

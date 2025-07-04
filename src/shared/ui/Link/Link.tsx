@@ -18,10 +18,8 @@ export const Link = ({ href, className, text, ...rest }: ILink) => {
   }
 
   return (
-    <NextLink href={href} passHref legacyBehavior>
-      <a className={className} {...rest}>
-        {text}
-      </a>
+    <NextLink href={href} passHref className={className} {...rest}>
+      {text}
     </NextLink>
   );
 };

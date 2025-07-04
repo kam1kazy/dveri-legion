@@ -1,31 +1,40 @@
+@use 'sass:string';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:list';
+
 $size__site_content_width: 1800px;
 
 //* Media Breakpoint
 $media_queries: (
-  'small': unquote('only screen and (max-width: 460px)'),
-  'x-small': unquote('only screen and (max-width: 576px)'),
-  'xx-small': unquote('only screen and (max-width: 768px)'),
-  'tablet': unquote('only screen and (max-width: 992px)'),
-  'desktop-xs': unquote('only screen and (max-width: 1024px)'),
-  'desktop': unquote('only screen and (max-width: 1280px)'),
-  'desktop-xl': unquote('only screen and (max-width: 1440px)'),
-  'desktop-big': unquote('only screen and (max-width: 1600px)'),
-  'desktop-ultra': unquote('only screen and (max-width: ' + $size__site_content_width + ')'),
-  'retina2': unquote(
+  'small': string.unquote('only screen and (max-width: 460px)'),
+  'x-small': string.unquote('only screen and (max-width: 576px)'),
+  'xx-small': string.unquote('only screen and (max-width: 768px)'),
+  'tablet': string.unquote('only screen and (max-width: 992px)'),
+  'desktop-xs': string.unquote('only screen and (max-width: 1024px)'),
+  'desktop': string.unquote('only screen and (max-width: 1280px)'),
+  'desktop-xl': string.unquote('only screen and (max-width: 1440px)'),
+  'desktop-big': string.unquote('only screen and (max-width: 1600px)'),
+  'desktop-ultra': string.unquote('only screen and (max-width: ' + $size__site_content_width + ')'),
+  'retina2': string.unquote(
       'only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi)'
     ),
-  'retina3': unquote(
+  'retina3': string.unquote(
       'only screen and (-webkit-min-device-pixel-ratio: 3) and (min-resolution: 288dpi)'
     ),
-  'landscape': unquote('screen and (orientation:landscape) '),
-  'portrait': unquote('screen and (orientation:portrait) '),
+  'landscape': string.unquote('screen and (orientation:landscape) '),
+  'portrait': string.unquote('screen and (orientation:portrait) '),
 );
 
 @mixin media_queries($breakpoints) {
   $conditions: ();
   @each $breakpoint in $breakpoints {
     // If the key exists in the map
-    $conditions: append($conditions, #{inspect(map-get($media_queries, $breakpoint))}, comma);
+    $conditions: list.append(
+      $conditions,
+      #{meta.inspect(map.get($media_queries, $breakpoint))},
+      comma
+    );
   }
 
   @media #{$conditions} {

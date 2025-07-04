@@ -1,5 +1,6 @@
 @use './_variable' as variable;
 @use './normalize.css' as *;
+@use 'sass:map';
 
 * {
   box-sizing: border-box;
@@ -12,14 +13,14 @@ body {
   font-size: variable.$fontSize-main;
   font-weight: variable.$fw-normal;
   line-height: variable.$line-height;
-  color: map-get(variable.$theme-light, 'on-default');
+  color: map.get(variable.$theme-light, 'on-default');
 
   &.background-noise {
-    background: map-get(variable.$theme-light, 'default') url(/images/noise.png);
+    background: map.get(variable.$theme-light, 'default') url(/images/noise.png);
   }
 }
 .main {
-  background: map-get(variable.$theme-light, 'default') url(/images/noise.png);
+  background: map.get(variable.$theme-light, 'default') url(/images/noise.png);
 }
 
 .container {

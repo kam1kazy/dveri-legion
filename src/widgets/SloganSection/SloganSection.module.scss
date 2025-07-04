@@ -1,9 +1,10 @@
 @use '../../app/style/variable' as variable;
+@use 'sass:map';
 
 .slogan {
   margin-top: -7rem;
-  color: map-get(variable.$theme-dark, 'on-default');
-  background-color: map-get(variable.$theme-dark, 'default');
+  color: map.get(variable.$theme-dark, 'on-default');
+  background-color: map.get(variable.$theme-dark, 'default');
   padding-block: 11.3125rem 2.4375rem;
 
   @include variable.media_queries(x-small) {

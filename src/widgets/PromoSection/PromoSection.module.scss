@@ -1,9 +1,10 @@
 @use '../../app/style/variable' as variable;
+@use 'sass:map';
 
 .promo {
   position: relative;
   padding-block: 3rem;
-  color: map-get(variable.$theme-dark, 'on-default');
+  color: map.get(variable.$theme-dark, 'on-default');
 
   @include variable.media_queries(xx-small) {
     padding-block: 0;

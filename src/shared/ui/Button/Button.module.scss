@@ -1,4 +1,5 @@
 @use '../../../app/style/variable' as variable;
+@use 'sass:map';
 
 .button {
   display: flex;
@@ -34,42 +35,42 @@
 
 .outline-border {
   border-radius: variable.$border-radius;
-  border: 1px solid map-get(variable.$theme-light, 'button-outline-color');
+  border: 1px solid map.get(variable.$theme-light, 'button-outline-color');
   transition: border-color 0.3s;
 
   &:hover {
-    border-color: map-get(variable.$theme-light, 'default');
+    border-color: map.get(variable.$theme-light, 'default');
   }
 }
 
 .filled {
   border-radius: variable.$border-radius;
 
-  background-color: map-get(variable.$theme-light, 'default');
-  color: map-get(variable.$theme-light, 'on-default');
+  background-color: map.get(variable.$theme-light, 'default');
+  color: map.get(variable.$theme-light, 'on-default');
 
   transition: background-color 0.3s;
 
   &-border {
-    border: 1px solid map-get(variable.$theme-dark, 'button-outline-color');
+    border: 1px solid map.get(variable.$theme-dark, 'button-outline-color');
   }
 
   &-hover {
     &:hover {
-      background-color: map-get(variable.$theme-light, 'button-background-hovered');
+      background-color: map.get(variable.$theme-light, 'button-background-hovered');
     }
   }
 
   &-dark {
-    background: map-get(variable.$theme-light, 'on-default');
-    color: map-get(variable.$theme-light, 'default');
+    background: map.get(variable.$theme-light, 'on-default');
+    color: map.get(variable.$theme-light, 'default');
 
     .button__icon {
       filter: invert(97%) sepia(19%) saturate(0%) hue-rotate(299deg) brightness(101%) contrast(103%);
     }
 
     &:hover {
-      background-color: map-get(variable.$theme-dark, 'button-background-hovered');
+      background-color: map.get(variable.$theme-dark, 'button-background-hovered');
     }
   }
 }

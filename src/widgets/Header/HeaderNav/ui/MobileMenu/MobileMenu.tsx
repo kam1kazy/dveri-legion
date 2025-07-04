@@ -1,13 +1,13 @@
 import { Image } from '@/shared/ui/Image/Image';
 
-import style from './ToggleMenu.module.scss';
+import style from './MobileMenu.module.scss';
 
-export interface IToggleMenu {
+export interface IMobileMenu {
   onClick: () => void;
   isOpen: boolean;
 }
 
-export const ToggleMenu = (props: IToggleMenu) => {
+export const MobileMenu = (props: IMobileMenu) => {
   return (
     <>
       {props.isOpen ? (

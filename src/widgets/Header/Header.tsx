@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 
-import { ToggleMenu } from '@/features/ToggleMenu/ToggleMenu';
 import { Logo } from '@/shared/ui/Logo/Logo';
+import { MobileMenu } from '@/widgets/Header/HeaderNav/ui/MobileMenu/MobileMenu';
 
 import style from './Header.module.scss';
 import { HeaderNav } from './HeaderNav/HeaderNav';
@@ -19,7 +19,7 @@ export const Header = () => {
     <header className={style.header}>
       <div className={`container ${style.container}`}>
         <div className={style.wrapper}>
-          <ToggleMenu onClick={handlerToggleMobileMenu} isOpen={isOpen} />
+          <MobileMenu onClick={handlerToggleMobileMenu} isOpen={isOpen} />
           <Logo />
           <HeaderNav onClick={handlerToggleMobileMenu} isOpen={isOpen} />
         </div>

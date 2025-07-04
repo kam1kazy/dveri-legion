@@ -4,7 +4,7 @@ export interface ILink extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   text: string;
   href: string;
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export const Link = ({ href, className, text, children, ...rest }: ILink) => {

@@ -1,8 +1,8 @@
-import { ToggleMenu } from '@/features/ToggleMenu/ToggleMenu';
+import { MobileMenu } from '@/widgets/Header/HeaderNav/ui/MobileMenu/MobileMenu';
 
-import { HeaderAddLinks } from './HeaderAddLinks/HeaderAddLinks';
 import styles from './HeaderNav.module.scss';
-import { NavLinks } from './NavLinks/NavLinks';
+import { NavLinks } from './ui/NavLinks';
+import { SideLinks } from './ui/SideLinks/SideLinks';
 
 interface IHeaderNav {
   onClick: () => void;
@@ -11,9 +11,9 @@ interface IHeaderNav {
 export const HeaderNav = (props: IHeaderNav) => {
   return (
     <div className={styles.header__nav}>
-      <ToggleMenu isOpen={props.isOpen} onClick={props.onClick} />
+      <MobileMenu isOpen={props.isOpen} onClick={props.onClick} />
       <NavLinks />
-      <HeaderAddLinks />
+      <SideLinks />
     </div>
   );
 };

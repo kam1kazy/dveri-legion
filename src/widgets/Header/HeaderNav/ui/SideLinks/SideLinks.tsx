@@ -1,6 +1,6 @@
 import { Button, IButton } from '@/shared/ui/Button';
 
-import style from './HeaderAddLinks.module.scss';
+import style from './SideLinks.module.scss';
 
 const addLinks: IButton[] = [
   {
@@ -18,7 +18,7 @@ const addLinks: IButton[] = [
   },
 ];
 
-export const HeaderAddLinks = () => {
+export const SideLinks = () => {
   return (
     <div className={style.header__add_links}>
       <ul>

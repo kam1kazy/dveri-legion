@@ -3,10 +3,10 @@
 import { useState } from 'react';
 
 import { Logo } from '@/shared/ui/Logo/Logo';
-import { MobileMenu } from '@/widgets/Header/HeaderNav/ui/MobileMenu/MobileMenu';
+import { MobileMenu } from '@/widgets/Header/ui/MobileMenu/MobileMenu';
 
 import style from './Header.module.scss';
-import { HeaderNav } from './HeaderNav/HeaderNav';
+import { Nav } from './ui/Nav/Nav';
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +21,7 @@ export const Header = () => {
         <div className={style.wrapper}>
           <MobileMenu onClick={handlerToggleMobileMenu} isOpen={isOpen} />
           <Logo />
-          <HeaderNav onClick={handlerToggleMobileMenu} isOpen={isOpen} />
+          <Nav onClick={handlerToggleMobileMenu} isOpen={isOpen} />
         </div>
       </div>
     </header>

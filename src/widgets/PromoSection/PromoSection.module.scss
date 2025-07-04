@@ -1,0 +1,112 @@
+@use '../../app/style/variable' as variable;
+
+.promo {
+  position: relative;
+  padding-block: 3rem;
+  color: map-get(variable.$theme-dark, 'on-default');
+
+  @include variable.media_queries(xx-small) {
+    padding-block: 0;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 50% 0;
+    background-color: #2f3035;
+  }
+
+  &__inner {
+    display: grid;
+    border-radius: 0.75rem;
+    contain: paint;
+    // max-height: 1195px;
+  }
+  &__image {
+    grid-column: 1/-1;
+    grid-row: 1;
+
+    img {
+      display: block;
+      height: auto;
+      max-width: 100%;
+      object-fit: fill;
+      object-position: initial;
+      width: auto;
+    }
+  }
+}
+
+.promo__text {
+  position: sticky;
+  bottom: 0;
+
+  min-height: 13rem;
+
+  padding-bottom: 1rem;
+  padding-left: calc(1.2676rem + 5.25822vw);
+
+  grid-column: 1/-1;
+  grid-row: 1;
+
+  align-self: end;
+
+  @include variable.media_queries(xx-small) {
+    min-height: 9rem;
+  }
+
+  @include variable.media_queries(small) {
+    min-height: 6rem;
+    padding-left: calc(0.0676rem + 5.25822vw);
+  }
+
+  &::before {
+    content: '';
+    inset: 0;
+    position: absolute;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(47, 48, 53, 0), rgba(47, 48, 53, 0.5));
+  }
+
+  &--header {
+    font-size: calc(1.2676rem + 5.25822vw);
+    margin-top: 1.625rem;
+    line-height: 1;
+
+    span {
+      font-size: 1rem;
+      margin-left: -10px;
+      margin-bottom: 20px;
+      display: block;
+
+      @include variable.media_queries(xx-small) {
+        font-size: 0.8rem;
+        margin-left: 0px;
+      }
+
+      @include variable.media_queries(small) {
+        margin-bottom: 10px;
+        font-size: 0.6rem;
+      }
+    }
+  }
+
+  .button_position {
+    position: absolute;
+    right: 45px;
+    bottom: 60px;
+
+    @include variable.media_queries(desktop) {
+      bottom: 75px;
+    }
+
+    @include variable.media_queries(xx-small) {
+      bottom: 40px;
+      right: 25px;
+    }
+
+    @include variable.media_queries(small) {
+      display: none;
+    }
+  }
+}

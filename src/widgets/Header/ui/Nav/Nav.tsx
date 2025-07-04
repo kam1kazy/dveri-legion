@@ -1,8 +1,8 @@
 import { MobileMenu } from '@/widgets/Header/ui/MobileMenu/MobileMenu';
 
-import { NavLinks } from '../NavLinks';
 import { SideLinks } from '../SideLinks/SideLinks';
 import styles from './Nav.module.scss';
+import { NavLinks } from './NavLinks';
 
 interface INav {
   onClick: () => void;

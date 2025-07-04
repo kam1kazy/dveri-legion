@@ -4,9 +4,10 @@ export interface ILink extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   text: string;
   href: string;
   className?: string;
+  children: React.ReactNode;
 }
 
-export const Link = ({ href, className, text, ...rest }: ILink) => {
+export const Link = ({ href, className, text, children, ...rest }: ILink) => {
   const isExternal = /^https?:\/\//.test(href);
 
   if (isExternal) {
@@ -20,6 +21,7 @@ export const Link = ({ href, className, text, ...rest }: ILink) => {
   return (
     <NextLink href={href} passHref className={className} {...rest}>
       {text}
+      {children}
     </NextLink>
   );
 };

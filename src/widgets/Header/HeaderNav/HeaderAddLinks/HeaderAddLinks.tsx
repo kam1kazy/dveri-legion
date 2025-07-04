@@ -12,7 +12,7 @@ const addLinks: IButton[] = [
     text: 'Собрать свою дверь',
     filled: true,
     icon: {
-      src: './images/icons/setting.svg',
+      src: '/images/icons/setting.svg',
       alt: 'Настройки',
     },
   },
@@ -24,7 +24,7 @@ export const HeaderAddLinks = () => {
       <ul>
         {addLinks.map((item) => (
           <li key={item.id}>
-            <Button text={item.text} />
+            <Button {...item} className={style.button} text={item.text} />
           </li>
         ))}
       </ul>

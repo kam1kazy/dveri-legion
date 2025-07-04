@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { Image } from '@/shared/ui/Image/Image';
 
 export interface IIcon {
   src: string;

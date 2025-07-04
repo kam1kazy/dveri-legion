@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { Image } from '@/shared/ui/Image/Image';
 
 import style from './ToggleMenu.module.scss';
 

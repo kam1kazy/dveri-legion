@@ -1,12 +1,12 @@
-import Image from 'next/image';
+import { Image } from '@/shared/ui/Image/Image';
 
 import styles from './Logo.module.scss';
 
-interface IProps {
+export interface ILogo {
   mode?: 'light' | 'dark';
 }
 
-export const Logo = ({ mode }: IProps) => {
+export const Logo = ({ mode }: ILogo) => {
   return (
     <div className={styles.logo}>
       {}

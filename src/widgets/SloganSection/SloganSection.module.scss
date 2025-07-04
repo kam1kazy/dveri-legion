@@ -1,0 +1,61 @@
+@use '../../app/style/variable' as variable;
+
+.slogan {
+  margin-top: -7rem;
+  color: map-get(variable.$theme-dark, 'on-default');
+  background-color: map-get(variable.$theme-dark, 'default');
+  padding-block: 11.3125rem 2.4375rem;
+
+  @include variable.media_queries(x-small) {
+    padding-block: 9.3125rem 2.4375rem;
+  }
+
+  .wrapper {
+    position: relative;
+  }
+
+  h3 {
+    max-width: 700px;
+    font-size: calc(1.662rem + 0.37559vw);
+    line-height: 1.25;
+    font-weight: variable.$fw-normal;
+    margin-left: 460px;
+
+    @include variable.media_queries(desktop-xs) {
+      margin-left: 270px;
+    }
+
+    @include variable.media_queries(xx-small) {
+      margin-left: 110px;
+    }
+
+    @include variable.media_queries(x-small) {
+      font-size: calc(1.162rem + 0.37559vw);
+    }
+
+    @include variable.media_queries(small) {
+      margin-left: 50px;
+      font-size: calc(0.762rem + 0.37559vw);
+    }
+  }
+}
+
+.arrow_down {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  .button {
+    max-height: 32px;
+  }
+
+  cursor: pointer;
+
+  img {
+    width: 21px;
+  }
+}

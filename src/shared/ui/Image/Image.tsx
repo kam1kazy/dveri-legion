@@ -3,7 +3,7 @@ import type { CSSProperties } from 'react';
 
 interface UniversalImageProps
   extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'width' | 'height'> {
-  src: string;
+  src: any;
   alt?: string;
   width?: number;
   height?: number;

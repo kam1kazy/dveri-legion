@@ -47,7 +47,7 @@
       &-name {
         p {
           opacity: 1;
-          transition: opacity 0.35s ease-out;
+          transition: opacity 0.2s ease-out;
         }
 
         p:first-child {
@@ -162,14 +162,6 @@
       }
     }
   }
-}
-
-.slide .pagination-progressbar.pagination-horizontal {
-  width: 100px;
-  top: 80px;
-  right: 180px;
-  left: auto;
-  height: 2px;
 }
 
 @keyframes marquee1 {

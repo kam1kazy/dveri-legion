@@ -44,6 +44,8 @@
   }
 
   &-link {
+    display: flex;
+    justify-content: center;
     margin: 67px 0 93px;
 
     @include variable.media_queries(desktop-xs) {
@@ -59,7 +61,7 @@
 .button-next,
 .button-prev {
   position: absolute;
-  top: 80px;
+  top: 60px;
   right: 60px;
 
   background-color: transparent;
@@ -76,6 +78,10 @@
 
   cursor: pointer;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &:hover {
     background-color: rgb(47, 48, 53);
     color: #fff;
@@ -91,4 +97,14 @@
   right: 110px;
   left: auto;
   transform: rotate(180deg);
+}
+
+.pagination-progressbar {
+  position: absolute;
+  background: #2f3035;
+  width: 100px;
+  top: 80px;
+  right: 180px;
+  left: auto;
+  height: 2px;
 }

@@ -46,6 +46,9 @@ export const Slide: React.FC<PropType> = (props) => {
 
             <Button
               text="Подробнее"
+              filled
+              dark
+              className={style['slide__inner--info-btn']}
               icon={{ src: './images/icons/arrow-right.svg', alt: 'Настройки' }}
             />
           </div>

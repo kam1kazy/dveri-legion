@@ -13,16 +13,19 @@ export interface IButton {
     src: string;
     alt: string;
   };
+  dark?: boolean;
 }
 
 export const Button = (props: IButton) => {
   const href = props.link ? (props.ancher ? `#${props.link}` : props.link) : '#';
-  const isFilled = `${styles.button} ${props.filled ? styles.filled : styles['outline-border']}`;
+  const isFilled = `${props.filled ? styles.filled : styles['outline-border']}`;
+  const isDark = `${props.dark && styles['filled-dark']}`;
+
   return (
     <Link
       text={props.text}
       href={href}
-      className={`${props.className} ${isFilled} ${props.icon?.src && styles['animate-icon']}`}
+      className={`${props.className} ${styles.button} ${isFilled} ${isDark} ${props.icon?.src && styles['animate-icon']}`}
     >
       {props.icon?.src && (
         <Icon

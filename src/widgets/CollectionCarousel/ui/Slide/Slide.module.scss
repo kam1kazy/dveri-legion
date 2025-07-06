@@ -16,17 +16,16 @@
     &--info {
       position: relative;
       margin-top: 70px;
+      z-index: 1;
 
       @include variable.media_queries(xx-small) {
         margin-top: 2.5rem;
       }
 
       &-btn {
-        background-color: map.get(variable.$theme-dark, 'default');
         position: absolute;
         inset: 0;
         min-width: 200px;
-        color: map.get(variable.$theme-dark, 'on-default');
         height: 50px;
         display: flex;
         align-items: center;
@@ -171,40 +170,6 @@
   right: 180px;
   left: auto;
   height: 2px;
-}
-
-.button-next,
-.button-prev {
-  top: 80px;
-  right: 60px;
-
-  background-color: transparent;
-  border-radius: 40px;
-  isolation: isolate;
-  border-radius: 50px;
-
-  background: #dcdbdd;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-
-  transition: all 0.5s ease;
-
-  &:hover {
-    background-color: rgb(47, 48, 53);
-    color: #fff;
-    transform: scale(1.1);
-  }
-}
-
-.button-next:after,
-.button-prev:after {
-  font-size: 17px;
-}
-
-.button-prev {
-  right: 110px;
-  left: auto;
 }
 
 @keyframes marquee1 {

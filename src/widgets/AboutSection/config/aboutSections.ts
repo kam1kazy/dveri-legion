@@ -1,4 +1,4 @@
-import { ITextSection } from '@/shared/ui/TextSection/TextSection';
+import type { ITextSection } from '@/shared/ui/TextSection/TextSection';
 
 export const aboutSectionsList: ITextSection[] = [
   {

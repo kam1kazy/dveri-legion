@@ -1,0 +1,33 @@
+@use '../../app/style/variable' as variable;
+
+.contact_area {
+  background: linear-gradient(0deg, hsla(0, 0%, 96%, 0), #f6f6f6);
+  padding: 9rem 0;
+
+  @include variable.media_queries(xx-small) {
+    padding: 5rem 0;
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+
+    @include variable.media_queries(small) {
+      flex-direction: column;
+    }
+
+    h4 {
+      margin-bottom: 1.875rem;
+      opacity: 0.7;
+      line-height: 1.25;
+    }
+
+    p {
+      margin-bottom: 2.9375rem;
+      @include variable.responsive-font-size;
+      line-height: variable.$lh-text-second;
+    }
+  }
+}

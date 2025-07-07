@@ -1,3 +1,4 @@
+import { AboutSection } from '@/widgets/AboutSection/AboutSection';
 import { CollectionCarousel } from '@/widgets/CollectionCarousel/CollectionCarousel';
 import { Header } from '@/widgets/Header';
 import { PromoSection } from '@/widgets/PromoSection/PromoSection';
@@ -11,6 +12,7 @@ export default function Home() {
         <SloganSection />
         <PromoSection />
         <CollectionCarousel />
+        <AboutSection />
       </main>
     </>
   );

@@ -1,9 +1,13 @@
-import { TextSection } from '@/shared/ui/TextSection/TextSection';
+import { type ITextSection, TextSection } from '@/shared/ui/TextSection/TextSection';
+
+import { aboutSectionsList } from './config/aboutSections';
 
 export const AboutSection = () => {
   return (
     <>
-      <TextSection title="" description="" cover="" />
+      {aboutSectionsList.map((section: ITextSection) => (
+        <TextSection {...section} key={section.id} />
+      ))}
     </>
   );
 };

@@ -1,4 +1,4 @@
-@use '../../app/style/variable' as variable;
+@use '../../../app/style/variable' as variable;
 
 .about_text {
   margin: 7.5rem 0;
@@ -29,49 +29,47 @@
     }
   }
 
-  &__img-left .wrapper {
-    flex-direction: row-reverse;
+  // &__img-left .wrapper {
+  //   @include variable.media_queries(xx-small) {
+  //     p {
+  //       width: 250px;
+  //     }
+  //   }
 
-    @include variable.media_queries(xx-small) {
-      p {
-        width: 250px;
-      }
-    }
+  //   @include variable.media_queries(x-small) {
+  //     .about_text-img {
+  //       width: 13rem;
+  //       height: 20rem;
+  //     }
 
-    @include variable.media_queries(x-small) {
-      .about_text-img {
-        width: 13rem;
-        height: 20rem;
-      }
+  //     p {
+  //       width: 200px;
+  //     }
+  //   }
 
-      p {
-        width: 200px;
-      }
-    }
+  //   @include variable.media_queries(small) {
+  //     align-items: center;
+  //     flex-direction: column-reverse;
 
-    @include variable.media_queries(small) {
-      align-items: center;
-      flex-direction: column-reverse;
+  //     .about_text-img {
+  //       width: 100%;
+  //       height: 16rem;
+  //       margin-bottom: 50px;
+  //     }
 
-      .about_text-img {
-        width: 100%;
-        height: 16rem;
-        margin-bottom: 50px;
-      }
+  //     p {
+  //       width: 100%;
+  //     }
 
-      p {
-        width: 100%;
-      }
+  //     .about_text__content {
+  //       text-align: center;
+  //     }
 
-      .about_text__content {
-        text-align: center;
-      }
-
-      .button {
-        margin: 0 auto;
-      }
-    }
-  }
+  //     .button {
+  //       margin: 0 auto;
+  //     }
+  //   }
+  // }
 
   &-img {
     flex: 0 0 auto;
@@ -140,7 +138,7 @@
 
     p {
       width: 570px;
-      @include responsive-font-size;
+      @include variable.responsive-font-size;
       margin-bottom: 2.25rem;
       font-weight: variable.$fw-normal;
       line-height: variable.$lh-text-second;

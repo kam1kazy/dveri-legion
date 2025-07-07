@@ -5,6 +5,7 @@ import AutoScroll from 'embla-carousel-auto-scroll';
 import useEmblaCarousel from 'embla-carousel-react';
 
 import { Button } from '@/shared/ui/Button';
+import { ArrowRightIcon } from '@/shared/ui/Icons';
 
 import styles from './CollectionCarousel.module.scss';
 import { slides } from './config/slides';
@@ -40,12 +41,9 @@ export const CollectionCarousel = () => {
             />
 
             <div className={styles['collection_carousel-link']}>
-              <Button
-                border
-                filled
-                text="Посмотреть все коллекции"
-                icon={{ src: './images/icons/arrow-right.svg', alt: 'icon' }}
-              />
+              <Button border filled text="Посмотреть все коллекции">
+                <ArrowRightIcon />
+              </Button>
             </div>
           </div>
         </div>

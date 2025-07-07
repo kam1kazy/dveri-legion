@@ -1,4 +1,4 @@
-import { Image } from '@/shared/ui/Image/Image';
+import { ArrowDownIcon } from '@/shared/ui/Icons';
 
 import style from './SloganSection.module.scss';
 
@@ -17,7 +17,7 @@ export const SloganSection = () => {
 
           <div className={style.arrow_down}>
             <a href="#promo">
-              <Image src="./images/icons/arrow-down.svg" alt="Стрелка вниз" />
+              <ArrowDownIcon />
             </a>
           </div>
         </div>

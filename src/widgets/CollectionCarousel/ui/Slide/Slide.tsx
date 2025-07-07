@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Button } from '@/shared/ui/Button';
+import { ArrowRightIcon } from '@/shared/ui/Icons';
 
 import type { ISlide } from '../../config/slides';
 import styleEmbla from '../Carousel/Carousel.module.scss';
@@ -42,13 +43,9 @@ export const Slide: React.FC<PropType> = (props) => {
             <p>{slide.title}</p>
             <p>{slide.subtitle}</p>
 
-            <Button
-              text="Подробнее"
-              filled
-              dark
-              className={style['slide__inner--info-btn']}
-              icon={{ src: './images/icons/arrow-right.svg', alt: 'Настройки' }}
-            />
+            <Button text="Подробнее" filled dark className={style['slide__inner--info-btn']}>
+              <ArrowRightIcon />
+            </Button>
           </div>
         </div>
       </div>

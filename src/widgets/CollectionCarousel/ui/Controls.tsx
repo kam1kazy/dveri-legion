@@ -1,6 +1,6 @@
 import type { EmblaCarouselType } from 'embla-carousel';
 
-import { ArrowCarouselIcon } from '@/shared/ui/Icon';
+import { ArrowCarouselIcon } from '@/shared/ui/Icons';
 
 import styles from '../CollectionCarousel.module.scss';
 import { NextButton, PrevButton, usePrevNextButtons } from '../ui/Arrow';

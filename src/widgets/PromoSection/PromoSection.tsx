@@ -1,4 +1,5 @@
 import { Button } from '@/shared/ui/Button';
+import { ArrowRightIcon } from '@/shared/ui/Icons';
 import { Image } from '@/shared/ui/Image/Image';
 
 import style from './PromoSection.module.scss';
@@ -28,12 +29,9 @@ export const PromoSection = () => {
                 {promo.title}
               </p>
 
-              <Button
-                text="Посмотреть коллекцию"
-                className={style.button_position}
-                filled
-                icon={{ src: './images/icons/arrow-right.svg', alt: 'Настройки' }}
-              />
+              <Button text="Посмотреть коллекцию" className={style.button_position} filled>
+                <ArrowRightIcon />
+              </Button>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { Icon } from '../Icon';
+import { Icon } from '@/shared/ui/Icons';
 import { Link } from '../Link';
 import styles from './Button.module.scss';
 
@@ -15,6 +15,7 @@ export interface IButton {
     alt: string;
   };
   dark?: boolean;
+  children?: React.ReactNode;
 }
 
 export const Button = (props: IButton) => {
@@ -29,6 +30,7 @@ export const Button = (props: IButton) => {
       href={href}
       className={`${props.className} ${styles.button} ${isBorder} ${isFilled} ${isDark} ${props.icon?.src && styles['animate-icon']}`}
     >
+      {props?.children}
       {props.icon?.src && (
         <Icon
           className={styles.button__icon}

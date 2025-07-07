@@ -1,4 +1,4 @@
-import { Image } from '@/shared/ui/Image/Image';
+import { CloseIcon, MenuIcon } from '@/shared/ui/Icons';
 
 import style from './MobileMenu.module.scss';
 
@@ -12,11 +12,11 @@ export const MobileMenu = (props: IMobileMenu) => {
     <>
       {props.isOpen ? (
         <div className={style.close_menu} onClick={props.onClick}>
-          <Image src="./images/icons/close.svg" alt="Закрыть мобильное меню" />
+          <CloseIcon />
         </div>
       ) : (
         <div className={style.open_menu}>
-          <Image src="./images/icons/menu.svg" alt="Мобильное меню" width={40} height={40} />
+          <MenuIcon width={40} height={40} />
         </div>
       )}
     </>

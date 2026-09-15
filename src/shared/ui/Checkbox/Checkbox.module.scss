@@ -1,0 +1,51 @@
+@use '../../../app/style/variable' as variable;
+@use 'sass:map';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.label {
+  display: block;
+  position: relative;
+  padding-left: 2rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  line-height: variable.$lh-text;
+  color: map.get(variable.$theme-dark, 'default');
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    border: 2px solid map.get(variable.$theme-dark, 'default');
+    display: flex;
+    height: 18px;
+    width: 1.125rem;
+    background-color: transparent;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+.input {
+  display: none;
+
+  &:checked + .label::before {
+    background-image: url('/images/icons/checked.svg');
+    background-color: #fff;
+    background-size: 12px;
+    background-repeat: no-repeat;
+  }
+}
+
+.error {
+  font-size: 0.75rem;
+  color: hsl(0, 70%, 45%);
+  padding-left: 2rem;
+}

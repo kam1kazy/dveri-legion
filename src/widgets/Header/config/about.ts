@@ -41,7 +41,7 @@ export const aboutSmallLinks: IAboutLink[] = [
   {
     id: 6,
     title: 'Контакты',
-    href: '#',
+    href: '/contacts',
   },
   {
     id: 7,

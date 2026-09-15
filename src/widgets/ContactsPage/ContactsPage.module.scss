@@ -1,0 +1,59 @@
+@use '../../app/style/variable' as variable;
+@use 'sass:map';
+
+.page {
+  padding-top: 8rem;
+
+  @include variable.media_queries(desktop) {
+    padding-top: 6rem;
+  }
+}
+
+.intro {
+  margin-bottom: 4.5rem;
+
+  @include variable.media_queries(xx-small) {
+    margin-bottom: 3rem;
+  }
+}
+
+.title {
+  font-size: calc(2rem + 1.2vw);
+  line-height: 1.15;
+  font-weight: variable.$fw-medium;
+  margin-bottom: 1rem;
+
+  @include variable.media_queries(tablet) {
+    font-size: calc(1.6rem + 1vw);
+  }
+
+  @include variable.media_queries(xx-small) {
+    font-size: calc(1.4rem + 0.8vw);
+  }
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  line-height: variable.$lh-text;
+  color: map.get(variable.$theme-dark, 'default-70');
+}
+
+.formSection {
+  margin-bottom: 7rem;
+
+  @include variable.media_queries(xx-small) {
+    margin-bottom: 4rem;
+  }
+}
+
+.locations {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  margin-bottom: 4rem;
+
+  @include variable.media_queries(xx-small) {
+    gap: 3rem;
+    margin-bottom: 2rem;
+  }
+}

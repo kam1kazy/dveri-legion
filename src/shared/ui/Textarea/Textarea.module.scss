@@ -1,0 +1,52 @@
+@use '../../../app/style/variable' as variable;
+@use 'sass:map';
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.label {
+  font-size: 0.875rem;
+  line-height: variable.$lh-text;
+  color: map.get(variable.$theme-dark, 'default-70');
+}
+
+.required {
+  margin-left: 0.15rem;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 0.875rem 1.25rem;
+  border: 1px solid map.get(variable.$theme-dark, 'input-border');
+  border-radius: variable.$border-radius;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: variable.$lh-text;
+  color: map.get(variable.$theme-dark, 'default');
+  transition: border-color 0.3s;
+  outline: none;
+  resize: vertical;
+
+  &::placeholder {
+    color: map.get(variable.$theme-dark, 'input-placeholder');
+  }
+
+  &:focus {
+    border-color: map.get(variable.$theme-dark, 'input-border-focus');
+  }
+
+  &--error {
+    border-color: hsl(0, 70%, 45%);
+  }
+}
+
+.error {
+  font-size: 0.75rem;
+  color: hsl(0, 70%, 45%);
+}

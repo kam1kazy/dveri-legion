@@ -1,0 +1,86 @@
+@use '../../../app/style/variable' as variable;
+@use 'sass:map';
+
+.card {
+  display: grid;
+  gap: 2rem;
+
+  &--showroom {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+
+    @include variable.media_queries(tablet) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &--office {
+    max-width: 480px;
+  }
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.title {
+  font-size: calc(1.162rem + 0.37559vw);
+  line-height: 1.33;
+  font-weight: variable.$fw-medium;
+
+  @include variable.media_queries(x-small) {
+    font-size: calc(0.762rem + 0.37559vw);
+  }
+}
+
+.description {
+  line-height: variable.$lh-text-second;
+  color: map.get(variable.$theme-dark, 'default-70');
+  max-width: 28rem;
+  @include variable.responsive-font-size;
+}
+
+.address {
+  font-size: 0.875rem;
+  line-height: variable.$lh-text;
+  color: map.get(variable.$theme-dark, 'default');
+
+  p {
+    margin: 0;
+  }
+}
+
+.phone {
+  display: inline-block;
+  margin-top: 0.35rem;
+  color: map.get(variable.$theme-dark, 'default');
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.mapLink {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  text-decoration: underline;
+  color: map.get(variable.$theme-dark, 'default-70');
+  transition: color 0.3s;
+
+  &:hover {
+    color: map.get(variable.$theme-dark, 'default');
+  }
+}

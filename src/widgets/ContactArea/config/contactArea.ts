@@ -7,7 +7,7 @@ export const textCards: ITextCard[] = [
     description: 'Профессионалы, мы здесь, чтобы поддержать вас в вашем проекте.',
     button: {
       text: 'Свяжитесь с нами',
-      href: '#',
+      href: '/contacts',
     },
     dark: false,
   },
@@ -17,7 +17,7 @@ export const textCards: ITextCard[] = [
     description: 'Вопрос? Проект? Мы в вашем распоряжении, чтобы ответить на них.',
     button: {
       text: 'Оставить заявку',
-      href: '#',
+      href: '/contacts',
     },
     dark: true,
   },

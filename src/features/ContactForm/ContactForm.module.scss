@@ -1,0 +1,111 @@
+@use '../../app/style/variable' as variable;
+@use 'sass:map';
+
+.form {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 4rem;
+  align-items: start;
+
+  @include variable.media_queries(desktop) {
+    grid-template-columns: 180px 1fr;
+    gap: 2.5rem;
+  }
+
+  @include variable.media_queries(tablet) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.nav {
+  position: sticky;
+  top: 8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  @include variable.media_queries(tablet) {
+    display: none;
+  }
+}
+
+.navLink {
+  font-size: 0.875rem;
+  line-height: variable.$lh-text;
+  color: map.get(variable.$theme-dark, 'default-70');
+  transition: color 0.3s;
+
+  &:hover {
+    color: map.get(variable.$theme-dark, 'default');
+  }
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  max-width: 720px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  scroll-margin-top: 7rem;
+}
+
+.sectionTitle {
+  display: none;
+  font-size: 1rem;
+  font-weight: variable.$fw-medium;
+  margin-bottom: 0.25rem;
+
+  @include variable.media_queries(tablet) {
+    display: block;
+  }
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+
+  @include variable.media_queries(xx-small) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.consentText {
+  font-size: 0.8125rem;
+  line-height: variable.$lh-text;
+  color: map.get(variable.$theme-dark, 'default-70');
+}
+
+.success {
+  max-width: 720px;
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.successTitle {
+  line-height: 1.25;
+  font-weight: variable.$fw-medium;
+  @include variable.responsive-font-size;
+}
+
+.successText {
+  font-size: 0.875rem;
+  line-height: variable.$lh-text;
+  color: map.get(variable.$theme-dark, 'default-70');
+  max-width: 480px;
+}

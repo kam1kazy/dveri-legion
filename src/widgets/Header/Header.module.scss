@@ -9,6 +9,21 @@
   z-index: 1;
   // overflow: hidden;
 
+  &.onLight {
+    color: map.get(variable.$theme-light, 'on-default');
+
+    &:not(.lightTheme) {
+      &::after {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .container::before {
+        opacity: 0;
+      }
+    }
+  }
+
   .container {
     position: relative;
 

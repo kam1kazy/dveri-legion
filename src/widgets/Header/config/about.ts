@@ -15,7 +15,7 @@ export const aboutMainLinks: IAboutLink[] = [
   {
     id: 2,
     title: 'Блог',
-    href: '#',
+    href: '/blog',
     image: '/images/img3.jpg',
   },
   {
@@ -36,7 +36,7 @@ export const aboutSmallLinks: IAboutLink[] = [
   {
     id: 5,
     title: 'FAQ',
-    href: '#',
+    href: '/faq',
   },
   {
     id: 6,

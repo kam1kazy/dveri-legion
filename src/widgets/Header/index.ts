@@ -1,1 +1,1 @@
-export { Header } from './Header';
+export { Header, type HeaderVariant } from './Header';

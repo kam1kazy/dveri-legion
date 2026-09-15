@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 
-import { Header } from '@/widgets/Header';
 import { ContactsPage } from '@/widgets/ContactsPage';
 
 export const metadata: Metadata = {
@@ -10,11 +9,8 @@ export const metadata: Metadata = {
 
 export default function Contacts() {
   return (
-    <>
-      <Header />
-      <main>
-        <ContactsPage />
-      </main>
-    </>
+    <main>
+      <ContactsPage />
+    </main>
   );
 }

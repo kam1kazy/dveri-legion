@@ -1,0 +1,39 @@
+@use '../../../../app/style/variable' as variable;
+@use 'sass:map';
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid map.get(variable.$theme-dark, 'input-border-15');
+
+  &:last-child {
+    border-bottom: 1px solid map.get(variable.$theme-dark, 'input-border-15');
+  }
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: map.get(variable.$theme-dark, 'default-70');
+  font-size: 0.875rem;
+}
+
+.title {
+  font-size: clamp(1.25rem, 1rem + 0.8vw, 1.75rem);
+  font-weight: variable.$fw-medium;
+  line-height: 1.25;
+  color: map.get(variable.$theme-light, 'on-default');
+  text-decoration: none;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.button {
+  margin-top: 0.25rem;
+}

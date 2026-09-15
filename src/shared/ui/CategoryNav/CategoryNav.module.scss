@@ -1,0 +1,79 @@
+@use '../../../app/style/variable' as variable;
+@use 'sass:map';
+
+.nav {
+  position: sticky;
+  top: 6rem;
+  z-index: 5;
+  padding: 1rem 0;
+  background: map.get(variable.$theme-light, 'default');
+  background-image: url(/images/noise.png);
+
+  @include variable.media_queries(desktop-xs) {
+    top: 5rem;
+  }
+}
+
+.list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0.25rem;
+  justify-content: flex-start;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+
+  @include variable.media_queries(xx-small) {
+    gap: 0.5rem;
+  }
+}
+
+.item {
+  margin: 0;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.75rem;
+  padding: 0 1.25rem;
+  border-radius: variable.$border-radius;
+  border: 1px solid map.get(variable.$theme-dark, 'button-outline-color');
+  font-size: 0.875rem;
+  line-height: variable.$lh-text;
+  color: map.get(variable.$theme-light, 'on-default');
+  background: transparent;
+  transition:
+    background-color 0.25s,
+    border-color 0.25s,
+    color 0.25s;
+  white-space: nowrap;
+  text-decoration: none;
+
+  &:hover {
+    border-color: map.get(variable.$theme-light, 'on-default');
+    background-color: map.get(variable.$theme-light, 'button-background-hovered');
+  }
+
+  @include variable.media_queries(x-small) {
+    height: 2.25rem;
+    padding: 0 0.875rem;
+    font-size: 0.75rem;
+  }
+}
+
+.active {
+  background-color: map.get(variable.$theme-light, 'on-default');
+  border-color: map.get(variable.$theme-light, 'on-default');
+  color: map.get(variable.$theme-light, 'default');
+
+  &:hover {
+    background-color: map.get(variable.$theme-dark, 'button-background-hovered');
+    border-color: map.get(variable.$theme-dark, 'button-background-hovered');
+    color: map.get(variable.$theme-light, 'default');
+  }
+}

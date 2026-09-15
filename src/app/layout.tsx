@@ -2,6 +2,8 @@ import './style/globals.scss';
 
 import type { Metadata } from 'next';
 
+import { Header } from '@/widgets/Header';
+
 import { suisseIntl } from './fonts';
 
 export const metadata: Metadata = {
@@ -22,7 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={`background-noise ${suisseIntl.variable} `}>{children}</body>
+      <body className={`background-noise ${suisseIntl.variable} `}>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

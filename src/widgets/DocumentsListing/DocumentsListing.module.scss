@@ -1,0 +1,24 @@
+@use '../../app/style/variable' as variable;
+@use 'sass:map';
+
+.showMore {
+  appearance: none;
+  border: 1px solid map.get(variable.$theme-dark, 'button-outline-color');
+  background: transparent;
+  border-radius: variable.$border-radius;
+  height: 2.75rem;
+  padding: 0 1.5rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: variable.$lh-text;
+  color: map.get(variable.$theme-light, 'on-default');
+  cursor: pointer;
+  transition:
+    background-color 0.25s,
+    border-color 0.25s;
+
+  &:hover {
+    border-color: map.get(variable.$theme-light, 'on-default');
+    background-color: map.get(variable.$theme-light, 'button-background-hovered');
+  }
+}

@@ -1,0 +1,59 @@
+'use client';
+
+import { Link } from '@/shared/ui/Link';
+
+import styles from './CategoryNav.module.scss';
+
+export interface ICategoryNavItem {
+  id: string;
+  label: string;
+  href?: string;
+}
+
+export interface ICategoryNav {
+  items: ICategoryNavItem[];
+  activeId?: string;
+  onSelect?: (id: string) => void;
+  className?: string;
+}
+
+export const CategoryNav = ({ items, activeId, onSelect, className }: ICategoryNav) => {
+  const handleClick = (item: ICategoryNavItem) => (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!onSelect) {
+      return;
+    }
+
+    if (item.href?.startsWith('#')) {
+      event.preventDefault();
+      const target = document.getElementById(item.id);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    onSelect(item.id);
+  };
+
+  return (
+    <nav className={`${styles.nav} ${className ?? ''}`} aria-label="Категории">
+      <ul className={styles.list}>
+        {items.map((item) => {
+          const isActive = item.id === activeId;
+          const href = item.href ?? `#${item.id}`;
+
+          return (
+            <li key={item.id} className={styles.item}>
+              <Link
+                text={item.label}
+                href={href}
+                className={`${styles.pill} ${isActive ? styles.active : ''}`}
+                onClick={handleClick(item)}
+                aria-current={isActive ? 'true' : undefined}
+              />
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+};

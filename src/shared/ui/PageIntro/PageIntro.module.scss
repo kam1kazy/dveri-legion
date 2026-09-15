@@ -1,0 +1,32 @@
+@use '../../../app/style/variable' as variable;
+@use 'sass:map';
+
+.intro {
+  text-align: center;
+  padding: 4rem 0 3rem;
+  max-width: 48rem;
+  margin: 0 auto;
+
+  @include variable.media_queries(tablet) {
+    padding: 3rem 0 2rem;
+  }
+
+  @include variable.media_queries(xx-small) {
+    padding: 2rem 0 1.5rem;
+  }
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: variable.$fw-normal;
+  line-height: 1.15;
+  margin: 0 0 1.25rem;
+  color: map.get(variable.$theme-light, 'on-default');
+}
+
+.description {
+  margin: 0;
+  @include variable.responsive-font-size;
+  line-height: variable.$lh-text-second;
+  color: map.get(variable.$theme-dark, 'default-70');
+}

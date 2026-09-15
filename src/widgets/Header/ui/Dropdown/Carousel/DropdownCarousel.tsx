@@ -27,7 +27,7 @@ export const DropdownCarousel = ({ items, hoveredId, isActive }: IDropdownCarous
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [
     AutoScroll({
       playOnInit: false,
-      speed: 1,
+      speed: 0.7,
       stopOnInteraction: false,
       stopOnMouseEnter: false,
       stopOnFocusIn: false,

@@ -5,26 +5,25 @@ import { useState } from 'react';
 import { Image } from '@/shared/ui/Image/Image';
 
 import { aboutMainLinks, aboutSmallLinks } from '../../config/about';
-import { Dropdown } from './Dropdown';
 import styles from './Dropdown.module.scss';
 import { DropdownMenu } from './DropdownMenu';
 
 interface IAboutDropdown {
-  isOpen: boolean;
+  isActive: boolean;
 }
 
-export const AboutDropdown = ({ isOpen }: IAboutDropdown) => {
+export const AboutDropdown = ({ isActive: _isActive }: IAboutDropdown) => {
   const [selectedId, setSelectedId] = useState(aboutMainLinks[0]?.id);
 
   return (
-    <Dropdown isOpen={isOpen} variant="about">
+    <div className={styles.inner}>
       <div className={styles.sidebarLeft}>
         <DropdownMenu
           items={aboutMainLinks}
           variant="about"
           activeId={aboutMainLinks[0]?.id}
+          hoveredId={selectedId}
           onItemEnter={setSelectedId}
-          onItemLeave={() => setSelectedId(aboutMainLinks[0]?.id)}
         />
         <DropdownMenu items={aboutSmallLinks} variant="small" />
       </div>
@@ -43,6 +42,6 @@ export const AboutDropdown = ({ isOpen }: IAboutDropdown) => {
           ))}
         </div>
       </div>
-    </Dropdown>
+    </div>
   );
 };

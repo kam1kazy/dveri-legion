@@ -8,11 +8,21 @@ import { MobileMenu } from './ui/MobileMenu/MobileMenu';
 import { Nav } from './ui/Nav/Nav';
 
 export const Header = () => {
-  const { openDropdown, isMobileOpen, isLight, open, close, toggleMobile } = useHeaderMenu();
+  const {
+    openDropdown,
+    contentDropdown,
+    isMobileOpen,
+    isLight,
+    open,
+    close,
+    keepOpen,
+    toggleMobile,
+  } = useHeaderMenu();
 
   return (
     <header
       className={`${style.header} ${isLight ? style.lightTheme : ''} ${isMobileOpen ? style.shadowboxActive : ''}`}
+      onMouseEnter={keepOpen}
       onMouseLeave={close}
     >
       <div className={`container ${style.container}`}>
@@ -23,6 +33,7 @@ export const Header = () => {
             isMobileOpen={isMobileOpen}
             isLight={isLight}
             openDropdown={openDropdown}
+            contentDropdown={contentDropdown}
             onOpenDropdown={open}
             onToggleMobile={toggleMobile}
           />

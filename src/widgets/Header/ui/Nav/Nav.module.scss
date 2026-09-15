@@ -1,6 +1,8 @@
 @use '../../../../app/style/_variable' as variable;
 @use 'sass:map';
 
+$ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
 .header__nav {
   display: flex;
   flex: 1;
@@ -15,12 +17,19 @@
   nav {
     display: flex;
 
+    ul {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
     li {
       position: relative;
       margin-right: 20px;
       font-size: 0.875rem;
       line-height: variable.$lh-text;
-      transition: color 0.3s;
+      transition: color 0.3s $ease-out;
       display: flex;
 
       a {
@@ -40,7 +49,7 @@
 
           font-size: 6px;
           margin-left: 0.5rem;
-          transition: transform 0.3s;
+          transition: transform 0.35s $ease-out;
         }
       }
 
@@ -51,10 +60,12 @@
           width: 1px;
           margin-left: 0.625rem;
           background-color: map.get(variable.$theme-dark, 'on-default-70');
+          transition: background-color 0.35s $ease-out;
         }
       }
 
-      &:hover {
+      &:hover,
+      &.isOpen {
         a::after {
           transform: rotate(-180deg) translateY(1px);
         }
@@ -72,7 +83,7 @@
     position: absolute;
     inset: 0;
     left: -100vw;
-    transition: left 0.5s ease;
+    transition: left 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

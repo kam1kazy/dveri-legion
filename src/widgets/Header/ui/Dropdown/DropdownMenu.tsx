@@ -13,16 +13,16 @@ interface IDropdownMenu {
   items: IDropdownMenuItem[];
   variant?: 'collection' | 'about' | 'small';
   activeId?: number;
+  hoveredId?: number | null;
   onItemEnter?: (id: number) => void;
-  onItemLeave?: () => void;
 }
 
 export const DropdownMenu = ({
   items,
   variant = 'about',
   activeId,
+  hoveredId,
   onItemEnter,
-  onItemLeave,
 }: IDropdownMenu) => {
   const menuClass =
     variant === 'small'
@@ -34,9 +34,8 @@ export const DropdownMenu = ({
       {items.map((item) => (
         <li
           key={item.id}
-          className={`${styles.link} ${item.id === activeId ? styles.active : ''}`}
+          className={`${styles.link} ${item.id === activeId ? styles.active : ''} ${item.id === hoveredId ? styles.hovered : ''}`}
           onMouseEnter={() => onItemEnter?.(item.id)}
-          onMouseLeave={onItemLeave}
         >
           {variant === 'collection' && <span className={styles.marker} />}
           <ArrowRightIcon className={styles.linkIcon} />

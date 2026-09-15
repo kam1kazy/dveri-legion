@@ -1,5 +1,14 @@
 @use '../../../../app/style/variable';
 
+.close_menu,
+.open_menu {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+
 .close_menu {
   position: absolute;
   width: 40px;
@@ -18,8 +27,9 @@
   align-items: center;
   margin-right: 30px;
 
-  img {
-    max-width: 40px;
+  svg {
+    width: 40px;
+    height: 40px;
   }
 
   @include variable.media_queries(desktop) {

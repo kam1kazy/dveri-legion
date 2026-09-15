@@ -1,9 +1,8 @@
+@use '../../../../app/style/variable' as variable;
+@use 'sass:map';
+
 .header__add_links {
   order: 2;
-
-  .outline-border {
-    color: #fff;
-  }
 
   ul {
     display: flex;
@@ -12,5 +11,22 @@
 
   .button {
     height: 32px;
+  }
+}
+
+.lightButton {
+  border-color: map.get(variable.$theme-dark, 'button-outline-color');
+  color: map.get(variable.$theme-light, 'on-default');
+
+  &:hover {
+    border-color: map.get(variable.$theme-dark, 'default');
+  }
+}
+
+@include variable.media_queries(desktop) {
+  .header__add_links {
+    padding: 20px 0;
+    order: 2;
+    margin-top: auto;
   }
 }

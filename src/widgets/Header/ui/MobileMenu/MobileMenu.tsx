@@ -4,21 +4,26 @@ import style from './MobileMenu.module.scss';
 
 export interface IMobileMenu {
   onClick: () => void;
-  isOpen: boolean;
+  variant: 'open' | 'close';
 }
 
-export const MobileMenu = (props: IMobileMenu) => {
+export const MobileMenu = ({ onClick, variant }: IMobileMenu) => {
+  if (variant === 'close') {
+    return (
+      <button
+        type="button"
+        className={style.close_menu}
+        onClick={onClick}
+        aria-label="Закрыть меню"
+      >
+        <CloseIcon />
+      </button>
+    );
+  }
+
   return (
-    <>
-      {props.isOpen ? (
-        <div className={style.close_menu} onClick={props.onClick}>
-          <CloseIcon />
-        </div>
-      ) : (
-        <div className={style.open_menu}>
-          <MenuIcon width={40} height={40} />
-        </div>
-      )}
-    </>
+    <button type="button" className={style.open_menu} onClick={onClick} aria-label="Открыть меню">
+      <MenuIcon width={40} height={40} />
+    </button>
   );
 };

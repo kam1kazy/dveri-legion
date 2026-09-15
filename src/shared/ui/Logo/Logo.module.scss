@@ -13,14 +13,24 @@
     width: 90px;
   }
 
-  .logo-dark {
-    opacity: 0;
-  }
-
   img {
     width: 85px;
     position: absolute;
     inset: 0;
     margin: auto 0;
+  }
+}
+
+.logoDark {
+  opacity: 0;
+}
+
+.inverted {
+  .logoLight {
+    opacity: 0;
+  }
+
+  .logoDark {
+    opacity: 1;
   }
 }

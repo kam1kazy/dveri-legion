@@ -22,8 +22,10 @@ export const Image = ({
   useNativeImg = false,
   ...rest
 }: UniversalImageProps) => {
-  const isSvg = src.endsWith('.svg');
-  if (useNativeImg || isSvg) {
+  const srcString = typeof src === 'string' ? src : '';
+  const isSvg = srcString.endsWith('.svg');
+  const isDataOrBlob = srcString.startsWith('data:') || srcString.startsWith('blob:');
+  if (useNativeImg || isSvg || isDataOrBlob) {
     return (
       <img src={src} alt={alt} width={width} height={height} className={className} {...rest} />
     );

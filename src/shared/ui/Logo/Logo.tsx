@@ -1,22 +1,30 @@
+import NextLink from 'next/link';
+
 import { Image } from '@/shared/ui/Image/Image';
 
 import styles from './Logo.module.scss';
 
 export interface ILogo {
-  mode?: 'light' | 'dark';
+  inverted?: boolean;
 }
 
-export const Logo = ({ mode }: ILogo) => {
+export const Logo = ({ inverted = false }: ILogo) => {
   return (
-    <div className={styles.logo}>
-      {}
+    <NextLink href="/" className={`${styles.logo} ${inverted ? styles.inverted : ''}`}>
       <Image
-        className={mode === 'dark' ? 'logo-dark' : 'logo-light'}
-        src={mode === 'dark' ? './images/logo_legion.svg' : './images/logo_legion-light.svg'}
+        className={styles.logoLight}
+        src="/images/logo_legion-light.svg"
         alt="Логотип"
         height={85}
         width={46}
       />
-    </div>
+      <Image
+        className={styles.logoDark}
+        src="/images/logo_legion.svg"
+        alt=""
+        height={85}
+        width={46}
+      />
+    </NextLink>
   );
 };

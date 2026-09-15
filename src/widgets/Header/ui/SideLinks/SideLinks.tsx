@@ -18,13 +18,21 @@ const addLinks: IButton[] = [
   },
 ];
 
-export const SideLinks = () => {
+interface ISideLinks {
+  isLight?: boolean;
+}
+
+export const SideLinks = ({ isLight = false }: ISideLinks) => {
   return (
     <div className={style.header__add_links}>
       <ul>
         {addLinks.map((item) => (
           <li key={item.id}>
-            <Button {...item} className={style.button} text={item.text} />
+            <Button
+              {...item}
+              className={`${style.button} ${isLight && !item.filled ? style.lightButton : ''}`}
+              text={item.text}
+            />
           </li>
         ))}
       </ul>

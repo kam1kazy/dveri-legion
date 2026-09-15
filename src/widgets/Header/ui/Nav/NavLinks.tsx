@@ -1,28 +1,25 @@
-import { ILink, Link } from '@/shared/ui/Link';
+import { Link } from '@/shared/ui/Link';
 
-const links: ILink[] = [
-  {
-    text: 'Коллекции',
-    href: '#',
-    className: 'nav__collection',
-  },
-  {
-    text: 'Узнать больше',
-    href: '#',
-    className: 'nav__about',
-  },
-];
+import { type DropdownId, navLinks } from '../../config/nav';
 
-export const NavLinks = () => {
+interface INavLinks {
+  onOpen: (id: DropdownId) => void;
+}
+
+export const NavLinks = ({ onOpen }: INavLinks) => {
   return (
     <nav>
-      {links.map((item, idx) => {
-        return (
-          <li key={idx} className={item.className}>
-            <Link text={item.text} href={item.href} />
-          </li>
-        );
-      })}
+      {navLinks.map((item) => (
+        <li key={item.id} onMouseEnter={() => onOpen(item.id)} onClick={() => onOpen(item.id)}>
+          <Link
+            text={item.text}
+            href={item.href}
+            onClick={(event) => {
+              event.preventDefault();
+            }}
+          />
+        </li>
+      ))}
     </nav>
   );
 };

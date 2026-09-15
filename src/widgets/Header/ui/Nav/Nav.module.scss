@@ -39,18 +39,7 @@
         position: relative;
 
         &::after {
-          content: '▼';
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          width: 24px;
-          height: 24px;
-
-          font-size: 6px;
-          margin-left: 0.5rem;
-          transition: transform 0.3s;
+          content: none;
         }
       }
 

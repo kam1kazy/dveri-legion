@@ -8,7 +8,11 @@ import { MobileMenu } from '@/widgets/Header/ui/MobileMenu/MobileMenu';
 import style from './Header.module.scss';
 import { Nav } from './ui/Nav/Nav';
 
-export const Header = () => {
+interface HeaderProps {
+  solid?: boolean;
+}
+
+export const Header = ({ solid = false }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handlerToggleMobileMenu = () => {
@@ -16,11 +20,11 @@ export const Header = () => {
   };
 
   return (
-    <header className={style.header}>
+    <header className={`${style.header} ${solid ? style.solid : ''}`}>
       <div className={`container ${style.container}`}>
         <div className={style.wrapper}>
           <MobileMenu onClick={handlerToggleMobileMenu} isOpen={isOpen} />
-          <Logo />
+          <Logo mode={solid ? 'dark' : undefined} />
           <Nav onClick={handlerToggleMobileMenu} isOpen={isOpen} />
         </div>
       </div>

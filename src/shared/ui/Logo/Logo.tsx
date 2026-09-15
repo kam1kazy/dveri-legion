@@ -12,7 +12,7 @@ export const Logo = ({ mode }: ILogo) => {
       {}
       <Image
         className={mode === 'dark' ? 'logo-dark' : 'logo-light'}
-        src={mode === 'dark' ? './images/logo_legion.svg' : './images/logo_legion-light.svg'}
+        src={mode === 'dark' ? '/images/logo_legion.svg' : '/images/logo_legion-light.svg'}
         alt="Логотип"
         height={85}
         width={46}

@@ -2,8 +2,8 @@ import { ILink, Link } from '@/shared/ui/Link';
 
 const links: ILink[] = [
   {
-    text: 'Коллекции',
-    href: '#',
+    text: 'Каталог',
+    href: '/catalog',
     className: 'nav__collection',
   },
   {

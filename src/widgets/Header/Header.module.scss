@@ -159,3 +159,11 @@
     position: relative;
   }
 }
+
+.solid {
+  color: map.get(variable.$theme-light, 'on-default');
+
+  .container::before {
+    opacity: 1;
+  }
+}

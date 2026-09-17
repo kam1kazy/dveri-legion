@@ -1,0 +1,311 @@
+@use '../../app/style/variable' as variable;
+@use 'sass:map';
+
+.page {
+  padding: 2rem 0 5rem;
+  color: map.get(variable.$theme-light, 'on-default');
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.intro {
+  max-width: 720px;
+
+  h1 {
+    margin: 0.35rem 0 0.75rem;
+    font-size: calc(1.8rem + 0.6vw);
+    font-weight: variable.$fw-normal;
+    line-height: 1.2;
+  }
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: map.get(variable.$theme-light, 'on-default-70');
+}
+
+.lead {
+  margin: 0;
+  max-width: 620px;
+  color: map.get(variable.$theme-light, 'on-default-70');
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 44px;
+  padding: 0 1rem;
+  border: 1px solid map.get(variable.$theme-dark, 'default-15');
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+
+  span {
+    font-size: 0.75rem;
+    color: map.get(variable.$theme-light, 'on-default-70');
+  }
+}
+
+.tabActive {
+  background: map.get(variable.$theme-dark, 'default');
+  border-color: map.get(variable.$theme-dark, 'default');
+  color: map.get(variable.$theme-light, 'default');
+
+  span {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+.toolbarRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mobileFilters {
+  display: none;
+  height: 44px;
+  padding: 0 1rem;
+  border: 1px solid map.get(variable.$theme-dark, 'default-15');
+  border-radius: 0.5rem;
+  background: transparent;
+  cursor: pointer;
+
+  @include variable.media_queries(tablet) {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+
+  span {
+    color: map.get(variable.$theme-light, 'on-default-70');
+  }
+
+  select {
+    height: 44px;
+    padding: 0 0.8rem;
+    border: 1px solid map.get(variable.$theme-dark, 'default-15');
+    border-radius: 0.5rem;
+    background: map.get(variable.$theme-light, 'default');
+    color: inherit;
+    font: inherit;
+  }
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+
+  @include variable.media_queries(tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sidebar {
+  position: sticky;
+  top: 6.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid map.get(variable.$theme-dark, 'default-15');
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.72);
+
+  @include variable.media_queries(tablet) {
+    display: none;
+    position: static;
+  }
+}
+
+.sidebarOpen {
+  @include variable.media_queries(tablet) {
+    display: flex;
+  }
+}
+
+.filterBlock {
+  h2 {
+    margin: 0 0 0.85rem;
+    font-size: 0.8rem;
+    font-weight: variable.$fw-medium;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+}
+
+.priceInputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    color: map.get(variable.$theme-light, 'on-default-70');
+  }
+
+  input {
+    width: 100%;
+    height: 40px;
+    padding: 0 0.6rem;
+    border: 1px solid map.get(variable.$theme-dark, 'default-15');
+    border-radius: 0.5rem;
+    font: inherit;
+    color: inherit;
+    background: map.get(variable.$theme-light, 'default');
+  }
+}
+
+.slider {
+  position: relative;
+  height: 28px;
+  margin-top: 1rem;
+  background: #ececee;
+  border-radius: 999px;
+
+  input[type='range'] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    background: none;
+    pointer-events: none;
+    appearance: none;
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      margin-top: 5px;
+      border: 2px solid map.get(variable.$theme-dark, 'default');
+      border-radius: 50%;
+      background: #fff;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border: 2px solid map.get(variable.$theme-dark, 'default');
+      border-radius: 50%;
+      background: #fff;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+  }
+}
+
+.sliderFill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: map.get(variable.$theme-dark, 'default');
+  border-radius: 999px;
+}
+
+.priceHint {
+  margin: 0.6rem 0 0;
+  font-size: 0.75rem;
+  color: map.get(variable.$theme-light, 'on-default-70');
+}
+
+.checks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  input {
+    width: 16px;
+    height: 16px;
+    accent-color: map.get(variable.$theme-dark, 'default');
+  }
+}
+
+.reset {
+  height: 40px;
+  padding: 0 0.8rem;
+  border: 0;
+  background: transparent;
+  color: map.get(variable.$theme-light, 'on-default-70');
+  text-align: left;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.count {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: map.get(variable.$theme-light, 'on-default-70');
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+
+  @include variable.media_queries(desktop) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include variable.media_queries(x-small) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.empty {
+  padding: 3rem 1rem;
+  border: 1px dashed map.get(variable.$theme-dark, 'default-15');
+  border-radius: 1rem;
+  text-align: center;
+  color: map.get(variable.$theme-light, 'on-default-70');
+}

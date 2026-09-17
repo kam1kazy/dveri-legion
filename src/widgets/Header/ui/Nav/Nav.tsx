@@ -1,3 +1,5 @@
+import type { DoorCollectionPreview } from '@/entities/door';
+
 import type { DropdownId } from '../../config/nav';
 import { AboutDropdown, CollectionDropdown, Dropdown } from '../Dropdown';
 import { MobileMenu } from '../MobileMenu/MobileMenu';
@@ -6,6 +8,7 @@ import styles from './Nav.module.scss';
 import { NavLinks } from './NavLinks';
 
 interface INav {
+  collections: DoorCollectionPreview[];
   isMobileOpen: boolean;
   isLight: boolean;
   openDropdown: DropdownId | null;
@@ -15,6 +18,7 @@ interface INav {
 }
 
 export const Nav = ({
+  collections,
   isMobileOpen,
   isLight,
   openDropdown,
@@ -32,7 +36,12 @@ export const Nav = ({
       <Dropdown
         isOpen={openDropdown !== null}
         active={contentDropdown}
-        collection={<CollectionDropdown isActive={contentDropdown === 'collection'} />}
+        collection={
+          <CollectionDropdown
+            isActive={contentDropdown === 'collection'}
+            collections={collections}
+          />
+        }
         about={<AboutDropdown isActive={contentDropdown === 'about'} />}
       />
     </div>

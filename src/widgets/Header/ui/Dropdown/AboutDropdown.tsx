@@ -13,7 +13,7 @@ interface IAboutDropdown {
 }
 
 export const AboutDropdown = ({ isActive: _isActive }: IAboutDropdown) => {
-  const [selectedId, setSelectedId] = useState(aboutMainLinks[0]?.id);
+  const [selectedId, setSelectedId] = useState(String(aboutMainLinks[0]?.id));
 
   return (
     <div className={styles.inner}>
@@ -33,7 +33,7 @@ export const AboutDropdown = ({ isActive: _isActive }: IAboutDropdown) => {
           {aboutMainLinks.map((item) => (
             <Image
               key={item.id}
-              className={item.id === selectedId ? styles.selected : ''}
+              className={String(item.id) === selectedId ? styles.selected : ''}
               src={item.image ?? ''}
               alt={item.title}
               width={416}

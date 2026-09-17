@@ -12,25 +12,6 @@
   gap: 1.75rem;
 }
 
-.intro {
-  max-width: 720px;
-
-  h1 {
-    margin: 0.35rem 0 0.75rem;
-    font-size: calc(1.8rem + 0.6vw);
-    font-weight: variable.$fw-normal;
-    line-height: 1.2;
-  }
-}
-
-.eyebrow {
-  margin: 0;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: map.get(variable.$theme-light, 'on-default-70');
-}
-
 .lead {
   margin: 0;
   max-width: 620px;
@@ -39,54 +20,21 @@
 
 .toolbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
 }
 
-.tabs {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+.seriesSelect {
+  width: 100%;
   height: 44px;
-  padding: 0 1rem;
+  padding: 0 0.75rem;
   border: 1px solid map.get(variable.$theme-dark, 'default-15');
-  border-radius: 999px;
+  border-radius: variable.$border-radius;
   background: transparent;
   color: inherit;
   cursor: pointer;
-  transition:
-    background-color 0.2s,
-    color 0.2s,
-    border-color 0.2s;
-
-  span {
-    font-size: 0.75rem;
-    color: map.get(variable.$theme-light, 'on-default-70');
-  }
-}
-
-.tabActive {
-  background: map.get(variable.$theme-dark, 'default');
-  border-color: map.get(variable.$theme-dark, 'default');
-  color: map.get(variable.$theme-light, 'default');
-
-  span {
-    color: rgba(255, 255, 255, 0.7);
-  }
-}
-
-.toolbarRight {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
 }
 
 .mobileFilters {
@@ -255,19 +203,6 @@
   flex-direction: column;
   gap: 0.65rem;
 
-  label {
-    display: flex;
-    align-items: center;
-    gap: 0.55rem;
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
-
-  input {
-    width: 16px;
-    height: 16px;
-    accent-color: map.get(variable.$theme-dark, 'default');
-  }
 }
 
 .reset {

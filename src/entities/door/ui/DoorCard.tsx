@@ -1,18 +1,12 @@
 import NextImage from 'next/image';
 import NextLink from 'next/link';
 
-import {
-  CATEGORY_LABELS,
-  doorImage,
-  FLAG_LABELS,
-  formatPrice,
-} from '@/entities/door/model/catalog';
-import type { Door, DoorFlagId } from '@/entities/door/model/types';
-
+import { CATEGORY_LABELS, doorImage, FLAG_LABELS, formatPrice } from '../model/catalog';
+import type { DoorFlagId, DoorListItem } from '../model/types';
 import styles from './DoorCard.module.scss';
 
 interface DoorCardProps {
-  door: Door;
+  door: DoorListItem;
 }
 
 const CARD_FLAGS: Array<Exclude<DoorFlagId, 'apartment' | 'house'>> = [
@@ -35,6 +29,7 @@ export const DoorCard = ({ door }: DoorCardProps) => {
   if (door.categories.house) {
     categories.push('house');
   }
+
   const flags = CARD_FLAGS.filter((flag) => door.flags.includes(flag));
 
   return (

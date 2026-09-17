@@ -3,17 +3,14 @@
 import NextImage from 'next/image';
 import { useState } from 'react';
 
-import { doorGallery } from '@/entities/door/model/catalog';
-import type { Door } from '@/entities/door/model/types';
-
 import styles from './ProductGallery.module.scss';
 
 interface ProductGalleryProps {
-  door: Door;
+  images: string[];
+  alt: string;
 }
 
-export const ProductGallery = ({ door }: ProductGalleryProps) => {
-  const images = doorGallery(door);
+export const ProductGallery = ({ images, alt }: ProductGalleryProps) => {
   const [active, setActive] = useState(0);
   const current = images[active] || images[0];
 
@@ -24,7 +21,7 @@ export const ProductGallery = ({ door }: ProductGalleryProps) => {
   return (
     <div className={styles.gallery}>
       <div className={styles.stage}>
-        <NextImage src={current} alt={door.name} width={640} height={1280} priority />
+        <NextImage src={current} alt={alt} width={640} height={1280} priority />
       </div>
       {images.length > 1 && (
         <div className={styles.thumbs}>

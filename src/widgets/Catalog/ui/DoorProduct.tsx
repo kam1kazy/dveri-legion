@@ -1,7 +1,8 @@
 import NextLink from 'next/link';
 
-import { CATEGORY_LABELS, FLAG_LABELS, formatPrice } from '@/entities/door/model/catalog';
-import type { Door, DoorFlagId } from '@/entities/door/model/types';
+import type { Door, DoorFlagId } from '@/entities/door';
+import { CATEGORY_LABELS, FLAG_LABELS, formatPrice } from '@/entities/door';
+import { doorGallery } from '@/entities/door/server';
 import { Button } from '@/shared/ui/Button';
 
 import styles from './DoorProduct.module.scss';
@@ -38,7 +39,7 @@ export const DoorProduct = ({ door }: DoorProductProps) => {
           ← К каталогу
         </NextLink>
         <div className={styles.layout}>
-          <ProductGallery door={door} />
+          <ProductGallery images={doorGallery(door)} alt={door.name} />
           <div className={styles.info}>
             <p className={styles.series}>{door.series}</p>
             <h1>{title}</h1>
@@ -68,7 +69,7 @@ export const DoorProduct = ({ door }: DoorProductProps) => {
                 ))}
               </ul>
             )}
-            <Button text="Оставить заявку" link="/" filled dark />
+            <Button text="Оставить заявку" link="/contacts" filled dark />
           </div>
         </div>
 

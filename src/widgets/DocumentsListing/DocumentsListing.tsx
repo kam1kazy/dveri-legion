@@ -13,10 +13,7 @@ import styles from './DocumentsListing.module.scss';
 export const DocumentsListing = () => {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
-  const sectionIds = useMemo(
-    () => documentCategories.map((category) => category.id),
-    []
-  );
+  const sectionIds = useMemo(() => documentCategories.map((category) => category.id), []);
 
   const navItems = useMemo(
     () =>

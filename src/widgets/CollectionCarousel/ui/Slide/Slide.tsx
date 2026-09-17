@@ -36,14 +36,20 @@ export const Slide: React.FC<PropType> = (props) => {
 
         <div className={style['slide__inner--info']}>
           <div className={style['slide__inner--info-color']}>
-            <p>color ico**</p>
+            <p>{slide.subtitle}</p>
           </div>
 
           <div className={style['slide__inner--info-name']}>
             <p>{slide.title}</p>
             <p>{slide.subtitle}</p>
 
-            <Button text="Подробнее" filled dark className={style['slide__inner--info-btn']}>
+            <Button
+              text="Подробнее"
+              filled
+              dark
+              link={slide.link}
+              className={style['slide__inner--info-btn']}
+            >
               <ArrowRightIcon />
             </Button>
           </div>

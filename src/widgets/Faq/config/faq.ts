@@ -168,9 +168,7 @@ export const faqCategories: IFaqCategory[] = [
       {
         id: 'glossary-collection',
         question: 'Коллекция',
-        paragraphs: [
-          'Линейка дверей с общей эстетикой, материалами и доступными отделками.',
-        ],
+        paragraphs: ['Линейка дверей с общей эстетикой, материалами и доступными отделками.'],
       },
       {
         id: 'glossary-config',

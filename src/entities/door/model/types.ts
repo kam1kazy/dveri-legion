@@ -1,5 +1,7 @@
 export type DoorCategoryId = 'apartment' | 'house';
 
+export type DoorCollectionId = 'apartment' | 'house' | 'technical' | 'fire' | 'office' | 'tambour';
+
 export type DoorFlagId =
   | 'apartment'
   | 'house'
@@ -7,6 +9,12 @@ export type DoorFlagId =
   | 'thermalBreak'
   | 'electronicLock'
   | 'hiddenHinges';
+
+export interface DoorOption {
+  id: string;
+  label: string;
+  slug: string;
+}
 
 export interface DoorSpecPairGroup {
   key: string;
@@ -24,38 +32,48 @@ export interface DoorSpecValue {
 
 export type DoorSpec = DoorSpecPairGroup | DoorSpecValue;
 
-export interface DoorImages {
+export interface DoorPreviewImages {
   outerRemote: string | null;
   innerRemote: string | null;
-  galleryRemote: string[];
   outer: string | null;
   inner: string | null;
+}
+
+export interface DoorImages extends DoorPreviewImages {
+  galleryRemote: string[];
   gallery: string[];
 }
 
-export interface Door {
+/** Данных этого объёма хватает для каталога, фильтров и карточки в сетке. */
+export interface DoorListItem {
   id: string;
   slug: string;
   name: string;
   series: string;
   price: number | null;
   currency: string;
-  sourceUrl: string | null;
   categories: {
     apartment: boolean;
     house: boolean;
   };
   sectionIds: number[];
+  sections: string[];
   features: string[];
   placement: string[];
   priceTier: string[];
   flags: DoorFlagId[];
   previewText: string | null;
+  images: DoorPreviewImages;
+}
+
+export interface Door extends DoorListItem {
+  sourceUrl: string | null;
   specs: DoorSpec[];
   images: DoorImages;
 }
 
-export interface CatalogData {
+export interface CatalogData<TItem = Door> {
+  items: TItem[];
   source: string;
   exportedAt: string;
   categories: Array<{
@@ -63,11 +81,16 @@ export interface CatalogData {
     label: string;
     sectionId: number;
   }>;
+  options?: {
+    sections: DoorOption[];
+    placement: DoorOption[];
+    features: DoorOption[];
+    priceTier: DoorOption[];
+  };
   filters: {
     features: string[];
     flags: Array<{ id: DoorFlagId; label: string }>;
   };
-  items: Door[];
   stats?: {
     total: number;
     apartment: number;

@@ -4,7 +4,7 @@ import { Link } from '@/shared/ui/Link';
 import styles from './Dropdown.module.scss';
 
 export interface IDropdownMenuItem {
-  id: number;
+  id: string | number;
   title: string;
   href: string;
 }
@@ -12,9 +12,9 @@ export interface IDropdownMenuItem {
 interface IDropdownMenu {
   items: IDropdownMenuItem[];
   variant?: 'collection' | 'about' | 'small';
-  activeId?: number;
-  hoveredId?: number | null;
-  onItemEnter?: (id: number) => void;
+  activeId?: string | number;
+  hoveredId?: string | number | null;
+  onItemEnter?: (id: string) => void;
 }
 
 export const DropdownMenu = ({
@@ -35,7 +35,7 @@ export const DropdownMenu = ({
         <li
           key={item.id}
           className={`${styles.link} ${item.id === activeId ? styles.active : ''} ${item.id === hoveredId ? styles.hovered : ''}`}
-          onMouseEnter={() => onItemEnter?.(item.id)}
+          onMouseEnter={() => onItemEnter?.(String(item.id))}
         >
           {variant === 'collection' && <span className={styles.marker} />}
           <ArrowRightIcon className={styles.linkIcon} />

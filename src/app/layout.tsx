@@ -2,6 +2,7 @@ import './style/globals.scss';
 
 import type { Metadata } from 'next';
 
+import { getCollectionPreviews } from '@/entities/door';
 import { Header } from '@/widgets/Header';
 
 import { suisseIntl } from './fonts';
@@ -25,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={`background-noise ${suisseIntl.variable} `}>
-        <Header />
+        <Header collections={getCollectionPreviews()} />
         {children}
       </body>
     </html>

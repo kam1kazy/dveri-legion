@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
+import type { DoorCollectionPreview } from '@/entities/door';
 import { Logo } from '@/shared/ui/Logo/Logo';
 
 import style from './Header.module.scss';
@@ -12,15 +13,16 @@ import { Nav } from './ui/Nav/Nav';
 export type HeaderVariant = 'onDark' | 'onLight';
 
 interface IHeader {
+  collections: DoorCollectionPreview[];
   variant?: HeaderVariant;
 }
 
-const LIGHT_PATHS = ['/faq', '/contacts', '/documents', '/blog', '/gallery', '/buyers'];
+const LIGHT_PATHS = ['/faq', '/contacts', '/documents', '/blog', '/gallery', '/buyers', '/catalog'];
 
 const isLightPath = (pathname: string) =>
   LIGHT_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`));
 
-export const Header = ({ variant }: IHeader) => {
+export const Header = ({ collections, variant }: IHeader) => {
   const pathname = usePathname();
   const {
     openDropdown,
@@ -49,6 +51,7 @@ export const Header = ({ variant }: IHeader) => {
           <MobileMenu variant="open" onClick={toggleMobile} />
           <Logo inverted={logoInverted} />
           <Nav
+            collections={collections}
             isMobileOpen={isMobileOpen}
             isLight={navIsLight}
             openDropdown={openDropdown}

@@ -1,37 +1,41 @@
 'use client';
 
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
+import type { DoorCollectionId, DoorListItem } from '@/entities/door';
 import {
   catalog,
-  CATEGORY_LABELS,
+  COLLECTIONS,
+  DoorCard,
+  doorCollections,
   doors,
-  FLAG_LABELS,
+  doorSeries,
+  FILTER_GROUPS,
   formatPrice,
-} from '@/entities/door/model/catalog';
-import type { Door, DoorCategoryId, DoorFlagId } from '@/entities/door/model/types';
-import { DoorCard } from '@/entities/door/ui/DoorCard';
+  matchesFilter,
+  priceBounds,
+} from '@/entities/door';
+import { plural } from '@/shared/lib/plural';
+import { CategoryNav } from '@/shared/ui/CategoryNav';
+import { Checkbox } from '@/shared/ui/Checkbox';
+import { PageIntro } from '@/shared/ui/PageIntro';
+import { ContactArea } from '@/widgets/ContactArea/ContactArea';
 
 import styles from './Catalog.module.scss';
 
-type CategoryFilter = 'all' | DoorCategoryId;
+type CollectionFilter = 'all' | DoorCollectionId;
 type SortId = 'price-asc' | 'price-desc' | 'name';
 
-const EXTRA_FLAGS: Array<Exclude<DoorFlagId, DoorCategoryId>> = [
-  'mirror',
-  'thermalBreak',
-  'electronicLock',
-  'hiddenHinges',
-];
-
-const prices = doors.map((door) => door.price).filter((price): price is number => price !== null);
-const minCatalogPrice = prices.length ? Math.min(...prices) : 0;
-const maxCatalogPrice = prices.length ? Math.max(...prices) : 0;
 const PRICE_STEP = 1000;
+const PRICE_TIERS = ['Бизнес', 'Премиум'];
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
-const sortDoors = (items: Door[], sort: SortId) => {
+const isCollectionId = (value: string | null): value is DoorCollectionId =>
+  COLLECTIONS.some((collection) => collection.id === value);
+
+const sortDoors = (items: DoorListItem[], sort: SortId) => {
   const copy = [...items];
 
   copy.sort((a, b) => {
@@ -39,128 +43,119 @@ const sortDoors = (items: Door[], sort: SortId) => {
       return a.name.localeCompare(b.name, 'ru');
     }
 
-    const aPrice = a.price;
-    const bPrice = b.price;
-
-    if (aPrice === null && bPrice === null) {
+    if (a.price === null && b.price === null) {
       return a.name.localeCompare(b.name, 'ru');
     }
 
-    if (aPrice === null) {
+    if (a.price === null) {
       return 1;
     }
 
-    if (bPrice === null) {
+    if (b.price === null) {
       return -1;
     }
 
-    return sort === 'price-desc' ? bPrice - aPrice : aPrice - bPrice;
+    return sort === 'price-desc' ? b.price - a.price : a.price - b.price;
   });
 
   return copy;
 };
 
 export const Catalog = () => {
-  const [category, setCategory] = useState<CategoryFilter>('all');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const collectionParam = searchParams.get('collection');
+  const collection: CollectionFilter = isCollectionId(collectionParam) ? collectionParam : 'all';
+
   const [sort, setSort] = useState<SortId>('price-asc');
-  const [priceFrom, setPriceFrom] = useState(minCatalogPrice);
-  const [priceTo, setPriceTo] = useState(maxCatalogPrice);
-  const [flags, setFlags] = useState<Array<Exclude<DoorFlagId, DoorCategoryId>>>([]);
+  const [priceFrom, setPriceFrom] = useState(priceBounds.min);
+  const [priceTo, setPriceTo] = useState(priceBounds.max);
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
+  const [tiers, setTiers] = useState<string[]>([]);
+  const [series, setSeries] = useState<string>('all');
   const [filtersOpen, setFiltersOpen] = useState(false);
 
+  const inCollection = useMemo(
+    () =>
+      collection === 'all'
+        ? doors
+        : doors.filter((door) => doorCollections(door).includes(collection)),
+    [collection]
+  );
+
   const filtered = useMemo(() => {
-    const next = doors.filter((door) => {
-      if (category === 'apartment' && !door.categories.apartment) {
-        return false;
-      }
-
-      if (category === 'house' && !door.categories.house) {
-        return false;
-      }
-
+    const next = inCollection.filter((door) => {
       if (door.price !== null && (door.price < priceFrom || door.price > priceTo)) {
         return false;
       }
 
-      if (flags.length > 0 && !flags.every((flag) => door.flags.includes(flag))) {
+      if (series !== 'all' && door.series !== series) {
         return false;
       }
 
-      return true;
+      if (tiers.length > 0 && !tiers.some((tier) => door.priceTier.includes(tier))) {
+        return false;
+      }
+
+      return activeFilters.every((id) => matchesFilter(door, id));
     });
 
     return sortDoors(next, sort);
-  }, [category, flags, priceFrom, priceTo, sort]);
+  }, [activeFilters, inCollection, priceFrom, priceTo, series, sort, tiers]);
 
-  const counts = useMemo(
-    () => ({
-      all: doors.length,
-      apartment: doors.filter((door) => door.categories.apartment).length,
-      house: doors.filter((door) => door.categories.house).length,
-    }),
+  const navItems = useMemo(
+    () => [
+      { id: 'all', label: `Все двери · ${doors.length}` },
+      ...COLLECTIONS.map((item) => ({
+        id: item.id,
+        label: `${item.label} · ${doors.filter((door) => doorCollections(door).includes(item.id)).length}`,
+      })),
+    ],
     []
   );
 
-  const resetFilters = () => {
-    setCategory('all');
-    setSort('price-asc');
-    setPriceFrom(minCatalogPrice);
-    setPriceTo(maxCatalogPrice);
-    setFlags([]);
+  const activeCollection = COLLECTIONS.find((item) => item.id === collection);
+
+  const selectCollection = (id: string) => {
+    const query = id === 'all' ? '/catalog' : `/catalog?collection=${id}`;
+    router.replace(query, { scroll: false });
   };
 
-  const toggleFlag = (flag: Exclude<DoorFlagId, DoorCategoryId>) => {
-    setFlags((current) =>
-      current.includes(flag) ? current.filter((item) => item !== flag) : [...current, flag]
+  const resetFilters = () => {
+    setSort('price-asc');
+    setPriceFrom(priceBounds.min);
+    setPriceTo(priceBounds.max);
+    setActiveFilters([]);
+    setTiers([]);
+    setSeries('all');
+  };
+
+  const toggleFilter = (id: string) => {
+    setActiveFilters((current) =>
+      current.includes(id) ? current.filter((item) => item !== id) : [...current, id]
     );
   };
 
-  const onFromChange = (value: number) => {
-    const next = clamp(value, minCatalogPrice, priceTo);
-    setPriceFrom(next);
-  };
-
-  const onToChange = (value: number) => {
-    const next = clamp(value, priceFrom, maxCatalogPrice);
-    setPriceTo(next);
+  const toggleTier = (tier: string) => {
+    setTiers((current) =>
+      current.includes(tier) ? current.filter((item) => item !== tier) : [...current, tier]
+    );
   };
 
   return (
-    <section className={styles.page}>
-      <div className={`container ${styles.container}`}>
-        <header className={styles.intro}>
-          <p className={styles.eyebrow}>Каталог Legion</p>
-          <h1>Входные двери для квартиры и дома</h1>
-          <p className={styles.lead}>
-            {catalog.stats?.total ?? doors.length} моделей с ценами, назначением и нормальными
-            фильтрами — без бесконечного списка галочек.
-          </p>
-        </header>
+    <>
+      <section className={styles.page}>
+        <div className={`container ${styles.container}`}>
+          <PageIntro
+            title="Каталог входных дверей"
+            description={`${catalog.stats?.total ?? doors.length} моделей с ценами. Выберите, куда нужна дверь, — остальное отфильтруем.`}
+          />
 
-        <div className={styles.toolbar}>
-          <div className={styles.tabs} role="tablist" aria-label="Категория">
-            {(
-              [
-                ['all', 'Все', counts.all],
-                ['apartment', CATEGORY_LABELS.apartment, counts.apartment],
-                ['house', CATEGORY_LABELS.house, counts.house],
-              ] as const
-            ).map(([id, label, count]) => (
-              <button
-                key={id}
-                type="button"
-                role="tab"
-                aria-selected={category === id}
-                className={`${styles.tab} ${category === id ? styles.tabActive : ''}`}
-                onClick={() => setCategory(id)}
-              >
-                {label}
-                <span>{count}</span>
-              </button>
-            ))}
-          </div>
+          <CategoryNav items={navItems} activeId={collection} onSelect={selectCollection} />
 
-          <div className={styles.toolbarRight}>
+          {activeCollection && <p className={styles.lead}>{activeCollection.description}</p>}
+
+          <div className={styles.toolbar}>
             <button
               type="button"
               className={styles.mobileFilters}
@@ -177,115 +172,176 @@ export const Catalog = () => {
               </select>
             </label>
           </div>
-        </div>
 
-        <div className={styles.layout}>
-          <aside className={`${styles.sidebar} ${filtersOpen ? styles.sidebarOpen : ''}`}>
-            <div className={styles.filterBlock}>
-              <h2>Цена</h2>
-              <div className={styles.priceInputs}>
-                <label>
-                  от
+          <div className={styles.layout}>
+            <aside className={`${styles.sidebar} ${filtersOpen ? styles.sidebarOpen : ''}`}>
+              <div className={styles.filterBlock}>
+                <h2>Цена</h2>
+                <div className={styles.priceInputs}>
+                  <label>
+                    от
+                    <input
+                      type="number"
+                      min={priceBounds.min}
+                      max={priceTo}
+                      step={PRICE_STEP}
+                      value={priceFrom}
+                      onChange={(event) =>
+                        setPriceFrom(
+                          clamp(
+                            Number(event.target.value) || priceBounds.min,
+                            priceBounds.min,
+                            priceTo
+                          )
+                        )
+                      }
+                    />
+                  </label>
+                  <label>
+                    до
+                    <input
+                      type="number"
+                      min={priceFrom}
+                      max={priceBounds.max}
+                      step={PRICE_STEP}
+                      value={priceTo}
+                      onChange={(event) =>
+                        setPriceTo(
+                          clamp(
+                            Number(event.target.value) || priceBounds.max,
+                            priceFrom,
+                            priceBounds.max
+                          )
+                        )
+                      }
+                    />
+                  </label>
+                </div>
+                <div className={styles.slider}>
+                  <div
+                    className={styles.sliderFill}
+                    style={{
+                      left: `${((priceFrom - priceBounds.min) / (priceBounds.max - priceBounds.min || 1)) * 100}%`,
+                      right: `${100 - ((priceTo - priceBounds.min) / (priceBounds.max - priceBounds.min || 1)) * 100}%`,
+                    }}
+                  />
                   <input
-                    type="number"
-                    min={minCatalogPrice}
-                    max={priceTo}
+                    type="range"
+                    min={priceBounds.min}
+                    max={priceBounds.max}
                     step={PRICE_STEP}
                     value={priceFrom}
+                    aria-label="Минимальная цена"
                     onChange={(event) =>
-                      onFromChange(Number(event.target.value) || minCatalogPrice)
+                      setPriceFrom(clamp(Number(event.target.value), priceBounds.min, priceTo))
                     }
                   />
-                </label>
-                <label>
-                  до
                   <input
-                    type="number"
-                    min={priceFrom}
-                    max={maxCatalogPrice}
+                    type="range"
+                    min={priceBounds.min}
+                    max={priceBounds.max}
                     step={PRICE_STEP}
                     value={priceTo}
-                    onChange={(event) => onToChange(Number(event.target.value) || maxCatalogPrice)}
+                    aria-label="Максимальная цена"
+                    onChange={(event) =>
+                      setPriceTo(clamp(Number(event.target.value), priceFrom, priceBounds.max))
+                    }
                   />
-                </label>
+                </div>
+                <p className={styles.priceHint}>
+                  {formatPrice(priceFrom)} — {formatPrice(priceTo)}
+                </p>
               </div>
-              <div className={styles.slider}>
-                <div
-                  className={styles.sliderFill}
-                  style={{
-                    left: `${((priceFrom - minCatalogPrice) / (maxCatalogPrice - minCatalogPrice || 1)) * 100}%`,
-                    right: `${100 - ((priceTo - minCatalogPrice) / (maxCatalogPrice - minCatalogPrice || 1)) * 100}%`,
-                  }}
-                />
-                <input
-                  type="range"
-                  min={minCatalogPrice}
-                  max={maxCatalogPrice}
-                  step={PRICE_STEP}
-                  value={priceFrom}
-                  aria-label="Минимальная цена"
-                  onChange={(event) => onFromChange(Number(event.target.value))}
-                />
-                <input
-                  type="range"
-                  min={minCatalogPrice}
-                  max={maxCatalogPrice}
-                  step={PRICE_STEP}
-                  value={priceTo}
-                  aria-label="Максимальная цена"
-                  onChange={(event) => onToChange(Number(event.target.value))}
-                />
-              </div>
-              <p className={styles.priceHint}>
-                {formatPrice(minCatalogPrice)} — {formatPrice(maxCatalogPrice)}
-              </p>
-            </div>
 
-            <div className={styles.filterBlock}>
-              <h2>Что важно</h2>
-              <ul className={styles.checks}>
-                {EXTRA_FLAGS.map((flag) => (
-                  <li key={flag}>
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={flags.includes(flag)}
-                        onChange={() => toggleFlag(flag)}
+              <div className={styles.filterBlock}>
+                <h2>Сегмент</h2>
+                <ul className={styles.checks}>
+                  {PRICE_TIERS.map((tier) => (
+                    <li key={tier}>
+                      <Checkbox
+                        id={`tier-${tier}`}
+                        label={tier}
+                        checked={tiers.includes(tier)}
+                        onChange={() => toggleTier(tier)}
                       />
-                      {FLAG_LABELS[flag]}
-                    </label>
-                  </li>
-                ))}
-              </ul>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {FILTER_GROUPS.map((group) => {
+                const available = group.filters.filter((filter) =>
+                  inCollection.some((door) => filter.match(door))
+                );
+
+                if (available.length === 0) {
+                  return null;
+                }
+
+                return (
+                  <div key={group.id} className={styles.filterBlock}>
+                    <h2>{group.label}</h2>
+                    <ul className={styles.checks}>
+                      {available.map((filter) => (
+                        <li key={filter.id}>
+                          <Checkbox
+                            id={`filter-${filter.id}`}
+                            label={filter.label}
+                            checked={activeFilters.includes(filter.id)}
+                            onChange={() => toggleFilter(filter.id)}
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+
+              <div className={styles.filterBlock}>
+                <h2>Серия</h2>
+                <select
+                  className={styles.seriesSelect}
+                  value={series}
+                  onChange={(event) => setSeries(event.target.value)}
+                >
+                  <option value="all">Все серии</option>
+                  {doorSeries.map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <button type="button" className={styles.reset} onClick={resetFilters}>
+                Сбросить всё
+              </button>
+            </aside>
+
+            <div>
+              <p className={styles.count}>
+                Найдено {filtered.length} {plural(filtered.length, 'дверь', 'двери', 'дверей')}
+              </p>
+              {filtered.length === 0 ? (
+                <div className={styles.empty}>
+                  <p>Под такие условия дверей нет. Сдвиньте цену или снимите пару фильтров.</p>
+                  <button type="button" className={styles.reset} onClick={resetFilters}>
+                    Сбросить фильтры
+                  </button>
+                </div>
+              ) : (
+                <div className={styles.grid}>
+                  {filtered.map((door) => (
+                    <DoorCard key={door.id} door={door} />
+                  ))}
+                </div>
+              )}
             </div>
-
-            <button type="button" className={styles.reset} onClick={resetFilters}>
-              Сбросить всё
-            </button>
-          </aside>
-
-          <div>
-            <p className={styles.count}>
-              Найдено {filtered.length}{' '}
-              {filtered.length === 1 ? 'дверь' : filtered.length < 5 ? 'двери' : 'дверей'}
-            </p>
-            {filtered.length === 0 ? (
-              <div className={styles.empty}>
-                <p>Под такие условия дверей нет. Сдвиньте цену или снимите пару фильтров.</p>
-                <button type="button" className={styles.reset} onClick={resetFilters}>
-                  Сбросить фильтры
-                </button>
-              </div>
-            ) : (
-              <div className={styles.grid}>
-                {filtered.map((door) => (
-                  <DoorCard key={door.id} door={door} />
-                ))}
-              </div>
-            )}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <ContactArea />
+    </>
   );
 };

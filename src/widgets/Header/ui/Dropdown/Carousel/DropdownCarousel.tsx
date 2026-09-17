@@ -19,7 +19,7 @@ const OPTIONS: EmblaOptionsType = {
 
 interface IDropdownCarousel {
   items: ICollectionNavItem[];
-  hoveredId: number | null;
+  hoveredId: string | null;
   isActive: boolean;
 }
 

@@ -7,8 +7,8 @@ import { Image } from '@/shared/ui/Image/Image';
 import { PageIntro } from '@/shared/ui/PageIntro';
 import { ContactArea } from '@/widgets/ContactArea/ContactArea';
 
-import style from './Gallery.module.scss';
 import { galleryCategories, galleryItems, galleryPage } from './config/gallery';
+import style from './Gallery.module.scss';
 
 export const Gallery = () => {
   const [activeId, setActiveId] = useState('all');

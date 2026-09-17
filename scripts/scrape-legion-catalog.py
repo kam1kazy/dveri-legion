@@ -16,6 +16,24 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "src" / "entities" / "door" / "data"
+# Поля, которых достаточно для листинга и фильтров. Полный файл с
+# характеристиками и галереей грузится только на странице товара.
+LITE_FIELDS = {
+    "id",
+    "slug",
+    "name",
+    "series",
+    "price",
+    "currency",
+    "categories",
+    "sectionIds",
+    "sections",
+    "features",
+    "placement",
+    "priceTier",
+    "flags",
+    "previewText",
+}
 IMG_DIR = ROOT / "public" / "catalog" / "doors"
 BASE = "https://legion-doors.ru"
 API = (
@@ -29,7 +47,7 @@ CTX = ssl.create_default_context()
 APARTMENT_ID = 87
 HOUSE_ID = 61
 SERIES_RE = re.compile(
-    r"^(Legion(?:\s+(?:Arctic|Nordic|Ultima|Prime|Smart|Pro)"
+    r"^(Legion(?:\s+(?:Arctic|Nordic|Ultima|Prime|Smart|Pro|Classic|Fire|Steel)"
     r"(?:\s+(?:Plus|Steel|Pro|Glass(?:\s+Plus)?))?)?)",
     re.I,
 )
@@ -203,6 +221,7 @@ def normalize_item(item: dict, maps: dict[str, dict[str, dict]]) -> dict:
             "house": HOUSE_ID in sections,
         },
         "sectionIds": sections,
+        "sections": labels_for(sections, maps["SECTION"]),
         "features": features,
         "placement": labels_for(props.get("PLACEMENT"), maps["PLACEMENT"]),
         "priceTier": labels_for(props.get("PRICEMENT"), maps["PRICEMENT"]),
@@ -236,14 +255,10 @@ def main() -> int:
         "PRICEMENT": option_map(options.get("PRICEMENT")),
     }
 
-    items = []
-    for item in data.get("items") or []:
-        sections = [int(x) for x in (item.get("SECTIONS") or [])]
-        if APARTMENT_ID in sections or HOUSE_ID in sections:
-            items.append(normalize_item(item, maps))
+    items = [normalize_item(item, maps) for item in data.get("items") or []]
 
     items.sort(key=lambda x: (x["price"] is None, x["price"] or 0, x["name"]))
-    print(f"Matched {len(items)} doors (apartment + house)")
+    print(f"Matched {len(items)} doors (full catalog)")
 
     catalog = {
         "source": BASE,
@@ -252,6 +267,12 @@ def main() -> int:
             {"id": "apartment", "label": "В квартиру", "sectionId": APARTMENT_ID},
             {"id": "house", "label": "В дом", "sectionId": HOUSE_ID},
         ],
+        "options": {
+            "sections": sorted(maps["SECTION"].values(), key=lambda o: o["label"]),
+            "placement": sorted(maps["PLACEMENT"].values(), key=lambda o: o["label"]),
+            "features": sorted(maps["FEATUREMENT"].values(), key=lambda o: o["label"]),
+            "priceTier": sorted(maps["PRICEMENT"].values(), key=lambda o: o["label"]),
+        },
         "filters": {
             "features": sorted({f for item in items for f in item["features"]}),
             "flags": [
@@ -346,8 +367,27 @@ def main() -> int:
         "imagesSaved": saved,
     }
     out_path.write_text(json.dumps(catalog, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    lite_items = []
+    for item in items:
+        lite = {key: value for key, value in item.items() if key in LITE_FIELDS}
+        lite["images"] = {
+            "outer": item["images"]["outer"],
+            "inner": item["images"]["inner"],
+            "outerRemote": item["images"]["outerRemote"],
+            "innerRemote": item["images"]["innerRemote"],
+        }
+        lite_items.append(lite)
+
+    lite_path = DATA_DIR / "doors-lite.json"
+    lite_path.write_text(
+        json.dumps({**catalog, "items": lite_items}, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
     print(json.dumps(catalog["stats"], ensure_ascii=False, indent=2))
     print(f"Wrote {out_path}")
+    print(f"Wrote {lite_path}")
     return 0
 
 

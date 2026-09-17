@@ -8,7 +8,7 @@ import { Button } from '@/shared/ui/Button';
 import { ArrowRightIcon } from '@/shared/ui/Icons';
 
 import styles from './CollectionCarousel.module.scss';
-import { slides } from './config/slides';
+import type { ISlide } from './config/slides';
 import Carousel from './ui/Carousel/Carousel';
 import { Controls } from './ui/Controls';
 
@@ -20,7 +20,11 @@ const OPTIONS: EmblaOptionsType = {
   containScroll: 'trimSnaps',
 };
 
-export const CollectionCarousel = () => {
+interface ICollectionCarousel {
+  slides: ISlide[];
+}
+
+export const CollectionCarousel = ({ slides }: ICollectionCarousel) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [AutoScroll({ playOnInit: false })]);
 
   return (
@@ -41,7 +45,7 @@ export const CollectionCarousel = () => {
             />
 
             <div className={styles['collection_carousel-link']}>
-              <Button border filled text="Посмотреть все коллекции">
+              <Button border filled text="Посмотреть весь каталог" link="/catalog">
                 <ArrowRightIcon />
               </Button>
             </div>

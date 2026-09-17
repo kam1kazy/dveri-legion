@@ -37,16 +37,35 @@ export const LocationCard = ({ location }: ILocationCardProps) => {
               {location.phone}
             </a>
           )}
+          {location.email && (
+            <a className={style.email} href={`mailto:${location.email}`}>
+              {location.email}
+            </a>
+          )}
         </div>
 
-        <a
-          className={style.mapLink}
-          href={location.mapUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Показать карту
-        </a>
+        {location.messengers && location.messengers.length > 0 && (
+          <ul className={style.messengers}>
+            {location.messengers.map((item) => (
+              <li key={item.label}>
+                <a href={item.href} target="_blank" rel="noopener noreferrer">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {location.mapUrl && (
+          <a
+            className={style.mapLink}
+            href={location.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Показать карту
+          </a>
+        )}
       </div>
     </article>
   );

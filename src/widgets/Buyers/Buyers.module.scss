@@ -1,0 +1,128 @@
+@use '../../app/style/variable' as variable;
+@use 'sass:map';
+
+.section {
+  padding: 3.5rem 0 2.5rem;
+  scroll-margin-top: 12rem;
+
+  @include variable.media_queries(tablet) {
+    padding: 2.5rem 0 2rem;
+    scroll-margin-top: 11rem;
+  }
+
+  @include variable.media_queries(xx-small) {
+    padding: 2rem 0 1.5rem;
+    scroll-margin-top: 10rem;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid map.get(variable.$theme-dark, 'input-border-15');
+  }
+}
+
+.sectionTitle {
+  margin: 0 0 1rem;
+  font-size: 1.125rem;
+  font-weight: variable.$fw-medium;
+  line-height: 1.3;
+  color: map.get(variable.$theme-light, 'on-default');
+}
+
+.intro {
+  margin: 0 0 2rem;
+  max-width: 42rem;
+  font-size: 1rem;
+  line-height: variable.$lh-text-second;
+  color: map.get(variable.$theme-dark, 'default-70');
+}
+
+.blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  max-width: 48rem;
+}
+
+.blockTitle {
+  margin: 0 0 0.85rem;
+  font-size: 1rem;
+  font-weight: variable.$fw-medium;
+  line-height: 1.35;
+}
+
+.paragraph {
+  margin: 0 0 0.85rem;
+  font-size: 0.9375rem;
+  line-height: variable.$lh-text-second;
+  color: map.get(variable.$theme-dark, 'default');
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.list {
+  margin: 0 0 0.85rem;
+  padding-left: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+
+  li {
+    font-size: 0.9375rem;
+    line-height: variable.$lh-text-second;
+  }
+}
+
+.priceGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin: 0.5rem 0 0.85rem;
+}
+
+.priceGroup {
+  padding: 1.25rem 1.35rem;
+  border-radius: 0.75rem;
+  background: #eee;
+}
+
+.priceGroupTitle {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  font-weight: variable.$fw-medium;
+}
+
+.priceList {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  li {
+    font-size: 0.875rem;
+    line-height: variable.$lh-text;
+  }
+}
+
+.note {
+  margin: 0.75rem 0 0;
+  font-size: 0.8125rem;
+  line-height: variable.$lh-text;
+  color: map.get(variable.$theme-dark, 'default-70');
+}
+
+.link {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-size: 0.875rem;
+  color: map.get(variable.$theme-light, 'on-default');
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  transition: opacity 0.25s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

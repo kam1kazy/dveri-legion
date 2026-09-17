@@ -15,7 +15,7 @@ interface IHeader {
   variant?: HeaderVariant;
 }
 
-const LIGHT_PATHS = ['/faq', '/contacts', '/documents', '/blog'];
+const LIGHT_PATHS = ['/faq', '/contacts', '/documents', '/blog', '/about', '/gallery', '/buyers'];
 
 const isLightPath = (pathname: string) =>
   LIGHT_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`));

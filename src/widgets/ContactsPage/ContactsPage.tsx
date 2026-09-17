@@ -1,7 +1,7 @@
 import { ContactForm } from '@/features/ContactForm';
 import { ContactArea } from '@/widgets/ContactArea/ContactArea';
 
-import { contactsPage, locations } from './config/contacts';
+import { companyRequisites, contactsPage, locations } from './config/contacts';
 import style from './ContactsPage.module.scss';
 import { LocationCard } from './ui/LocationCard';
 
@@ -24,6 +24,18 @@ export const ContactsPage = () => {
               <LocationCard key={location.id} location={location} />
             ))}
           </div>
+
+          <aside className={style.requisites}>
+            <h2 className={style.requisitesTitle}>{companyRequisites.title}</h2>
+            <dl className={style.requisitesList}>
+              {companyRequisites.items.map((item) => (
+                <div key={item.label} className={style.requisitesItem}>
+                  <dt>{item.label}</dt>
+                  <dd>{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </aside>
         </div>
       </section>
 

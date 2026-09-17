@@ -8,27 +8,27 @@ export interface IAboutLink {
 export const aboutMainLinks: IAboutLink[] = [
   {
     id: 1,
-    title: 'Технологии',
-    href: '#',
-    image: '/images/img2.jpg',
-  },
-  {
-    id: 2,
-    title: 'Блог',
-    href: '/blog',
-    image: '/images/img3.jpg',
-  },
-  {
-    id: 3,
-    title: 'Как выбрать?',
-    href: '#',
+    title: 'О компании',
+    href: '/about',
     image: '/images/img4.jpg',
   },
   {
-    id: 4,
-    title: 'Гарантия',
-    href: '#',
+    id: 2,
+    title: 'Фотогалерея',
+    href: '/gallery',
     image: '/images/img5.jpg',
+  },
+  {
+    id: 3,
+    title: 'Покупателям',
+    href: '/buyers',
+    image: '/images/img-how.jpg',
+  },
+  {
+    id: 4,
+    title: 'Блог',
+    href: '/blog',
+    image: '/images/img-blog.jpg',
   },
 ];
 

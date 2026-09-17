@@ -1,0 +1,84 @@
+@use '../../app/style/variable' as variable;
+@use 'sass:map';
+
+.page {
+  color: map.get(variable.$theme-light, 'on-default');
+  padding-bottom: 2rem;
+}
+
+.introWrap {
+  padding-top: 4rem;
+
+  @include variable.media_queries(tablet) {
+    padding-top: 3rem;
+  }
+
+  @include variable.media_queries(xx-small) {
+    padding-top: 2rem;
+  }
+}
+
+.sections {
+  :global(.about_text) {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+    @include variable.media_queries(xx-small) {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+  }
+}
+
+.reasons {
+  padding: 4rem 0 5rem;
+
+  @include variable.media_queries(xx-small) {
+    padding: 3rem 0 3.5rem;
+  }
+}
+
+.reasonsTitle {
+  margin: 0 0 2.5rem;
+  font-size: calc(1.5rem + 0.5vw);
+  font-weight: variable.$fw-normal;
+  line-height: 1.25;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.reasonsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem 1.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+
+  @include variable.media_queries(tablet) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include variable.media_queries(xx-small) {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+}
+
+.reason {
+  padding: 0 0.5rem;
+  text-align: center;
+}
+
+.reasonTitle {
+  margin: 0 0 0.75rem;
+  font-size: 1.125rem;
+  font-weight: variable.$fw-medium;
+  line-height: 1.3;
+}
+
+.reasonText {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: variable.$lh-text-second;
+  color: map.get(variable.$theme-dark, 'default-70');
+}

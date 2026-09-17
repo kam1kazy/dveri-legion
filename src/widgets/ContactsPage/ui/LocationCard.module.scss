@@ -71,6 +71,38 @@
   }
 }
 
+.email {
+  display: block;
+  margin-top: 0.25rem;
+  color: map.get(variable.$theme-dark, 'default');
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.messengers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;
+
+  a {
+    color: map.get(variable.$theme-dark, 'default');
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
 .mapLink {
   display: inline-flex;
   align-items: center;

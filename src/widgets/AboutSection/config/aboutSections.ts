@@ -38,7 +38,7 @@ export const aboutSectionsList: ITextSection[] = [
     cover: '/images/img4.jpg',
     button: {
       text: 'Подробнее о нас',
-      href: '#',
+      href: '/about',
     },
     grayBg: false,
     inversion: false,

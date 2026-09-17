@@ -46,16 +46,19 @@ export const TextSection = (props: ITextSection) => {
             <h3>{props.title}</h3>
             <p>{props.description}</p>
 
-            <Button
-              text={props.button?.text ?? ''}
-              icon={{ src: props.button?.src ?? '', alt: props.button?.alt ?? '' }}
-              filled
-              dark
-            >
-              {!props.button?.src && (
-                <ArrowRightWhiteIcon style={{ fontSize: '1.563rem', marginLeft: 10 }} />
-              )}
-            </Button>
+            {props.button?.text && (
+              <Button
+                text={props.button.text}
+                link={props.button.href}
+                icon={{ src: props.button.src ?? '', alt: props.button.alt ?? '' }}
+                filled
+                dark
+              >
+                {!props.button.src && (
+                  <ArrowRightWhiteIcon style={{ fontSize: '1.563rem', marginLeft: 10 }} />
+                )}
+              </Button>
+            )}
           </div>
         </div>
 

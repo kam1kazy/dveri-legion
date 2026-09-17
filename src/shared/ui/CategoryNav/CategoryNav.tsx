@@ -19,19 +19,16 @@ export interface ICategoryNav {
 
 export const CategoryNav = ({ items, activeId, onSelect, className }: ICategoryNav) => {
   const handleClick = (item: ICategoryNavItem) => (event: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!onSelect) {
-      return;
-    }
+    const href = item.href ?? `#${item.id}`;
 
-    if (item.href?.startsWith('#')) {
+    if (onSelect && href.startsWith('#')) {
       event.preventDefault();
       const target = document.getElementById(item.id);
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+      onSelect(item.id);
     }
-
-    onSelect(item.id);
   };
 
   return (

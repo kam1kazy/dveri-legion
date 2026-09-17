@@ -6,6 +6,49 @@ export const aboutPage = {
     'Legion Doors — прочность, стиль и надёжность. Более десяти лет проектируем, производим и устанавливаем входные двери премиум-класса по всей России.',
 };
 
+export const aboutHero = {
+  title: 'О компании',
+  links: [
+    { text: 'Выбрать свою дверь', href: '/' },
+    { text: 'Вдохновение', href: '/gallery' },
+    { text: 'Техническое описание', href: '/documents' },
+    { text: 'Документация', href: '/documents' },
+  ],
+};
+
+export const aboutArt = {
+  lead: 'Изысканные формы и безупречная детализация делают наши коллекции незаменимыми для создания теплой и уютной атмосферы в вашем доме, гостинице или любом другом проекте.',
+  accent: 'Позвольте вашим интерьерам говорить',
+  rest: 'на языке изысканности с дверями, которые подчеркнут ваш высокий статус и утонченный вкус.',
+  cover: '/images/catalog/art-door.png',
+  alt: 'Дверь Legion в интерьере',
+};
+
+export const aboutHarmony = {
+  title: 'Двери Legion — это гармония стиля и функциональности.',
+  subtitle: 'Каждый элемент материализует ваше стремление к совершенству.',
+  items: [
+    {
+      id: 'locks',
+      title: 'Надежные замки',
+      cover: '/images/catalog/adv_1.png',
+      alt: 'Надежные замки',
+    },
+    {
+      id: 'handles',
+      title: 'Износостойкие ручки',
+      cover: '/images/catalog/adv_2.png',
+      alt: 'Прочные ручки',
+    },
+    {
+      id: 'hinges',
+      title: 'Бесшумные петли',
+      cover: '/images/catalog/adv_3.png',
+      alt: 'Тихие петли',
+    },
+  ],
+};
+
 export const aboutStorySections: ITextSection[] = [
   {
     id: 1,

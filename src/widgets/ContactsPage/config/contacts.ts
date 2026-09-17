@@ -7,21 +7,19 @@ export interface ILocation {
   email?: string;
   mapUrl?: string;
   image?: string;
-  variant?: 'showroom' | 'office';
   messengers?: { label: string; href: string }[];
 }
 
 export const contactsPage = {
   title: 'Связаться с нами',
-  subtitle: 'Мы всегда рады помочь — выберите удобный способ связи',
+  subtitle: 'Мы на связи',
 };
 
 export const locations: ILocation[] = [
   {
     id: 'office',
-    title: 'Офис',
-    description:
-      'Производство и офис в Клину. Приезжайте по предварительной записи — обсудим проект, покажем образцы отделок и рассчитаем стоимость.',
+    title: 'Офис и производство',
+    description: 'Производство и офис в Клину. Работаем по предварительной записи.',
     address: [
       'ООО «ЛЕГИОН ДОРС»',
       'Московская область, г. Клин',
@@ -31,8 +29,7 @@ export const locations: ILocation[] = [
     phone: '+7 (999) 508-88-58',
     email: 'legiondoors@yandex.ru',
     mapUrl: 'https://yandex.ru/maps/?text=Клин%2C%20Лесопарковая%2086',
-    image: '/images/img5.jpg',
-    variant: 'showroom',
+    image: '/images/img6.jpg',
   },
   {
     id: 'field',
@@ -42,7 +39,7 @@ export const locations: ILocation[] = [
     address: ['Выезд замерщика и монтаж — по предварительной записи'],
     phone: '+7 (999) 508-88-58',
     email: 'legiondoors@yandex.ru',
-    variant: 'office',
+    image: '/images/img4.jpg',
     messengers: [
       { label: 'Telegram', href: 'https://t.me/' },
       { label: 'WhatsApp', href: 'https://wa.me/79995088858' },

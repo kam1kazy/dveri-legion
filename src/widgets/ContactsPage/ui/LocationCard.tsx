@@ -8,21 +8,8 @@ interface ILocationCardProps {
 }
 
 export const LocationCard = ({ location }: ILocationCardProps) => {
-  const variantClass =
-    location.variant === 'showroom' ? style['card--showroom'] : style['card--office'];
-
   return (
-    <article className={`${style.card} ${variantClass}`}>
-      {location.image && (
-        <Image
-          className={style.image}
-          src={location.image}
-          alt={location.title}
-          width={880}
-          height={660}
-        />
-      )}
-
+    <article className={style.card}>
       <div className={style.content}>
         <h3 className={style.title}>{location.title}</h3>
 
@@ -67,6 +54,16 @@ export const LocationCard = ({ location }: ILocationCardProps) => {
           </a>
         )}
       </div>
+
+      {location.image && (
+        <Image
+          className={style.image}
+          src={location.image}
+          alt={location.title}
+          width={880}
+          height={660}
+        />
+      )}
     </article>
   );
 };

@@ -1,4 +1,5 @@
 import { ContactForm } from '@/features/ContactForm';
+import { PageIntro } from '@/shared/ui/PageIntro';
 import { ContactArea } from '@/widgets/ContactArea/ContactArea';
 
 import { companyRequisites, contactsPage, locations } from './config/contacts';
@@ -9,22 +10,25 @@ export const ContactsPage = () => {
   return (
     <>
       <section className={style.page}>
-        <div className="container">
-          <header className={style.intro}>
-            <h1 className={style.title}>{contactsPage.title}</h1>
-            <p className={style.subtitle}>{contactsPage.subtitle}</p>
-          </header>
+        <div className={`container ${style.introWrap}`}>
+          <PageIntro title={contactsPage.title} description={contactsPage.subtitle} />
+        </div>
 
+        <div className="container">
           <div className={style.formSection}>
             <ContactForm />
           </div>
+        </div>
 
-          <div className={style.locations}>
-            {locations.map((location) => (
-              <LocationCard key={location.id} location={location} />
-            ))}
-          </div>
+        <div className={style.locations}>
+          {locations.map((location) => (
+            <div key={location.id} className="container">
+              <LocationCard location={location} />
+            </div>
+          ))}
+        </div>
 
+        <div className="container">
           <aside className={style.requisites}>
             <h2 className={style.requisitesTitle}>{companyRequisites.title}</h2>
             <dl className={style.requisitesList}>

@@ -2,68 +2,83 @@
 @use 'sass:map';
 
 .form {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 4rem;
-  align-items: start;
-
-  @include variable.media_queries(desktop) {
-    grid-template-columns: 180px 1fr;
-    gap: 2.5rem;
-  }
-
-  @include variable.media_queries(tablet) {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+  max-width: 46rem;
+  scroll-margin-top: 7rem;
 }
 
 .nav {
-  position: sticky;
-  top: 8rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  margin-bottom: 3.5rem;
 
-  @include variable.media_queries(tablet) {
-    display: none;
+  @include variable.media_queries(xx-small) {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.navList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 3.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include variable.media_queries(xx-small) {
+    gap: 1rem 2rem;
   }
 }
 
 .navLink {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
   font-size: 0.875rem;
   line-height: variable.$lh-text;
   color: map.get(variable.$theme-dark, 'default-70');
+  cursor: pointer;
   transition: color 0.3s;
 
-  &:hover {
+  &:hover:not(:disabled) {
     color: map.get(variable.$theme-dark, 'default');
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.55;
+  }
+
+  &--active {
+    color: map.get(variable.$theme-dark, 'default');
+  }
+
+  &:focus-visible {
+    outline: 2px solid map.get(variable.$theme-dark, 'input-border-focus');
+    outline-offset: 4px;
   }
 }
 
 .fields {
   display: flex;
   flex-direction: column;
-  gap: 3.5rem;
-  max-width: 720px;
+  gap: 2rem;
 }
 
 .section {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  scroll-margin-top: 7rem;
 }
 
 .sectionTitle {
-  display: none;
-  font-size: 1rem;
-  font-weight: variable.$fw-medium;
-  margin-bottom: 0.25rem;
-
-  @include variable.media_queries(tablet) {
-    display: block;
-  }
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .row {
@@ -83,6 +98,10 @@
   margin-top: 0.5rem;
 }
 
+.submit {
+  margin-top: 0.5rem;
+}
+
 .consentText {
   font-size: 0.8125rem;
   line-height: variable.$lh-text;
@@ -90,7 +109,7 @@
 }
 
 .success {
-  max-width: 720px;
+  max-width: 46rem;
   padding: 3rem 0;
   display: flex;
   flex-direction: column;

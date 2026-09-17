@@ -2,59 +2,39 @@
 @use 'sass:map';
 
 .page {
-  padding-top: 8rem;
-
-  @include variable.media_queries(desktop) {
-    padding-top: 6rem;
-  }
+  color: map.get(variable.$theme-light, 'on-default');
+  padding-bottom: 2rem;
 }
 
-.intro {
-  margin-bottom: 4.5rem;
-
-  @include variable.media_queries(xx-small) {
-    margin-bottom: 3rem;
-  }
-}
-
-.title {
-  font-size: calc(2rem + 1.2vw);
-  line-height: 1.15;
-  font-weight: variable.$fw-medium;
-  margin-bottom: 1rem;
+.introWrap {
+  padding-top: 4rem;
 
   @include variable.media_queries(tablet) {
-    font-size: calc(1.6rem + 1vw);
+    padding-top: 3rem;
   }
 
   @include variable.media_queries(xx-small) {
-    font-size: calc(1.4rem + 0.8vw);
+    padding-top: 2rem;
   }
-}
-
-.subtitle {
-  font-size: 0.875rem;
-  line-height: variable.$lh-text;
-  color: map.get(variable.$theme-dark, 'default-70');
 }
 
 .formSection {
-  margin-bottom: 7rem;
+  margin-bottom: 8rem;
 
   @include variable.media_queries(xx-small) {
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
   }
 }
 
 .locations {
   display: flex;
   flex-direction: column;
-  gap: 5rem;
-  margin-bottom: 4rem;
+  gap: 6.5rem;
+  margin-bottom: 5rem;
 
   @include variable.media_queries(xx-small) {
-    gap: 3rem;
-    margin-bottom: 2rem;
+    gap: 4rem;
+    margin-bottom: 3rem;
   }
 }
 

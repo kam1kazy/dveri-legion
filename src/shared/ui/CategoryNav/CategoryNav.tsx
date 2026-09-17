@@ -14,10 +14,17 @@ export interface ICategoryNav {
   items: ICategoryNavItem[];
   activeId?: string;
   onSelect?: (id: string) => void;
+  layout?: 'row' | 'stack';
   className?: string;
 }
 
-export const CategoryNav = ({ items, activeId, onSelect, className }: ICategoryNav) => {
+export const CategoryNav = ({
+  items,
+  activeId,
+  onSelect,
+  layout = 'row',
+  className,
+}: ICategoryNav) => {
   const handleClick = (item: ICategoryNavItem) => (event: React.MouseEvent<HTMLAnchorElement>) => {
     const href = item.href ?? `#${item.id}`;
 
@@ -32,7 +39,10 @@ export const CategoryNav = ({ items, activeId, onSelect, className }: ICategoryN
   };
 
   return (
-    <nav className={`${styles.nav} ${className ?? ''}`} aria-label="Категории">
+    <nav
+      className={`${styles.nav} ${layout === 'stack' ? styles.stack : styles.row} ${className ?? ''}`}
+      aria-label="Категории"
+    >
       <ul className={styles.list}>
         {items.map((item) => {
           const isActive = item.id === activeId;

@@ -13,20 +13,23 @@ import {
   aboutReasons,
   aboutStorySections,
 } from './config/about';
+import { DoorScene } from './ui/DoorScene';
 
 export const AboutPage = () => {
   return (
     <>
       <section className={style.hero}>
-        <div className="container">
-          <div className={style.heroWrapper}>
-            <p className={style.heroTitle}>{aboutHero.title}</p>
+        <div className={`container ${style.heroTitleWrap}`}>
+          <p className={style.heroTitle}>{aboutHero.title}</p>
+        </div>
 
-            <div className={style.heroLinks}>
-              {aboutHero.links.map((link) => (
-                <Button key={link.text} text={link.text} link={link.href} />
-              ))}
-            </div>
+        <DoorScene className={style.canvas} />
+
+        <div className={`container ${style.heroLinksWrap}`}>
+          <div className={style.heroLinks}>
+            {aboutHero.links.map((link) => (
+              <Button key={link.text} text={link.text} link={link.href} />
+            ))}
           </div>
         </div>
       </section>

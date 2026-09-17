@@ -24,7 +24,12 @@ export const CategoryPageShell = ({
     <div className={styles.shell}>
       <div className="container">
         <PageIntro title={title} description={description} />
-        <CategoryNav items={navItems} activeId={activeId} onSelect={onSelectCategory} />
+        <CategoryNav
+          items={navItems}
+          activeId={activeId}
+          onSelect={onSelectCategory}
+          layout="stack"
+        />
         <div className={styles.content}>{children}</div>
       </div>
     </div>

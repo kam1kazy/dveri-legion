@@ -25,7 +25,15 @@ interface ICollectionCarousel {
 }
 
 export const CollectionCarousel = ({ slides }: ICollectionCarousel) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [AutoScroll({ playOnInit: false })]);
+  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [
+    AutoScroll({
+      playOnInit: true,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+      // Пауза и при наведении на стрелки в шапке, не только на viewport
+      rootNode: (emblaRoot) => emblaRoot.closest(`.${styles.collection_carousel}`),
+    }),
+  ]);
 
   return (
     <section className="carousel">

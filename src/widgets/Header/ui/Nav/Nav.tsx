@@ -38,11 +38,11 @@ export const Nav = ({
         active={contentDropdown}
         collection={
           <CollectionDropdown
-            isActive={contentDropdown === 'collection'}
+            isActive={openDropdown === 'collection'}
             collections={collections}
           />
         }
-        about={<AboutDropdown isActive={contentDropdown === 'about'} />}
+        about={<AboutDropdown isActive={openDropdown === 'about'} />}
       />
     </div>
   );

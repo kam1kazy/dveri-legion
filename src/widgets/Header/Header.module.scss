@@ -3,16 +3,31 @@
 
 .header {
   position: sticky;
+  top: 0;
   height: 6rem;
   padding-top: 1rem;
   color: map.get(variable.$theme-dark, 'on-default');
   z-index: 1;
-  // overflow: hidden;
+  transition:
+    opacity 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    visibility 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, -100%, 0);
+    transition:
+      opacity 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53),
+      visibility 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53),
+      transform 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  }
 
   &.onLight {
     color: map.get(variable.$theme-light, 'on-default');
 
-    &:not(.lightTheme) {
+    &:not(.filled):not(.lightTheme) {
       &::after {
         opacity: 0;
         visibility: hidden;
@@ -39,11 +54,12 @@
 
       margin: 0 auto;
 
-      border-top-left-radius: 1rem;
-      border-top-right-radius: 1rem;
+      border-radius: 1rem;
 
       opacity: 0;
-      transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition:
+        opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        border-radius 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
       @include variable.media_queries(desktop-xs) {
         width: calc(100% - variable.$gutter);
@@ -175,11 +191,21 @@
     position: relative;
   }
 
+  &.filled {
+    color: map.get(variable.$theme-light, 'on-default');
+
+    .container::before {
+      opacity: 1;
+    }
+  }
+
   &.lightTheme {
     color: map.get(variable.$theme-light, 'on-default');
 
     .container::before {
       opacity: 1;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
     }
 
     &::after {
@@ -197,6 +223,7 @@
     z-index: -1;
   }
 
+  &.filled,
   &.lightTheme,
   &.shadowboxActive {
     z-index: 10;

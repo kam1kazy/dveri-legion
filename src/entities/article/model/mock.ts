@@ -1,12 +1,171 @@
 import type { Article, ArticleCategory } from './types';
 
 export const articleCategories: ArticleCategory[] = [
+  { id: 'promotions', title: 'Акции', slug: 'promotions' },
   { id: 'collections', title: 'Коллекции', slug: 'collections' },
   { id: 'tips', title: 'Советы', slug: 'tips' },
   { id: 'projects', title: 'Проекты', slug: 'projects' },
 ];
 
 export const articles: Article[] = [
+  {
+    id: 'promo-1',
+    slug: 'aktsiya-biometricheskie-zamki',
+    title: 'На биометрические замки',
+    excerpt: '10% скидка на двери с системами биометрического доступа.',
+    cover: '/images/promos/biometric.webp',
+    date: '2026-09-10',
+    categoryId: 'promotions',
+    isNew: true,
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Электронные и биометрические замки делают вход удобнее и безопаснее: отпечаток пальца, код или карта — без обычного ключа в кармане.',
+      },
+      {
+        type: 'heading',
+        text: 'Условия акции',
+      },
+      {
+        type: 'paragraph',
+        text: 'Скидка 10% действует на двери с системами биометрического доступа. Размер скидки фиксируется в договоре при оформлении заказа.',
+      },
+      {
+        type: 'image',
+        src: '/images/promos/biometric.webp',
+        alt: 'Биометрический замок на входной двери',
+      },
+      {
+        type: 'heading',
+        text: 'Как воспользоваться',
+      },
+      {
+        type: 'paragraph',
+        text: 'Выберите модель с биометрией в каталоге или на замере — менеджер подскажет совместимые комплекты и рассчитает итоговую стоимость со скидкой.',
+      },
+    ],
+  },
+  {
+    id: 'promo-2',
+    slug: 'aktsiya-ot-dvuh-dverey',
+    title: 'При заказе от 2 дверей',
+    excerpt: 'Скидка 8% на весь заказ при покупке двух и более дверей.',
+    cover: '/images/promos/two-doors.webp',
+    date: '2026-09-08',
+    categoryId: 'promotions',
+    isNew: true,
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Если нужна дверь в квартиру и на этаж, в дом и в котельную или несколько входных групп на объект — выгоднее оформить всё одним заказом.',
+      },
+      {
+        type: 'heading',
+        text: 'Условия акции',
+      },
+      {
+        type: 'paragraph',
+        text: 'При покупке двух и более дверей действует скидка 8% на весь заказ. Модели могут быть из разных коллекций.',
+      },
+      {
+        type: 'image',
+        src: '/images/promos/two-doors.webp',
+        alt: 'Входные двери Legion',
+      },
+      {
+        type: 'paragraph',
+        text: 'Скидка суммируется с условиями договора и согласовывается до оплаты. Подробности уточняйте у менеджера при расчёте сметы.',
+      },
+    ],
+  },
+  {
+    id: 'promo-3',
+    slug: 'aktsiya-pensioneram',
+    title: 'Пенсионерам',
+    excerpt: 'Дополнительная скидка 5% при предъявлении пенсионного удостоверения.',
+    cover: '/images/promos/pensioners.webp',
+    date: '2026-09-06',
+    categoryId: 'promotions',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Для пенсионеров действует дополнительная скидка 5% на входные двери Legion — чтобы обновление входа было спокойнее для бюджета.',
+      },
+      {
+        type: 'heading',
+        text: 'Как получить скидку',
+      },
+      {
+        type: 'paragraph',
+        text: 'При оформлении договора предъявите пенсионное удостоверение. Скидка фиксируется в документах и применяется к выбранной конфигурации.',
+      },
+      {
+        type: 'image',
+        src: '/images/promos/pensioners.webp',
+        alt: 'Акция для пенсионеров',
+      },
+    ],
+  },
+  {
+    id: 'promo-4',
+    slug: 'aktsiya-uchastnikam-svo',
+    title: 'Участникам СВО',
+    excerpt: 'Мы уважаем ваш труд — предоставляем 7% скидку на все модели.',
+    cover: '/images/promos/svo.webp',
+    date: '2026-09-05',
+    categoryId: 'promotions',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Участникам СВО и их семьям предоставляем скидку 7% на все модели входных дверей Legion.',
+      },
+      {
+        type: 'heading',
+        text: 'Условия',
+      },
+      {
+        type: 'paragraph',
+        text: 'Скидка действует при предъявлении подтверждающих документов при заключении договора. Менеджер поможет подобрать конфигурацию под проём и бюджет.',
+      },
+      {
+        type: 'image',
+        src: '/images/promos/svo.webp',
+        alt: 'Акция для участников СВО',
+      },
+    ],
+  },
+  {
+    id: 'promo-5',
+    slug: 'aktsiya-novosele',
+    title: 'Скидка на новоселье',
+    excerpt: 'Получите 5% при покупке двери в новый дом или квартиру.',
+    cover: '/images/promos/housewarming.webp',
+    date: '2026-09-03',
+    categoryId: 'promotions',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Новоселье — хороший момент поставить надёжную входную дверь сразу, без компромиссов по теплу и безопасности.',
+      },
+      {
+        type: 'heading',
+        text: 'Условия акции',
+      },
+      {
+        type: 'paragraph',
+        text: 'Скидка 5% действует при покупке двери в новый дом или квартиру. Подтверждение новоселья согласуется с менеджером при оформлении заказа.',
+      },
+      {
+        type: 'image',
+        src: '/images/promos/housewarming.webp',
+        alt: 'Скидка на новоселье',
+      },
+      {
+        type: 'paragraph',
+        text: 'Можно совместить с бесплатным замером: специалист приедет на объект, снимет размеры и поможет выбрать модель под проём.',
+      },
+    ],
+  },
   {
     id: '1',
     slug: '50-let-legion',

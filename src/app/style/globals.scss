@@ -2,6 +2,10 @@
 @use './normalize.css' as *;
 @use 'sass:map';
 
+:root {
+  --header-offset: 6rem;
+}
+
 * {
   box-sizing: border-box;
 }

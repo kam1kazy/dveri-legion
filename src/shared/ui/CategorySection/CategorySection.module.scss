@@ -8,17 +8,15 @@
   row-gap: 1.75rem;
   align-items: start;
   padding: 4.5rem 0 3rem;
-  scroll-margin-top: 7rem;
+  scroll-margin-top: calc(var(--header-offset, 6rem) + 1rem);
 
   @include variable.media_queries(tablet) {
     grid-template-columns: 1fr;
     padding: 3rem 0 2rem;
-    scroll-margin-top: 6.5rem;
   }
 
   @include variable.media_queries(xx-small) {
     padding: 2.5rem 0 1.75rem;
-    scroll-margin-top: 6rem;
     row-gap: 1.25rem;
   }
 

@@ -5,11 +5,13 @@ import style from './SideLinks.module.scss';
 const addLinks: IButton[] = [
   {
     id: 1,
-    text: 'Визуализация в 3D',
+    text: 'Вызвать замерщика',
+    link: '/contacts',
   },
   {
     id: 2,
-    text: 'Собрать свою дверь',
+    text: 'Подобрать дверь',
+    link: '/catalog',
     filled: true,
     icon: {
       src: '/images/icons/setting.svg',

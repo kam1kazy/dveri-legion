@@ -44,7 +44,9 @@ export const TextSection = (props: ITextSection) => {
         >
           <div className={style['about_text__content-wrapper']}>
             <h3>{props.title}</h3>
-            <p>{props.description}</p>
+            {props.description.split(/\n\n+/).map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
 
             {props.button?.text && (
               <Button

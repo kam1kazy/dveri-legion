@@ -29,7 +29,12 @@ export const PromoSection = () => {
                 {promo.title}
               </p>
 
-              <Button text="Посмотреть коллекцию" className={style.button_position} filled>
+              <Button
+                text="Посмотреть коллекцию"
+                className={style.button_position}
+                filled
+                link="/catalog"
+              >
                 <ArrowRightIcon />
               </Button>
             </div>

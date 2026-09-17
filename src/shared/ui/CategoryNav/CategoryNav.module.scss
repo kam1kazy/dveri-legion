@@ -6,16 +6,7 @@
 }
 
 .row {
-  position: sticky;
-  top: 6rem;
-  z-index: 5;
   padding: 1rem 0;
-  background: map.get(variable.$theme-light, 'default');
-  background-image: url(/images/noise.png);
-
-  @include variable.media_queries(desktop-xs) {
-    top: 5rem;
-  }
 
   .list {
     display: flex;
@@ -30,6 +21,15 @@
       gap: 0.5rem;
     }
   }
+}
+
+.sticky {
+  position: sticky;
+  top: var(--header-offset, 6rem);
+  z-index: 5;
+  background: map.get(variable.$theme-light, 'default');
+  background-image: url(/images/noise.png);
+  transition: top 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
 }
 
 .stack {

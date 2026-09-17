@@ -1,12 +1,14 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 
 import type { DoorCollectionPreview } from '@/entities/door';
 import { Logo } from '@/shared/ui/Logo/Logo';
 
 import style from './Header.module.scss';
 import { useHeaderMenu } from './model/useHeaderMenu';
+import { useHeaderScroll } from './model/useHeaderScroll';
 import { MobileMenu } from './ui/MobileMenu/MobileMenu';
 import { Nav } from './ui/Nav/Nav';
 
@@ -18,6 +20,7 @@ interface IHeader {
 }
 
 const LIGHT_PATHS = ['/faq', '/contacts', '/documents', '/blog', '/gallery', '/buyers', '/catalog'];
+const HEADER_OFFSET = '6rem';
 
 const isLightPath = (pathname: string) =>
   LIGHT_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`));
@@ -35,14 +38,37 @@ export const Header = ({ collections, variant }: IHeader) => {
     toggleMobile,
   } = useHeaderMenu();
 
+  const menuOpen = isLight || isMobileOpen;
+  const { isHidden, isFilled } = useHeaderScroll(!menuOpen);
+
   const isOnLight = variant === 'onLight' || (variant === undefined && isLightPath(pathname));
-  const showLightChrome = isLight || isMobileOpen;
-  const logoInverted = isOnLight || isLight;
-  const navIsLight = isOnLight || isLight;
+  const showFilled = isFilled || menuOpen;
+  const showOverlay = menuOpen;
+  const hideHeader = isHidden && !menuOpen;
+  const logoInverted = isOnLight || showFilled;
+  const navIsLight = isOnLight || showFilled;
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.style.setProperty('--header-offset', hideHeader ? '0rem' : HEADER_OFFSET);
+
+    return () => {
+      root.style.setProperty('--header-offset', HEADER_OFFSET);
+    };
+  }, [hideHeader]);
 
   return (
     <header
-      className={`${style.header} ${isOnLight ? style.onLight : ''} ${showLightChrome ? style.lightTheme : ''} ${isMobileOpen ? style.shadowboxActive : ''}`}
+      className={[
+        style.header,
+        isOnLight ? style.onLight : '',
+        showFilled ? style.filled : '',
+        showOverlay ? style.lightTheme : '',
+        isMobileOpen ? style.shadowboxActive : '',
+        hideHeader ? style.hidden : '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
       onMouseEnter={keepOpen}
       onMouseLeave={close}
     >

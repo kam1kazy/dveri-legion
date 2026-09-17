@@ -3,6 +3,7 @@ import './style/globals.scss';
 import type { Metadata } from 'next';
 
 import { getCollectionPreviews } from '@/entities/door';
+import { Footer } from '@/widgets/Footer';
 import { Header } from '@/widgets/Header';
 
 import { suisseIntl } from './fonts';
@@ -28,6 +29,7 @@ export default function RootLayout({
       <body className={`background-noise ${suisseIntl.variable} `}>
         <Header collections={getCollectionPreviews()} />
         {children}
+        <Footer />
       </body>
     </html>
   );

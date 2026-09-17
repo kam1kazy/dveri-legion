@@ -3,7 +3,7 @@
 import type { EmblaOptionsType } from 'embla-carousel';
 import AutoScroll from 'embla-carousel-auto-scroll';
 import useEmblaCarousel from 'embla-carousel-react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import type { ICollectionNavItem } from '../../../config/collections';
 import styles from './DropdownCarousel.module.scss';
@@ -17,6 +17,9 @@ const OPTIONS: EmblaOptionsType = {
   skipSnaps: false,
 };
 
+/** Ждём окончания анимации высоты дропдауна, иначе Embla resize сбрасывает скролл. */
+const OPEN_ANIMATION_MS = 600;
+
 interface IDropdownCarousel {
   items: ICollectionNavItem[];
   hoveredId: string | null;
@@ -24,31 +27,62 @@ interface IDropdownCarousel {
 }
 
 export const DropdownCarousel = ({ items, hoveredId, isActive }: IDropdownCarousel) => {
+  const wasActiveRef = useRef(false);
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [
     AutoScroll({
       playOnInit: false,
       speed: 0.7,
+      startDelay: 0,
       stopOnInteraction: false,
       stopOnMouseEnter: false,
       stopOnFocusIn: false,
     }),
   ]);
 
+  const slidesKey = items.map((item) => item.id).join(',');
+
   useEffect(() => {
     if (!emblaApi) {
       return;
     }
 
-    const autoScroll = emblaApi.plugins().autoScroll;
-
-    if (isActive) {
-      emblaApi.reInit();
-      autoScroll?.play();
+    if (!isActive || items.length === 0) {
+      emblaApi.plugins().autoScroll?.stop();
+      wasActiveRef.current = false;
       return;
     }
 
-    autoScroll?.stop();
-  }, [emblaApi, isActive]);
+    let cancelled = false;
+    const delay = wasActiveRef.current ? 0 : OPEN_ANIMATION_MS;
+    wasActiveRef.current = true;
+
+    const ensurePlaying = () => {
+      if (cancelled) {
+        return;
+      }
+      const autoScroll = emblaApi.plugins().autoScroll;
+      if (autoScroll && !autoScroll.isPlaying()) {
+        autoScroll.play(0);
+      }
+    };
+
+    const startTimer = window.setTimeout(() => {
+      emblaApi.reInit();
+      ensurePlaying();
+    }, delay);
+
+    // Resize при анимации высоты дропдауна пересоздаёт плагин и глушит AutoScroll.
+    const watchdog = window.setInterval(ensurePlaying, 400);
+    emblaApi.on('reInit', ensurePlaying);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(startTimer);
+      window.clearInterval(watchdog);
+      emblaApi.off('reInit', ensurePlaying);
+      emblaApi.plugins().autoScroll?.stop();
+    };
+  }, [emblaApi, isActive, items.length, slidesKey]);
 
   const hovered = items.find((item) => item.id === hoveredId);
 

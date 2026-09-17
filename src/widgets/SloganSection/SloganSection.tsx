@@ -4,15 +4,15 @@ import style from './SloganSection.module.scss';
 
 export const SloganSection = () => {
   return (
-    <section className={style.slogan}>
+    <section className={style.slogan} data-header-top-zone>
       <div className="container">
         <div className={style.wrapper}>
           <h3>
-            Искусство создания теплых
+            ЛЕГИОН — современные
             <br />
-            моментов: совершенство Hugge
+            входные двери: надёжность,
             <br />
-            на вашем пороге
+            стиль и тепло в каждом доме
           </h3>
 
           <div className={style.arrow_down}>

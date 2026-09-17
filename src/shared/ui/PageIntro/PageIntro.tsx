@@ -8,7 +8,7 @@ export interface IPageIntro {
 
 export const PageIntro = ({ title, description, className }: IPageIntro) => {
   return (
-    <div className={`${styles.intro} ${className ?? ''}`}>
+    <div className={`${styles.intro} ${className ?? ''}`} data-header-top-zone>
       <h1 className={styles.title}>{title}</h1>
       {description && <p className={styles.description}>{description}</p>}
     </div>

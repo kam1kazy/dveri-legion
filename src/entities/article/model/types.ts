@@ -1,4 +1,4 @@
-export type ArticleCategoryId = 'collections' | 'tips' | 'projects';
+export type ArticleCategoryId = 'promotions' | 'collections' | 'tips' | 'projects';
 
 export interface ArticleCategory {
   id: ArticleCategoryId;

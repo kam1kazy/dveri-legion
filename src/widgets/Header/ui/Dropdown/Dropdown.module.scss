@@ -10,8 +10,8 @@ $ease-in: cubic-bezier(0.55, 0.085, 0.68, 0.53);
   top: 59px;
 
   height: 0;
-  width: calc(100% + variable.$gutter);
-  left: calc((variable.$gutter / 2) * -1);
+  width: 100%;
+  left: 0;
 
   background: map.get(variable.$theme-light, 'default');
   color: map.get(variable.$theme-light, 'on-default');

@@ -15,6 +15,7 @@ export interface ICategoryNav {
   activeId?: string;
   onSelect?: (id: string) => void;
   layout?: 'row' | 'stack';
+  sticky?: boolean;
   className?: string;
 }
 
@@ -23,6 +24,7 @@ export const CategoryNav = ({
   activeId,
   onSelect,
   layout = 'row',
+  sticky = true,
   className,
 }: ICategoryNav) => {
   const handleClick = (item: ICategoryNavItem) => (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -40,7 +42,9 @@ export const CategoryNav = ({
 
   return (
     <nav
-      className={`${styles.nav} ${layout === 'stack' ? styles.stack : styles.row} ${className ?? ''}`}
+      className={`${styles.nav} ${layout === 'stack' ? styles.stack : styles.row} ${
+        layout === 'row' && sticky ? styles.sticky : ''
+      } ${className ?? ''}`}
       aria-label="Категории"
     >
       <ul className={styles.list}>

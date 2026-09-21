@@ -37,10 +37,7 @@ export const Nav = ({
         isOpen={openDropdown !== null}
         active={contentDropdown}
         collection={
-          <CollectionDropdown
-            isActive={openDropdown === 'collection'}
-            collections={collections}
-          />
+          <CollectionDropdown isActive={openDropdown === 'collection'} collections={collections} />
         }
         about={<AboutDropdown isActive={openDropdown === 'about'} />}
       />

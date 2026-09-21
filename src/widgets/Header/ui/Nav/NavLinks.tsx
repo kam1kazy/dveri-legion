@@ -17,15 +17,8 @@ export const NavLinks = ({ activeId, onOpen }: INavLinks) => {
             key={item.id}
             className={item.id === activeId ? styles.isOpen : undefined}
             onMouseEnter={() => onOpen(item.id)}
-            onClick={() => onOpen(item.id)}
           >
-            <Link
-              text={item.text}
-              href={item.href}
-              onClick={(event) => {
-                event.preventDefault();
-              }}
-            />
+            <Link text={item.text} href={item.href} />
           </li>
         ))}
       </ul>

@@ -1,10 +1,11 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useMemo, useState, type ReactNode } from 'react';
+import { type ReactNode, useMemo, useState } from 'react';
 
 import type { DoorCollectionId, DoorListItem } from '@/entities/door';
 import {
+  ALL_DOORS_EDITORIAL,
   catalog,
   COLLECTIONS,
   DoorCard,
@@ -14,6 +15,7 @@ import {
   FILTER_GROUPS,
   FILTER_HINTS,
   formatPrice,
+  getCollectionPriceRange,
   matchesFilter,
   priceBounds,
 } from '@/entities/door';
@@ -142,16 +144,43 @@ export const Catalog = () => {
 
   const navItems = useMemo(
     () => [
-      { id: 'all', label: `Все двери · ${doors.length}` },
+      { id: 'all', label: `Все двери · ${doors.length}`, href: '/catalog' },
       ...COLLECTIONS.map((item) => ({
         id: item.id,
         label: `${item.label} · ${doors.filter((door) => doorCollections(door).includes(item.id)).length}`,
+        href: `/catalog?collection=${item.id}`,
       })),
     ],
     []
   );
 
   const activeCollection = COLLECTIONS.find((item) => item.id === collection);
+  const editorial = activeCollection
+    ? {
+        eyebrow: activeCollection.eyebrow,
+        headline: activeCollection.headline,
+        audience: activeCollection.audience,
+        criteria: activeCollection.criteria,
+        suggestedFilter: activeCollection.suggestedFilter,
+        stats: getCollectionPriceRange(activeCollection.id),
+      }
+    : {
+        eyebrow: ALL_DOORS_EDITORIAL.eyebrow,
+        headline: ALL_DOORS_EDITORIAL.headline,
+        audience: ALL_DOORS_EDITORIAL.audience,
+        criteria: [...ALL_DOORS_EDITORIAL.criteria],
+        suggestedFilter: undefined,
+        stats: {
+          count: doors.length,
+          min: priceBounds.min || null,
+          max: priceBounds.max || null,
+        },
+      };
+
+  const applySuggestedFilter = (filterId: string) => {
+    setActiveFilters((current) => (current.includes(filterId) ? current : [...current, filterId]));
+    setFiltersOpen(true);
+  };
 
   const selectCollection = (id: string) => {
     const query = id === 'all' ? '/catalog' : `/catalog?collection=${id}`;
@@ -292,7 +321,48 @@ export const Catalog = () => {
         </div>
 
         <div className={`container ${styles.container}`}>
-          {activeCollection && <p className={styles.lead}>{activeCollection.description}</p>}
+          <div className={styles.editorial}>
+            <p className={styles.editorialEyebrow}>{editorial.eyebrow}</p>
+            <h2 className={styles.editorialHeadline}>{editorial.headline}</h2>
+            <p className={styles.editorialAudience}>{editorial.audience}</p>
+
+            <div className={styles.editorialMeta}>
+              <div className={styles.editorialStats}>
+                <div>
+                  <span className={styles.statValue}>{editorial.stats.count}</span>
+                  <span className={styles.statLabel}>
+                    {plural(editorial.stats.count, 'модель', 'модели', 'моделей')}
+                  </span>
+                </div>
+                {editorial.stats.min !== null && editorial.stats.max !== null && (
+                  <div>
+                    <span className={styles.statValue}>
+                      {formatPrice(editorial.stats.min)} — {formatPrice(editorial.stats.max)}
+                    </span>
+                    <span className={styles.statLabel}>диапазон цен</span>
+                  </div>
+                )}
+              </div>
+
+              <div className={styles.editorialCriteria}>
+                <p className={styles.criteriaTitle}>На что смотреть</p>
+                <ul>
+                  {editorial.criteria.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                {editorial.suggestedFilter && (
+                  <button
+                    type="button"
+                    className={styles.suggestedFilter}
+                    onClick={() => applySuggestedFilter(editorial.suggestedFilter!.id)}
+                  >
+                    Добавить фильтр: {editorial.suggestedFilter.label}
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
 
           <div className={styles.toolbar}>
             <button
@@ -392,7 +462,13 @@ export const Catalog = () => {
                 'Сегмент',
                 <ul className={styles.checks}>
                   {PRICE_TIERS.map((tier) =>
-                    renderCheck(tier, tier, tiers.includes(tier), () => toggleTier(tier), `tier-${tier}`)
+                    renderCheck(
+                      tier,
+                      tier,
+                      tiers.includes(tier),
+                      () => toggleTier(tier),
+                      `tier-${tier}`
+                    )
                   )}
                 </ul>
               )}

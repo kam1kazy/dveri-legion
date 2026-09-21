@@ -1,3 +1,5 @@
+import NextLink from 'next/link';
+
 import { Image } from '@/shared/ui/Image/Image';
 
 import type { ICollectionNavItem } from '../../../config/collections';
@@ -9,7 +11,7 @@ interface IDropdownSlide {
 
 export const DropdownSlide = ({ item }: IDropdownSlide) => {
   return (
-    <div className={styles.slide}>
+    <NextLink href={item.href} className={styles.slide}>
       <div className={styles.slideInner}>
         <Image
           className={styles.slideImage}
@@ -20,6 +22,6 @@ export const DropdownSlide = ({ item }: IDropdownSlide) => {
         />
         <p className={styles.slideTitle}>{item.title}</p>
       </div>
-    </div>
+    </NextLink>
   );
 };

@@ -6,12 +6,7 @@ import { ArrowRightIcon } from '@/shared/ui/Icons';
 import { Image } from '@/shared/ui/Image/Image';
 import { Link } from '@/shared/ui/Link';
 
-import {
-  footerBottomLinks,
-  footerFeedback,
-  footerMenu,
-  footerParallax,
-} from './config/footer';
+import { footerBottomLinks, footerFeedback, footerMenu, footerParallax } from './config/footer';
 import styles from './Footer.module.scss';
 
 export const Footer = () => {
@@ -61,7 +56,11 @@ export const Footer = () => {
               <p className={styles.copyright}>
                 Этот веб-сайт защищён reCAPTCHA и{' '}
                 <a href="/documents">Политика конфиденциальности</a>, а также{' '}
-                <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://policies.google.com/terms"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Условия использования
                 </a>{' '}
                 Google.
@@ -73,12 +72,7 @@ export const Footer = () => {
         <div className={styles.wrapper}>
           <div className={styles.logo}>
             <NextLink href="/">
-              <Image
-                src="/images/logo_legion-light.svg"
-                alt="Legion"
-                width={100}
-                height={55}
-              />
+              <Image src="/images/logo_legion-light.svg" alt="Legion" width={100} height={55} />
             </NextLink>
           </div>
 

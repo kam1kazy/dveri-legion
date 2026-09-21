@@ -34,25 +34,6 @@ export const AboutPage = () => {
         </div>
       </section>
 
-      <section className={`${style.catalogBlock} ${style.art}`}>
-        <div className="container">
-          <div className={style.artWrapper}>
-            <div className={style.artContent}>
-              <p>
-                {aboutArt.lead}
-                <br />
-                <br />
-                <strong>{aboutArt.accent}</strong> {aboutArt.rest}
-              </p>
-            </div>
-
-            <figure className={style.artFigure}>
-              <Image src={aboutArt.cover} alt={aboutArt.alt} width={1600} height={900} />
-            </figure>
-          </div>
-        </div>
-      </section>
-
       <section className={`${style.catalogBlock} ${style.harmony}`}>
         <div className="container">
           <p className={style.harmonyLead}>
@@ -72,6 +53,25 @@ export const AboutPage = () => {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={`${style.catalogBlock} ${style.art}`}>
+        <div className="container">
+          <div className={style.artWrapper}>
+            <figure className={style.artFigure}>
+              <Image src={aboutArt.cover} alt={aboutArt.alt} width={1600} height={900} />
+            </figure>
+            
+            <div className={style.artContent}>
+              <p>
+                {aboutArt.lead}
+                <br />
+                <br />
+                <strong>{aboutArt.accent}</strong> {aboutArt.rest}
+              </p>
+            </div>
           </div>
         </div>
       </section>

@@ -26,7 +26,7 @@
 
 .description {
   margin: 0;
-  @include variable.responsive-font-size;
   line-height: variable.$lh-text-second;
   color: map.get(variable.$theme-dark, 'default-70');
+  @include variable.responsive-font-size;
 }

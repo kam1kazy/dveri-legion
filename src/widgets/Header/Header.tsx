@@ -34,6 +34,7 @@ export const Header = ({ collections, variant }: IHeader) => {
     isLight,
     open,
     close,
+    closeNow,
     keepOpen,
     toggleMobile,
   } = useHeaderMenu();
@@ -71,6 +72,11 @@ export const Header = ({ collections, variant }: IHeader) => {
         .join(' ')}
       onMouseEnter={keepOpen}
       onMouseLeave={close}
+      onClick={(event) => {
+        if ((event.target as HTMLElement).closest('a')) {
+          closeNow();
+        }
+      }}
     >
       <div className={`container ${style.container}`}>
         <div className={style.wrapper}>

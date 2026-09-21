@@ -11,8 +11,8 @@ export const AboutSection = () => {
     <>
       {measurement && <TextSection {...measurement} key={measurement.id} />}
       <SaleSection />
-      {configurations && <TextSection {...configurations} key={configurations.id} />}
       <PromotionsCarousel />
+      {configurations && <TextSection {...configurations} key={configurations.id} />}
       {expertise && <TextSection {...expertise} key={expertise.id} />}
     </>
   );

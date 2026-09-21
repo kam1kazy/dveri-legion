@@ -2,11 +2,15 @@
 @use 'sass:map';
 
 .slide {
+  display: block;
+  height: 100%;
   background-color: #f6f6f6;
   border-radius: 0.75rem;
   padding: 4.0375rem 1.8125rem 3.125rem;
   overflow: hidden;
   position: relative;
+  color: inherit;
+  text-decoration: none;
 
   @include variable.media_queries(x-small) {
     padding: 3.4375rem 2.7125rem 2.125rem;
@@ -30,12 +34,23 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        gap: 0.5rem;
         border-radius: 0.75rem;
         margin: auto;
+        background: map.get(variable.$theme-light, 'on-default');
+        color: map.get(variable.$theme-light, 'default');
+        font-size: 0.875rem;
         transition:
           opacity 0.3s ease-in-out,
           background-color 0.3s;
         opacity: 0;
+
+        svg {
+          width: 20px;
+          height: 20px;
+          filter: invert(97%) sepia(19%) saturate(0%) hue-rotate(299deg) brightness(101%)
+            contrast(103%);
+        }
       }
 
       &-color {

@@ -10,11 +10,11 @@ export const navLinks: INavLink[] = [
   {
     id: 'collection',
     text: 'Коллекции',
-    href: '#',
+    href: '/catalog',
   },
   {
     id: 'about',
     text: 'Узнать больше',
-    href: '#',
+    href: '/about',
   },
 ];

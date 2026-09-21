@@ -26,8 +26,8 @@
 
     p {
       margin-bottom: 2.9375rem;
-      @include variable.responsive-font-size;
       line-height: variable.$lh-text-second;
+      @include variable.responsive-font-size;
     }
   }
 }

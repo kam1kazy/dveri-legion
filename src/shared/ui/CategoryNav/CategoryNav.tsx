@@ -28,16 +28,21 @@ export const CategoryNav = ({
   className,
 }: ICategoryNav) => {
   const handleClick = (item: ICategoryNavItem) => (event: React.MouseEvent<HTMLAnchorElement>) => {
-    const href = item.href ?? `#${item.id}`;
+    if (!onSelect || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      return;
+    }
 
-    if (onSelect && href.startsWith('#')) {
-      event.preventDefault();
+    const href = item.href ?? `#${item.id}`;
+    event.preventDefault();
+
+    if (href.startsWith('#')) {
       const target = document.getElementById(item.id);
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-      onSelect(item.id);
     }
+
+    onSelect(item.id);
   };
 
   return (

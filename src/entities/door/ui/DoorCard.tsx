@@ -1,67 +1,56 @@
 import NextImage from 'next/image';
 import NextLink from 'next/link';
 
-import { CATEGORY_LABELS, doorImage, FLAG_LABELS, formatPrice } from '../model/catalog';
-import type { DoorFlagId, DoorListItem } from '../model/types';
+import { doorImage, formatPrice } from '../model/catalog';
+import { getDoorBenefits, getDoorEditorialTitle, getDoorMarker } from '../model/presentation';
+import type { DoorListItem } from '../model/types';
 import styles from './DoorCard.module.scss';
 
 interface DoorCardProps {
   door: DoorListItem;
 }
 
-const CARD_FLAGS: Array<Exclude<DoorFlagId, 'apartment' | 'house'>> = [
-  'mirror',
-  'thermalBreak',
-  'electronicLock',
-  'hiddenHinges',
-];
-
 export const DoorCard = ({ door }: DoorCardProps) => {
   const outer = doorImage(door, 'outer');
   const inner = doorImage(door, 'inner');
   const hasInner = inner !== outer;
-  const categories: Array<'apartment' | 'house'> = [];
-
-  if (door.categories.apartment) {
-    categories.push('apartment');
-  }
-
-  if (door.categories.house) {
-    categories.push('house');
-  }
-
-  const flags = CARD_FLAGS.filter((flag) => door.flags.includes(flag));
+  const title = getDoorEditorialTitle(door);
+  const marker = getDoorMarker(door);
+  const benefits = getDoorBenefits(door, 3);
 
   return (
     <NextLink href={`/catalog/${door.slug}`} className={styles.card}>
       <div className={styles.media}>
-        <NextImage src={outer} alt={door.name} width={400} height={800} className={styles.photo} />
+        <NextImage src={outer} alt={door.name} width={480} height={960} className={styles.photo} />
         {hasInner && (
           <NextImage
             src={inner}
             alt=""
-            width={400}
-            height={800}
+            width={480}
+            height={960}
             className={`${styles.photo} ${styles.inner}`}
           />
         )}
+        <span className={styles.marker}>{marker}</span>
         {hasInner && <span className={styles.hint}>снаружи / внутри</span>}
+        <span className={styles.details}>Смотреть детали</span>
       </div>
+
       <div className={styles.body}>
         <p className={styles.series}>{door.series}</p>
-        <h3 className={styles.title}>{door.name.replace(door.series, '').trim()}</h3>
-        <div className={styles.tags}>
-          {categories.map((id) => (
-            <span key={id} className={styles.tag}>
-              {CATEGORY_LABELS[id]}
-            </span>
-          ))}
-          {flags.map((flag) => (
-            <span key={flag} className={styles.tagMuted}>
-              {FLAG_LABELS[flag]}
-            </span>
-          ))}
-        </div>
+        <h3 className={styles.title}>{title}</h3>
+
+        {benefits.length > 0 && (
+          <ul className={styles.benefits}>
+            {benefits.map((benefit) => (
+              <li key={benefit.id}>
+                <span className={styles.benefitLabel}>{benefit.label}</span>
+                <span className={styles.benefitDetail}>{benefit.detail}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
         <p className={styles.price}>{formatPrice(door.price, door.currency)}</p>
       </div>
     </NextLink>

@@ -59,8 +59,7 @@ export const InfoHint = ({ label, description, pros, cons, className }: InfoHint
       const placement: 'top' | 'bottom' =
         spaceBelow < height + gap && trigger.top > height + gap ? 'top' : 'bottom';
 
-      const top =
-        placement === 'bottom' ? trigger.bottom + gap : trigger.top - height - gap;
+      const top = placement === 'bottom' ? trigger.bottom + gap : trigger.top - height - gap;
 
       setCoords({ top, left, placement });
     };

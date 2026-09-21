@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import type { DropdownId } from '../config/nav';
@@ -7,10 +8,12 @@ import type { DropdownId } from '../config/nav';
 const CLOSE_DELAY_MS = 160;
 
 export const useHeaderMenu = () => {
+  const pathname = usePathname();
   const [openDropdown, setOpenDropdown] = useState<DropdownId | null>(null);
   const [contentDropdown, setContentDropdown] = useState<DropdownId | null>(null);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lockOpen = useRef(false);
 
   const clearCloseTimer = useCallback(() => {
     if (closeTimer.current) {
@@ -21,6 +24,10 @@ export const useHeaderMenu = () => {
 
   const open = useCallback(
     (id: DropdownId) => {
+      if (lockOpen.current) {
+        return;
+      }
+
       clearCloseTimer();
       setOpenDropdown(id);
       setContentDropdown(id);
@@ -29,10 +36,15 @@ export const useHeaderMenu = () => {
   );
 
   const keepOpen = useCallback(() => {
+    if (lockOpen.current) {
+      return;
+    }
+
     clearCloseTimer();
   }, [clearCloseTimer]);
 
   const close = useCallback(() => {
+    lockOpen.current = false;
     clearCloseTimer();
     closeTimer.current = setTimeout(() => {
       setOpenDropdown(null);
@@ -40,9 +52,25 @@ export const useHeaderMenu = () => {
     }, CLOSE_DELAY_MS);
   }, [clearCloseTimer]);
 
+  const collapse = useCallback(() => {
+    clearCloseTimer();
+    setOpenDropdown(null);
+    setContentDropdown(null);
+    setIsMobileOpen(false);
+  }, [clearCloseTimer]);
+
+  const closeNow = useCallback(() => {
+    lockOpen.current = true;
+    collapse();
+  }, [collapse]);
+
   const toggleMobile = useCallback(() => {
     setIsMobileOpen((prev) => !prev);
   }, []);
+
+  useEffect(() => {
+    collapse();
+  }, [pathname, collapse]);
 
   useEffect(() => {
     return () => {
@@ -57,6 +85,7 @@ export const useHeaderMenu = () => {
     isLight: openDropdown !== null,
     open,
     close,
+    closeNow,
     keepOpen,
     toggleMobile,
   };

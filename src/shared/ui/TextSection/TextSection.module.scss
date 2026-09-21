@@ -138,10 +138,10 @@
 
     p {
       width: 570px;
-      @include variable.responsive-font-size;
       margin-bottom: 2.25rem;
       font-weight: variable.$fw-normal;
       line-height: variable.$lh-text-second;
+      @include variable.responsive-font-size;
 
       @include variable.media_queries(desktop) {
         width: 510px;

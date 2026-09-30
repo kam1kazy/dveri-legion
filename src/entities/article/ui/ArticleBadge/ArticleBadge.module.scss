@@ -1,0 +1,15 @@
+@use '../../../../app/style/variable' as variable;
+@use 'sass:map';
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid map.get(variable.$theme-dark, 'input-border');
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: variable.$fw-medium;
+  line-height: 1.2;
+  color: map.get(variable.$theme-light, 'on-default');
+  white-space: nowrap;
+}

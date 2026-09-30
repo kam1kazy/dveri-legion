@@ -1,0 +1,98 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
+
+import type { DoorCollectionPreview } from '@/entities/door';
+import { Logo } from '@/shared/ui/Logo/Logo';
+
+import style from './Header.module.scss';
+import { useHeaderMenu } from './model/useHeaderMenu';
+import { useHeaderScroll } from './model/useHeaderScroll';
+import { MobileMenu } from './ui/MobileMenu/MobileMenu';
+import { Nav } from './ui/Nav/Nav';
+
+export type HeaderVariant = 'onDark' | 'onLight';
+
+interface IHeader {
+  collections: DoorCollectionPreview[];
+  variant?: HeaderVariant;
+}
+
+const LIGHT_PATHS = ['/faq', '/contacts', '/documents', '/blog', '/gallery', '/buyers', '/catalog'];
+const HEADER_OFFSET = '6rem';
+
+const isLightPath = (pathname: string) =>
+  LIGHT_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`));
+
+export const Header = ({ collections, variant }: IHeader) => {
+  const pathname = usePathname();
+  const {
+    openDropdown,
+    contentDropdown,
+    isMobileOpen,
+    isLight,
+    open,
+    close,
+    closeNow,
+    keepOpen,
+    toggleMobile,
+  } = useHeaderMenu();
+
+  const menuOpen = isLight || isMobileOpen;
+  const { isHidden, isFilled } = useHeaderScroll(!menuOpen);
+
+  const isOnLight = variant === 'onLight' || (variant === undefined && isLightPath(pathname));
+  const showFilled = isFilled || menuOpen;
+  const showOverlay = menuOpen;
+  const hideHeader = isHidden && !menuOpen;
+  const logoInverted = isOnLight || showFilled;
+  const navIsLight = isOnLight || showFilled;
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.style.setProperty('--header-offset', hideHeader ? '0rem' : HEADER_OFFSET);
+
+    return () => {
+      root.style.setProperty('--header-offset', HEADER_OFFSET);
+    };
+  }, [hideHeader]);
+
+  return (
+    <header
+      className={[
+        style.header,
+        isOnLight ? style.onLight : '',
+        showFilled ? style.filled : '',
+        showOverlay ? style.lightTheme : '',
+        isMobileOpen ? style.shadowboxActive : '',
+        hideHeader ? style.hidden : '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
+      onMouseEnter={keepOpen}
+      onMouseLeave={close}
+      onClick={(event) => {
+        if ((event.target as HTMLElement).closest('a')) {
+          closeNow();
+        }
+      }}
+    >
+      <div className={`container ${style.container}`}>
+        <div className={style.wrapper}>
+          <MobileMenu variant="open" onClick={toggleMobile} />
+          <Logo inverted={logoInverted} />
+          <Nav
+            collections={collections}
+            isMobileOpen={isMobileOpen}
+            isLight={navIsLight}
+            openDropdown={openDropdown}
+            contentDropdown={contentDropdown}
+            onOpenDropdown={open}
+            onToggleMobile={toggleMobile}
+          />
+        </div>
+      </div>
+    </header>
+  );
+};

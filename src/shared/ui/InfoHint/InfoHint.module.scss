@@ -1,0 +1,97 @@
+@use '../../../app/style/variable' as variable;
+@use 'sass:map';
+
+.root {
+  display: inline-flex;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid map.get(variable.$theme-dark, 'default-15');
+  border-radius: 50%;
+  background: map.get(variable.$theme-light, 'default');
+  color: map.get(variable.$theme-light, 'on-default-70');
+  font-family: inherit;
+  font-size: 0.65rem;
+  font-weight: variable.$fw-medium;
+  line-height: 1;
+  cursor: help;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background-color 0.2s;
+
+  &:hover,
+  &:focus-visible {
+    border-color: map.get(variable.$theme-light, 'on-default');
+    color: map.get(variable.$theme-light, 'on-default');
+    outline: none;
+  }
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 1000;
+  width: min(280px, calc(100vw - 24px));
+  padding: 0.85rem 0.95rem;
+  border: 1px solid map.get(variable.$theme-dark, 'default-15');
+  border-radius: 0.75rem;
+  background: map.get(variable.$theme-light, 'default');
+  box-shadow: 0 12px 32px rgba(20, 20, 24, 0.12);
+  color: map.get(variable.$theme-light, 'on-default');
+  pointer-events: auto;
+}
+
+.description {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: map.get(variable.$theme-light, 'on-default');
+}
+
+.block {
+  margin-top: 0.65rem;
+
+  ul {
+    margin: 0.3rem 0 0;
+    padding: 0 0 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  li {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: map.get(variable.$theme-light, 'on-default-70');
+  }
+}
+
+.blockLabel {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: variable.$fw-medium;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: map.get(variable.$theme-light, 'on-default');
+}
+
+.cons {
+  color: map.get(variable.$theme-light, 'on-default-70');
+}
+
+.top {
+  transform-origin: bottom center;
+}
+
+.bottom {
+  transform-origin: top center;
+}

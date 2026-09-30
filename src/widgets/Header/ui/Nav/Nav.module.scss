@@ -1,0 +1,104 @@
+@use '../../../../app/style/_variable' as variable;
+@use 'sass:map';
+
+$ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+.header__nav {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+
+  @include variable.media_queries(desktop-xs) {
+    justify-content: flex-end;
+  }
+
+  nav {
+    display: flex;
+
+    ul {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      position: relative;
+      margin-right: 20px;
+      font-size: 0.875rem;
+      line-height: variable.$lh-text;
+      transition: color 0.3s $ease-out;
+      display: flex;
+
+      a {
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        &::after {
+          content: '▼';
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          width: 24px;
+          height: 24px;
+
+          font-size: 6px;
+          margin-left: 0.5rem;
+          transition: transform 0.35s $ease-out;
+        }
+      }
+
+      &:first-child {
+        &::after {
+          content: '';
+          height: 1.5rem;
+          width: 1px;
+          margin-left: 0.625rem;
+          background-color: map.get(variable.$theme-dark, 'on-default-70');
+          transition: background-color 0.35s $ease-out;
+        }
+      }
+
+      &:hover,
+      &.isOpen {
+        a::after {
+          transform: rotate(-180deg) translateY(1px);
+        }
+      }
+    }
+  }
+
+  &.light nav li:first-child::after {
+    background-color: map.get(variable.$theme-light, 'on-default-70');
+  }
+}
+
+@include variable.media_queries(desktop) {
+  .header__nav {
+    position: absolute;
+    inset: 0;
+    left: -100vw;
+    transition: left 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: #292a2f;
+    border: 2px solid #292a2f;
+    height: 100vh;
+    width: 100%;
+    z-index: 2;
+
+    nav {
+      display: none;
+    }
+
+    &.active {
+      left: 0;
+    }
+  }
+}

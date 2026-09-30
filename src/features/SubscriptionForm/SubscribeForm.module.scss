@@ -1,0 +1,96 @@
+@use '../../app/style/variable' as variable;
+@use 'sass:map';
+
+.form {
+  p {
+    margin-bottom: 1.25rem;
+  }
+}
+
+.field {
+  display: flex;
+  height: 52px;
+
+  @include variable.media_queries(small) {
+    flex-direction: column;
+    height: auto;
+    min-height: 140px;
+  }
+}
+
+.input {
+  border: 1px solid map.get(variable.$theme-light, 'input-border');
+  border-radius: variable.$border-radius;
+  background: transparent;
+  color: map.get(variable.$theme-dark, 'on-default');
+  line-height: variable.$lh-text;
+  font-size: 0.875rem;
+  font-family: inherit;
+  padding: 0.875rem 1.25rem;
+  height: inherit;
+  margin-right: 12px;
+  width: 392px;
+  outline: none;
+  transition: border-color 0.3s;
+
+  &::placeholder {
+    color: map.get(variable.$theme-light, 'input-placeholder');
+  }
+
+  @include variable.media_queries(desktop-xl) {
+    width: 210px;
+  }
+
+  @include variable.media_queries(small) {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 52px;
+  }
+
+  &:focus {
+    border-color: map.get(variable.$theme-light, 'input-border-focus');
+  }
+}
+
+.checkbox {
+  display: none;
+
+  &:checked + .checkboxLabel::before {
+    background-image: url('/images/icons/checked.svg');
+    background-color: #fff;
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+.checkboxLabel {
+  display: block;
+  position: relative;
+  padding-left: 2rem;
+  margin-top: 1.75rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  line-height: variable.$lh-text;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    border: 2px solid map.get(variable.$theme-light, 'default');
+    display: flex;
+    height: 18px;
+    width: 1.125rem;
+  }
+}
+
+.success {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: variable.$lh-text;
+  opacity: 0.8;
+}

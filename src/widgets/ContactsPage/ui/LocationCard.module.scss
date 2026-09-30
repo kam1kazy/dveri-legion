@@ -1,0 +1,120 @@
+@use '../../../app/style/variable' as variable;
+@use 'sass:map';
+
+.card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 4rem;
+  align-items: center;
+
+  @include variable.media_queries(desktop) {
+    gap: 3rem;
+  }
+
+  @include variable.media_queries(tablet) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  max-width: 28rem;
+}
+
+.title {
+  margin: 0;
+  font-size: calc(1.162rem + 0.37559vw);
+  line-height: 1.33;
+  font-weight: variable.$fw-medium;
+
+  @include variable.media_queries(x-small) {
+    font-size: calc(0.762rem + 0.37559vw);
+  }
+}
+
+.description {
+  margin: 0;
+  line-height: variable.$lh-text-second;
+  color: map.get(variable.$theme-dark, 'default-70');
+  @include variable.responsive-font-size;
+}
+
+.address {
+  font-size: 0.875rem;
+  line-height: variable.$lh-text;
+  color: map.get(variable.$theme-dark, 'default');
+
+  p {
+    margin: 0;
+  }
+}
+
+.phone {
+  display: inline-block;
+  margin-top: 0.35rem;
+  color: map.get(variable.$theme-dark, 'default');
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.email {
+  display: block;
+  margin-top: 0.25rem;
+  color: map.get(variable.$theme-dark, 'default');
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.messengers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;
+
+  a {
+    color: map.get(variable.$theme-dark, 'default');
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+.mapLink {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  color: map.get(variable.$theme-dark, 'default');
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

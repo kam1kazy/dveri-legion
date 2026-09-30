@@ -1,0 +1,88 @@
+@use '../../../app/style/variable' as variable;
+@use 'sass:map';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tabList {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  padding-bottom: 0.15rem;
+}
+
+.tab {
+  flex: 0 0 auto;
+  height: 2.5rem;
+  padding: 0 1.1rem;
+  border: 1px solid map.get(variable.$theme-dark, 'default-15');
+  border-radius: variable.$border-radius;
+  background: transparent;
+  color: map.get(variable.$theme-light, 'on-default-70');
+  font: inherit;
+  font-size: 0.925rem;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s,
+    color 0.2s;
+
+  &:hover {
+    border-color: map.get(variable.$theme-light, 'on-default');
+    color: map.get(variable.$theme-light, 'on-default');
+  }
+}
+
+.tabActive {
+  background: map.get(variable.$theme-light, 'on-default');
+  border-color: map.get(variable.$theme-light, 'on-default');
+  color: map.get(variable.$theme-light, 'default');
+
+  &:hover {
+    background: map.get(variable.$theme-dark, 'button-background-hovered');
+    border-color: map.get(variable.$theme-dark, 'button-background-hovered');
+    color: map.get(variable.$theme-light, 'default');
+  }
+}
+
+.panel {
+  min-height: 12rem;
+}
+
+.rows {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.9fr) minmax(0, 1.4fr);
+  gap: 1rem 1.5rem;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid map.get(variable.$theme-dark, 'default-15');
+  font-size: 0.925rem;
+  line-height: 1.45;
+
+  @include variable.media_queries(xx-small) {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  dt {
+    color: map.get(variable.$theme-light, 'on-default-70');
+  }
+
+  dd {
+    margin: 0;
+    white-space: pre-line;
+  }
+}

@@ -1,0 +1,37 @@
+@use '../../../app/style/variable';
+
+.logo {
+  width: 300px;
+  height: 52px;
+  position: relative;
+
+  @include variable.media_queries(desktop) {
+    width: 145px;
+  }
+
+  @include variable.media_queries(small) {
+    width: 90px;
+  }
+
+  img {
+    width: 85px;
+    position: absolute;
+    inset: 0;
+    margin: auto 0;
+    transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+.logoDark {
+  opacity: 0;
+}
+
+.inverted {
+  .logoLight {
+    opacity: 0;
+  }
+
+  .logoDark {
+    opacity: 1;
+  }
+}

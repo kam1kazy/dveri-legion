@@ -124,7 +124,11 @@ const parseListValue = (value: string): string[] | null => {
   return null;
 };
 
-const pushRow = (buckets: Map<DoorSpecTabId, DoorSpecRow[]>, tab: DoorSpecTabId, row: DoorSpecRow) => {
+const pushRow = (
+  buckets: Map<DoorSpecTabId, DoorSpecRow[]>,
+  tab: DoorSpecTabId,
+  row: DoorSpecRow
+) => {
   const value = cleanValue(row.value);
   if (!value) {
     return;

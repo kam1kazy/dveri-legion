@@ -63,7 +63,7 @@ export const AboutPage = () => {
             <figure className={style.artFigure}>
               <Image src={aboutArt.cover} alt={aboutArt.alt} width={1600} height={900} />
             </figure>
-            
+
             <div className={style.artContent}>
               <p>
                 {aboutArt.lead}

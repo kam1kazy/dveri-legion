@@ -459,10 +459,16 @@ export const getDoorBenefitGroups = (door: Door): DoorBenefitGroup[] => {
   for (const benefit of fromSpecs) {
     if (!benefits.some((item) => item.id === benefit.id)) {
       // Не дублируем климат/безопасность, если уже есть близкий пункт из секций.
-      if (benefit.id === 'specInsulation' && benefits.some((item) => item.category === 'climate' && item.icon === 'thermometer')) {
+      if (
+        benefit.id === 'specInsulation' &&
+        benefits.some((item) => item.category === 'climate' && item.icon === 'thermometer')
+      ) {
         continue;
       }
-      if (benefit.id === 'specContours' && benefits.some((item) => item.id === 'threeContours' || item.id === 'twoContours')) {
+      if (
+        benefit.id === 'specContours' &&
+        benefits.some((item) => item.id === 'threeContours' || item.id === 'twoContours')
+      ) {
         continue;
       }
       benefits.push(benefit);
